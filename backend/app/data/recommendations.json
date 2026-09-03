@@ -207,6 +207,17 @@
       "Para transferir archivos de forma segura, preferir la nube (Drive, OneDrive) antes que USB."
     ]
   },
+  "REC-UPD-06": {
+    "title": "Activar cifrado de disco en notebooks y equipos portátiles",
+    "domain": "actualizaciones", "priority": "P2", "impact": "ALTO", "effort": "BAJO", "time": "1 día",
+    "why": "Si roban o pierden una notebook sin cifrar, cualquiera puede sacar el disco y leer toda la información — con el cifrado activado, el disco es ilegible sin la clave, aunque lo saquen físicamente.",
+    "steps": [
+      "En Windows: activar el cifrado de dispositivo (Configuración > Privacidad y seguridad > Cifrado de dispositivo) o BitLocker si es Windows Pro.",
+      "En Mac: activar FileVault (Preferencias del Sistema > Privacidad y Seguridad > FileVault).",
+      "Guardar la clave de recuperación en el gestor de contraseñas de la empresa, nunca en un papel pegado a la notebook.",
+      "Priorizar las notebooks que salen de la oficina — son las que más se pierden o roban, más que las PCs de escritorio."
+    ]
+  },
   "REC-CON-01": {
     "title": "Listar los servicios indispensables para operar",
     "domain": "continuidad", "priority": "P3", "impact": "MEDIO", "effort": "BAJO", "time": "1 día",

@@ -22,18 +22,22 @@ Si no se aclara lo contrario, priorizar siempre la entrega académica primero.
 
 Ya construido y funcionando (`backend/`):
 
-- `app/data/questions.json` — **23** preguntas, 5 dominios (accesos, wifi,
+- `app/data/questions.json` — **24** preguntas, 5 dominios (accesos, wifi,
   backups, actualizaciones, continuidad), con peso, mapeo NIST/CIS y
-  `recommendation_id`. Auditado 2026-09-03 contra el catálogo completo de
-  CIS Controls v8.1 IG1 (56 safeguards) — faltaban malware defenses
-  (antivirus), USB/removable media (Safeguard 10.3, específicamente IG1) y
-  concientización de phishing (Control 14) pese a que "Phishing" ya estaba
-  marcado como riesgo "Crítica" en la matriz de la sección 5 del documento
-  técnico. Se agregaron `ACC-06` (phishing), `UPD-04` (antivirus) y
-  `UPD-05` (USB) — no se creó un 6to dominio a propósito, por KISS/YAGNI y
-  para no tener que rebalancear los `domain_weight` (25/15/25/15/20) ni
-  reestructurar el documento técnico otra vez.
-- `app/data/recommendations.json` — 23 recomendaciones con prioridad
+  `recommendation_id`. Auditado 2026-09-03 en dos pasadas contra NIST CSF
+  2.0 (6 funciones) y los 15 controles de CIS Controls v8.1 aplicables a
+  IG1 — faltaban malware defenses/antivirus (Control 10), USB/removable
+  media (Safeguard 10.3, específicamente IG1), concientización de phishing
+  (Control 14, pese a que "Phishing" ya estaba marcado como riesgo
+  "Crítica" en la matriz de la sección 5 del documento técnico) y cifrado
+  de disco en notebooks (Control 3, Protección de Datos). Se agregaron
+  `ACC-06` (phishing), `UPD-04` (antivirus), `UPD-05` (USB) y `UPD-06`
+  (cifrado de disco) — no se creó un 6to dominio a propósito, por
+  KISS/YAGNI y para no rebalancear los `domain_weight` (25/15/25/15/20) ni
+  reestructurar el documento técnico otra vez. Resto de controles IG1
+  (logs, monitoreo de red, seguridad de apps, pentesting) quedan fuera de
+  alcance a propósito — exceden lo sostenible para una PyME sin área de IT.
+- `app/data/recommendations.json` — 24 recomendaciones con prioridad
   P1/P2/P3, impacto, esfuerzo, plazo, **`why`** (por qué importa) y
   **`steps`** (guía de resolución paso a paso en criollo, sin jerga
   técnica) — esto es lo que alimenta la guía de resolución del informe.
@@ -52,14 +56,14 @@ Ya construido y funcionando (`backend/`):
   — preferencia explícita del usuario, ver memoria `feedback-dark-gray-not-black`.
 - `app/data/validation_cases.json` + `app/services/validation.py` — 3
   perfiles simulados (débil/medio/maduro) corridos sobre el mismo motor,
-  con chequeo de orden monótono (`is_monotonic`). Resultado real (tras
-  sumar ACC-06/UPD-04/UPD-05, ver abajo): débil 1.67/100 CRÍTICO → medio
-  39.13/100 CRÍTICO → maduro 89.23/100 BAJO.
+  con chequeo de orden monótono (`is_monotonic`). Resultado real (tras la
+  auditoría del cuestionario, ver abajo): débil 1.36/100 CRÍTICO → medio
+  37.92/100 CRÍTICO → maduro 89.45/100 BAJO.
 - `app/services/report.py` → `render_comparative_html()` — informe HTML
   comparativo de los 3 casos (tabla + gráfico de barras agrupadas por
   dominio, paleta categórica de `dataviz`, conclusión automática).
 - `app/services/report.py` → `render_hardening_guide_html()` — guía de
-  hardening completa (las 23 acciones, agrupadas por dominio), generada
+  hardening completa (las 24 acciones, agrupadas por dominio), generada
   reusando `prioritize_actions()` sobre **todas** las preguntas en vez de
   solo las brechas de una evaluación puntual — no depende de ningún
   autodiagnóstico.
@@ -136,7 +140,7 @@ python -m pytest tests/ -v                          # 21 tests
 python -m app.cli demo                              # demo con caso simulado
 python -m app.cli interactivo                       # demo pregunta por pregunta
 python -m app.cli validacion                        # corre los 3 casos débil/medio/maduro
-python -m app.cli hardening --html guia.html        # guía de hardening completa (23 acciones)
+python -m app.cli hardening --html guia.html        # guía de hardening completa (24 acciones)
 python -m app.cli demo --html informe.html          # + informe HTML interactivo
 python -m app.cli validacion --html comparativa.html  # + informe comparativo
 ```

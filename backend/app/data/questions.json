@@ -199,6 +199,16 @@
       "recommendation_id": "REC-UPD-05"
     },
     {
+      "id": "UPD-06",
+      "domain": "actualizaciones",
+      "question": "¿Los equipos portátiles (notebooks) tienen cifrado de disco activado (BitLocker, FileVault o similar)?",
+      "weight": 4,
+      "risk": "device_theft_data_exposure",
+      "nist": ["PR.DS"],
+      "cis": ["3"],
+      "recommendation_id": "REC-UPD-06"
+    },
+    {
       "id": "CON-01",
       "domain": "continuidad",
       "question": "¿Existe una lista de servicios indispensables para operar?",

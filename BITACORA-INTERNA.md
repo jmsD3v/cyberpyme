@@ -109,21 +109,33 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
   producto (redactado sin fechar el avance, para no adelantar tampoco ahí).
   **Enviado por mail a Gabriel (vpp.teclab.gg@gmail.com) el 02/09/2026.**
 
-- **03/09/2026**: auditoría del cuestionario contra el catálogo completo de
-  CIS Controls v8.1 IG1 (a pedido de Juanma: "¿no nos estaremos olvidando
-  de USB?"). Encontrados 3 huecos reales: malware defenses/antivirus (CIS
-  Control 10), USB/removable media (Safeguard 10.3, específicamente IG1) y
-  concientización de phishing (Control 14) — este último más grave, porque
-  "Phishing" ya estaba marcado como riesgo "Crítica" en la matriz de la
-  sección 5 del documento técnico pero no tenía pregunta asociada.
-  Agregadas `ACC-06`, `UPD-04`, `UPD-05` (cuestionario pasa de 20 a 23
-  preguntas) — se optó por sumarlas a los dominios existentes (Accesos,
-  Actualizaciones) en vez de crear un 6to dominio, para no tener que
-  rebalancear `domain_weight` ni reestructurar el documento técnico otra
-  vez. `validation_cases.json` actualizado con las 3 respuestas nuevas en
-  los 3 perfiles — el caso "medio" (referencia de la demo) bajó de
-  ALTO a CRÍTICO al sumar estas preguntas, lo cual es correcto: el
-  cuestionario anterior subestimaba el riesgo real al no medir estos 3
+- **03/09/2026**: auditoría del cuestionario en dos pasadas — primero un
+  chequeo rápido (a pedido de Juanma: "¿no nos estaremos olvidando de
+  USB?") que encontró 3 huecos, y después una segunda pasada más
+  sistemática (a pedido explícito de Juanma: "analizá bien qué más nos
+  estaría faltando") contra los 6 functions de NIST CSF 2.0 y los 15
+  controles de CIS Controls v8.1 aplicables a IG1, que encontró un 4to
+  hueco. Total 4 preguntas nuevas:
+  - `ACC-06` — concientización de phishing (Control 14). El más grave de
+    los 4: "Phishing" ya estaba marcado como riesgo "Crítica" en la matriz
+    de la sección 5 del documento técnico, sin pregunta asociada.
+  - `UPD-04` — antivirus/antimalware (Control 10).
+  - `UPD-05` — USB/removable media (Safeguard 10.3, específicamente IG1).
+  - `UPD-06` — cifrado de disco en notebooks (Control 3, Protección de
+    Datos) — pedido explícito de Juanma tras la primera auditoría.
+
+  Cuestionario pasa de 20 a **24** preguntas. Se optó por sumarlas todas a
+  los dominios existentes (Accesos, Actualizaciones) en vez de crear un
+  6to dominio, para no rebalancear `domain_weight` ni reestructurar el
+  documento técnico otra vez. Resto de controles IG1 (logs, monitoreo de
+  red activo, seguridad de aplicaciones, pentesting, gestión formal de
+  proveedores) quedan fuera de alcance **a propósito** — exceden lo
+  sostenible para una PyME sin área de IT, no es un olvido.
+
+  `validation_cases.json` actualizado con las 4 respuestas nuevas en los 3
+  perfiles — el caso "medio" (referencia de la demo) bajó de ALTO a
+  CRÍTICO al sumar estas preguntas (ahora 37.92/100), lo cual es correcto:
+  el cuestionario anterior subestimaba el riesgo real al no medir estos 4
   controles. **`Herramienta_Autodiagnostico_Ciberseguridad_PyMEs.docx` no
   se actualizó todavía con este cambio** — el documento ya enviado a
   Gabriel el 02/09 sigue describiendo el cuestionario de 20 preguntas;
