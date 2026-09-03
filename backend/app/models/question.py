@@ -11,6 +11,7 @@ class Question:
     nist: list[str]
     cis: list[str]
     recommendation_id: str
+    help: str = ""
 
     @staticmethod
     def from_dict(data: dict) -> "Question":
@@ -23,6 +24,7 @@ class Question:
             nist=data["nist"],
             cis=data["cis"],
             recommendation_id=data["recommendation_id"],
+            help=data.get("help", ""),
         )
 
 

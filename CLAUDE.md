@@ -78,13 +78,26 @@ Ya construido y funcionando (`backend/`):
   automáticamente. Reusa el `CSS`/paleta de `report.py`. Verificado de
   punta a punta en el navegador: intro → 5 dominios → resultado →
   reiniciar, cero errores de consola, cero llamadas de red.
+  **Pulida 2026-09-03 (feedback directo del usuario tras probarla):**
+  (1) 6 preguntas con jerga técnica (MFA, gestor de contraseñas,
+  privilegios de administrador, WPA2/WPA3, estrategia 3-2-1, cifrado de
+  disco) ahora tienen un campo `help` en `questions.json` con una
+  aclaración en criollo, mostrada con 💡 debajo de la pregunta en el
+  cuestionario; (2) pase de diseño: ícono + color de acento propio por
+  dominio (candado/wifi/nube/escudo/reciclaje, paleta categórica
+  `dataviz`), fila de 5 "domain dots" mostrando el progreso real (no solo
+  una barra), transición fade+slide entre pantallas, el gauge del
+  resultado ahora arranca vacío y se llena animado (arco + número
+  contando hacia arriba) en vez de aparecer ya completo, tarjetas de
+  acciones con entrada escalonada, emoji según nivel de riesgo, glow
+  radial detrás del gauge, micro-interacciones de hover/press en botones.
 - `app/cli.py` — demo de consola (`python -m app.cli demo` /
   `interactivo` / `validacion` / `hardening` / `app`), con flag
   `--html <path>` en cualquier modo para generar también el HTML
   correspondiente.
 - `tests/test_scoring.py` (10) + `tests/test_report.py` (4) +
   `tests/test_validation.py` (4) + `tests/test_hardening.py` (3) +
-  `tests/test_interactive_app.py` (3) — **24/24 pasando**.
+  `tests/test_interactive_app.py` (4) — **25/25 pasando**.
 
 **No existe todavía:** documentación final/manual de uso, FastAPI,
 Supabase, frontend, GitHub remote.
@@ -150,7 +163,7 @@ avisarle a Juanma para que lo actualice él).
 cd backend
 pip install pytest --break-system-packages
 
-python -m pytest tests/ -v                          # 24 tests
+python -m pytest tests/ -v                          # 25 tests
 python -m app.cli app --html cyberpyme_app.html     # LA APP: cuestionario + resultado en el navegador
 python -m app.cli demo                              # demo con caso simulado
 python -m app.cli interactivo                       # demo pregunta por pregunta

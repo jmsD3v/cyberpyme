@@ -26,7 +26,8 @@
       "risk": "credential_compromise",
       "nist": ["PR.AA", "GV.RR"],
       "cis": ["6", "14"],
-      "recommendation_id": "REC-ACC-02"
+      "recommendation_id": "REC-ACC-02",
+      "help": "MFA = pedirte un segundo paso además de la contraseña (por ejemplo, un código que te llega al celular) para entrar a la cuenta."
     },
     {
       "id": "ACC-03",
@@ -36,7 +37,8 @@
       "risk": "password_reuse",
       "nist": ["PR.AA"],
       "cis": ["5"],
-      "recommendation_id": "REC-ACC-03"
+      "recommendation_id": "REC-ACC-03",
+      "help": "Un gestor de contraseñas es un programa que guarda y genera contraseñas seguras por vos (por ejemplo, Bitwarden), para no reutilizar siempre la misma."
     },
     {
       "id": "ACC-04",
@@ -56,7 +58,8 @@
       "risk": "privilege_escalation",
       "nist": ["PR.AA"],
       "cis": ["5"],
-      "recommendation_id": "REC-ACC-05"
+      "recommendation_id": "REC-ACC-05",
+      "help": "Un usuario 'administrador' puede instalar programas y cambiar configuraciones del equipo — lo ideal es que en el día a día solo lo tenga quien realmente lo necesita."
     },
     {
       "id": "ACC-06",
@@ -76,7 +79,8 @@
       "risk": "wifi_attack",
       "nist": ["PR.PS"],
       "cis": ["4", "12"],
-      "recommendation_id": "REC-WIF-01"
+      "recommendation_id": "REC-WIF-01",
+      "help": "Es el tipo de seguridad de tu WiFi — lo ves en la configuración del router, en la sección de seguridad de la red (evitá WEP o WPA, están obsoletos)."
     },
     {
       "id": "WIF-02",
@@ -136,7 +140,8 @@
       "risk": "single_point_of_failure",
       "nist": ["PR.DS"],
       "cis": ["11"],
-      "recommendation_id": "REC-BKP-03"
+      "recommendation_id": "REC-BKP-03",
+      "help": "3-2-1 = 3 copias de tus datos, en 2 tipos de soporte distintos (por ejemplo disco externo + nube), con al menos 1 copia fuera de la oficina."
     },
     {
       "id": "BKP-04",
@@ -206,7 +211,8 @@
       "risk": "device_theft_data_exposure",
       "nist": ["PR.DS"],
       "cis": ["3"],
-      "recommendation_id": "REC-UPD-06"
+      "recommendation_id": "REC-UPD-06",
+      "help": "Es una función que ya viene en Windows y Mac: si alguien te roba la notebook, no puede leer los archivos del disco sin la contraseña."
     },
     {
       "id": "CON-01",
