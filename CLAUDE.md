@@ -205,6 +205,21 @@ después de crear el backend).
   moviendo el texto de ayuda a su propia línea centrada arriba de los
   botones, en vez de compartir fila con ellos.
 
+**Bug de despliegue encontrado y corregido (2026-09-03, noche)**: el
+push con los fixes de mobile + forgot-password rompió el auto-deploy en
+Vercel — el proyecto nunca tuvo configurado `Root Directory=frontend`.
+Los deploys manuales por CLI (`vercel --prod`) habían funcionado bien
+porque ese comando sube directo el contenido de la carpeta actual, sin
+pasar por git; pero el auto-deploy disparado por push clona el repo
+completo y necesita saber que el código está en `frontend/`, no en la
+raíz. Corregido con
+`vercel project update cyberpyme --root-directory frontend --yes`.
+**Ojo**: después de este cambio, `vercel --prod` corrido a mano desde
+adentro de `frontend/` ya NO funciona (busca `frontend/frontend/`) — de
+acá en más, el único método de deploy es push a `master` (auto-deploy) o
+`vercel redeploy <url>` sobre un deploy anterior, nunca más
+`vercel --prod` desde la CLI local.
+
 **"Olvidé mi contraseña"** (`/forgot-password` + `/reset-password`, link
 agregado en `/login`): flujo estándar de Supabase Auth con
 `resetPasswordForEmail` + el evento `PASSWORD_RECOVERY` de
