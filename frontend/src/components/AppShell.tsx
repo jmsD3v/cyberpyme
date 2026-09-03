@@ -19,6 +19,9 @@ export default function AppShell({
             <Link href="/guia-hardening" className="text-sm text-ink-muted hover:text-ink transition">
               Guía de hardening
             </Link>
+            <Link href="/cuenta" className="text-sm text-ink-muted hover:text-ink transition">
+              Cuenta
+            </Link>
             <form action={logout}>
               <button type="submit" className="text-sm text-ink-muted hover:text-ink transition">
                 Salir
