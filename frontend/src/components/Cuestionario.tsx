@@ -72,7 +72,7 @@ export default function Cuestionario({ empresa }: { empresa: string }) {
         .eq("id", user!.id)
         .single();
 
-      await supabase.from("evaluaciones").insert({
+      const { error: insertError } = await supabase.from("evaluaciones").insert({
         empresa_id: perfil!.empresa_id,
         created_by: user!.id,
         respuestas: answers,
@@ -80,6 +80,7 @@ export default function Cuestionario({ empresa }: { empresa: string }) {
         risk_level: data.risk_level,
         domains: data.domains as unknown as Json,
       });
+      if (insertError) throw insertError;
 
       setResult(data);
     } catch {
