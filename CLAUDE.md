@@ -332,9 +332,9 @@ avisarle a Juanma para que lo actualice él).
 
 ```bash
 cd backend
-pip install pytest --break-system-packages
+pip install -r requirements-dev.txt
 
-python -m pytest tests/ -v                          # 25 tests
+python -m pytest tests/ -v                          # 32 tests
 python -m app.cli app --html cyberpyme_app.html     # LA APP: cuestionario + resultado en el navegador
 python -m app.cli demo                              # demo con caso simulado
 python -m app.cli interactivo                       # demo pregunta por pregunta
