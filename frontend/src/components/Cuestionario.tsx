@@ -156,26 +156,30 @@ export default function Cuestionario({ empresa }: { empresa: string }) {
         ))}
       </div>
 
-      <div className="flex items-center justify-between mt-6">
-        <button
-          type="button"
-          disabled={domainIndex === 0}
-          onClick={() => setDomainIndex((i) => i - 1)}
-          className="rounded-full bg-track px-5 py-2.5 font-semibold disabled:opacity-40"
-        >
-          Anterior
-        </button>
-        <span className="text-xs text-ink-muted">
-          {!completo && "Respondé todas las preguntas para continuar"}
-        </span>
-        <button
-          type="button"
-          disabled={!completo || saving}
-          onClick={siguiente}
-          className="rounded-full bg-accent text-white px-5 py-2.5 font-semibold disabled:opacity-40 hover:brightness-110 active:scale-[.98] transition"
-        >
-          {saving ? "Calculando…" : esUltimo ? "Ver resultado" : "Siguiente"}
-        </button>
+      <div className="mt-6">
+        {!completo && (
+          <p className="text-xs text-ink-muted text-center mb-3">
+            Respondé todas las preguntas para continuar
+          </p>
+        )}
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            disabled={domainIndex === 0}
+            onClick={() => setDomainIndex((i) => i - 1)}
+            className="rounded-full bg-track px-5 py-2.5 font-semibold disabled:opacity-40"
+          >
+            Anterior
+          </button>
+          <button
+            type="button"
+            disabled={!completo || saving}
+            onClick={siguiente}
+            className="rounded-full bg-accent text-white px-5 py-2.5 font-semibold disabled:opacity-40 hover:brightness-110 active:scale-[.98] transition"
+          >
+            {saving ? "Calculando…" : esUltimo ? "Ver resultado" : "Siguiente"}
+          </button>
+        </div>
       </div>
     </div>
   );

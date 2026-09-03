@@ -211,6 +211,20 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
   base de datos) ya es accesible desde cualquier lado, no solo desde la
   compu de Juanma.
 
+- **03/09/2026 (noche) — revisión mobile + "olvidé mi contraseña"**:
+  Juanma pidió revisar cómo se ve en el celular (solo se había probado
+  login/signup hasta ahora) y agregar recuperación de contraseña, que no
+  existía. Encontrados y corregidos 2 bugs reales de mobile: el header
+  (`AppShell.tsx`) no envolvía bien cuando el nombre de la empresa era
+  largo, y el pie del cuestionario apretaba el texto de ayuda entre los
+  botones "Anterior"/"Siguiente" en pantallas angostas. Implementado
+  `/forgot-password` + `/reset-password` con el flujo estándar de
+  Supabase (`resetPasswordForEmail` + evento `PASSWORD_RECOVERY`),
+  verificado con un usuario real que la contraseña efectivamente cambia
+  (login con la vieja falla, con la nueva funciona). Todo probado en
+  local antes de pushear — el push dispara el redeploy automático en
+  Vercel.
+
 - **03/09/2026 — pivot de ritmo, fase producto arrancada ya (no después del
   13/dic):** Juanma pidió explícitamente terminar el proyecto completo lo
   antes posible, sin esperar la fecha académica: *"no puedo estar sin

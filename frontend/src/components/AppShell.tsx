@@ -11,11 +11,11 @@ export default function AppShell({
   return (
     <div className="flex-1 flex flex-col">
       <header className="border-b border-border">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
           <Link href="/" className="font-bold text-lg">
             CyberPyME{empresa ? <span className="text-ink-muted font-normal"> — {empresa}</span> : null}
           </Link>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 shrink-0">
             <Link href="/guia-hardening" className="text-sm text-ink-muted hover:text-ink transition">
               Guía de hardening
             </Link>

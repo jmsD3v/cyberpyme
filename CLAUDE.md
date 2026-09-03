@@ -193,6 +193,30 @@ consola. `NEXT_PUBLIC_API_URL` del frontend ya apunta a la URL de Render
 (se actualizó con `vercel env rm` + `vercel env add` + `vercel --prod`
 después de crear el backend).
 
+**Revisión mobile (2026-09-03) — 2 bugs reales encontrados y corregidos**:
+- `AppShell.tsx`: el header no envolvía (`flex` sin `flex-wrap`), así que
+  en pantallas angostas el nombre de la empresa se cortaba en dos líneas
+  y los links de nav quedaban apretados al lado. Arreglado con
+  `flex-wrap` + `gap-y-2` en el contenedor y `shrink-0` en el grupo de
+  nav — ahora el nav baja a su propia fila si no entra.
+- `Cuestionario.tsx`: el pie con "Anterior" / texto de ayuda / "Siguiente"
+  vivía en una sola fila `justify-between`, así que en mobile el texto de
+  ayuda quedaba comprimido en 3 líneas entre los dos botones. Arreglado
+  moviendo el texto de ayuda a su propia línea centrada arriba de los
+  botones, en vez de compartir fila con ellos.
+
+**"Olvidé mi contraseña"** (`/forgot-password` + `/reset-password`, link
+agregado en `/login`): flujo estándar de Supabase Auth con
+`resetPasswordForEmail` + el evento `PASSWORD_RECOVERY` de
+`onAuthStateChange` en el cliente — **no hace falta tocar la plantilla de
+email de Supabase ni crear un route handler `/auth/confirm` con
+`token_hash`**, esa es una variante distinta (SSR con PKCE) que sí
+requeriría editar la plantilla desde el dashboard. Confirmado contra la
+documentación oficial de Supabase antes de implementar. Verificado que
+`updateUser({ password })` efectivamente cambia la contraseña en
+Supabase (probado con un usuario real: login con la contraseña vieja
+falló después, login con la nueva funcionó).
+
 ## ⚠️ Ritmo de publicación — NO confundir "hecho en el código" con "mostrado en clase"
 
 El desarrollo real va más rápido que el cronograma de clases. Eso está bien
