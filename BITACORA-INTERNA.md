@@ -166,5 +166,6 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
 - **03/09/2026**: inicializado el repositorio git (nunca se había hecho) —
   commit inicial con todo lo construido hasta la fecha. Configurado con
   `user.name`/`user.email` de Juanma (ya estaban en la config global de la
-  máquina). Sigue pendiente: crear el repo en GitHub y pushear (no hecho
-  todavía, requiere decisión de Juanma sobre público/privado).
+  máquina). Más tarde el mismo día, creado y pusheado a
+  **[github.com/jmsD3v/cyberpyme](https://github.com/jmsD3v/cyberpyme)**
+  como **privado** (elección explícita de Juanma) vía `gh repo create`.

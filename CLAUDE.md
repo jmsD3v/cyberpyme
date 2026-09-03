@@ -100,7 +100,10 @@ Ya construido y funcionando (`backend/`):
   `tests/test_interactive_app.py` (4) — **25/25 pasando**.
 
 **No existe todavía:** documentación final/manual de uso, FastAPI,
-Supabase, frontend, GitHub remote.
+Supabase, frontend.
+
+**Repositorio:** [github.com/jmsD3v/cyberpyme](https://github.com/jmsD3v/cyberpyme)
+(privado, creado 2026-09-03).
 
 ## ⚠️ Ritmo de publicación — NO confundir "hecho en el código" con "mostrado en clase"
 
@@ -129,9 +132,9 @@ real del código — es `BITACORA-INTERNA.md` y Notion los que se pausan.
    IA sin limpiar (nada de texto tipo `fileciteturn0file0` — ya pasó una
    vez en el documento técnico, revisar siempre antes de enviar nada).
    Due Notion: 2026-11-04. Mencionar la app interactiva también acá.
-2. Push del repo a GitHub (hoy local-only) — preguntarle a Juanma
-   público/privado antes de crearlo.
-3. Recién después del 13/dic: API FastAPI sobre el motor ya validado,
+   Deliberadamente no arrancada todavía — falta más de 2 meses y el
+   proyecto va a seguir cambiando mucho más que hasta ahora.
+2. Recién después del 13/dic: API FastAPI sobre el motor ya validado,
    Supabase con RLS real (políticas por operación, `auth.uid()`, nunca
    `user_metadata`), frontend Next.js.
 
