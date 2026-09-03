@@ -76,6 +76,24 @@ para el porqué.
 
 ---
 
+### Jornada 11 — 21/09/2026 (lunes) — publicar ese día
+**Tarea Notion asociada:** ninguna todavía — esta app no estaba en el plan de trabajo original, la agregamos porque Juanma notó (03/09) que todo lo construido hasta ahora era "mucho HTML lindo" generado desde la consola, no algo que una PyME pudiera realmente sentarse a usar. Crear una tarea nueva en la base Tareas cuando se publique, con fecha retroactiva a esta jornada.
+
+**Enfoque:** la primera pieza que es de verdad "una app" — el cuestionario se responde en el navegador, no en la terminal.
+**Qué se construyó:**
+- `app/services/interactive_app.py` → `render_interactive_app_html()`: un único `.html` donde el motor de scoring está portado a JavaScript puro (espejo de `scoring.py`, mismo algoritmo) y corre 100% en el navegador — preguntas y recomendaciones embebidas como datos, sin backend, sin build step.
+- Flujo de 5 pantallas (una por dominio) con barra de progreso, botones Sí/Parcial/No/No sé, y validación que no deja avanzar sin responder todo el dominio.
+- Pantalla de resultado idéntica en diseño al informe de `report.py` (gauge, barras por dominio, acordeón con guía de resolución) pero calculada en vivo a partir de las respuestas, no precomputada en Python.
+- CLI: `python -m app.cli app --html cyberpyme_app.html`.
+- 3 tests nuevos (`tests/test_interactive_app.py`): todas las preguntas/recomendaciones están embebidas, no hay `fetch`/XHR ni URLs (cero llamadas de red), y los datos embebidos coinciden con el motor Python (mismos ids/pesos/domain_weight).
+- **Probado de punta a punta en el navegador** (no solo con pytest): completé las 24 preguntas reales, click por click, y verifiqué que el resultado final (score, riesgo, barras, acordeón desplegable) calculado en JS coincide con lo esperado — cero errores de consola.
+- Encontrado y corregido en la propia verificación: el botón "Comenzar" no respondía al primer click porque el listener se enganchaba antes de que el HTML del intro existiera en el DOM (el intro vive en un `<template>`, inerte hasta clonarse). Se movió el `addEventListener` a después de inyectar el HTML.
+**Por qué así:** portar el motor a JS (en vez de, por ejemplo, correr Python en el navegador con Pyodide) es lo más simple que cumple "sin infraestructura" — es codigo espejo, no compartido, así que si `scoring.py` cambia hay que actualizar esto a mano; documentado como advertencia en el docstring del archivo.
+**Para mostrar en clase:** completar el cuestionario en vivo, proyectado, y mostrar que el resultado aparece al instante sin que nadie toque la terminal.
+**Próximo objetivo (a publicar cuando corresponda):** documentación final + manual de uso (due 04/11) — mencionar esta app ahí también.
+
+---
+
 ## Ya publicado en Notion (histórico, para referencia — no duplicar)
 
 ### Jornada 6 — 02/09/2026 (miércoles)
@@ -138,9 +156,12 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
   el cuestionario anterior subestimaba el riesgo real al no medir estos 4
   controles. **`Herramienta_Autodiagnostico_Ciberseguridad_PyMEs.docx` no
   se actualizó todavía con este cambio** — el documento ya enviado a
-  Gabriel el 02/09 sigue describiendo el cuestionario de 20 preguntas;
-  decidir si conviene mandar una versión actualizada o dejarlo para la
-  próxima entrega.
+  Gabriel el 02/09 sigue describiendo el cuestionario de 20 preguntas.
+  **Decisión de Juanma (03/09): no reenviar ahora.** Lo que se mandó es un
+  plan inicial — es lógico y esperable que cambie con el desarrollo. Las
+  actualizaciones se consolidan recién en la entrega final (documentación
+  final + manual de uso, due 04/11), que de todos modos va a cambiar mucho
+  más que esto entre hoy y esa fecha.
 - **03/09/2026**: inicializado el repositorio git (nunca se había hecho) —
   commit inicial con todo lo construido hasta la fecha. Configurado con
   `user.name`/`user.email` de Juanma (ya estaban en la config global de la

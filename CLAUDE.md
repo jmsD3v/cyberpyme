@@ -67,15 +67,27 @@ Ya construido y funcionando (`backend/`):
   reusando `prioritize_actions()` sobre **todas** las preguntas en vez de
   solo las brechas de una evaluación puntual — no depende de ningún
   autodiagnóstico.
+- `app/services/interactive_app.py` → `render_interactive_app_html()`
+  (nuevo 2026-09-03) — **la app de verdad**: un único HTML donde el
+  cuestionario se responde EN EL NAVEGADOR (5 pantallas, una por dominio,
+  con barra de progreso) y el resultado (gauge + barras + acordeón) se
+  calcula ahí mismo, sin Python. El motor de scoring está portado a JS
+  puro como espejo deliberado de `scoring.py` (mismo algoritmo, mismos
+  nombres en camelCase) — si `scoring.py` cambia, este archivo se
+  actualiza a mano, no hay build step que los mantenga sincronizados
+  automáticamente. Reusa el `CSS`/paleta de `report.py`. Verificado de
+  punta a punta en el navegador: intro → 5 dominios → resultado →
+  reiniciar, cero errores de consola, cero llamadas de red.
 - `app/cli.py` — demo de consola (`python -m app.cli demo` /
-  `interactivo` / `validacion` / `hardening`), con flag `--html <path>` en
-  cualquier modo para generar también el informe HTML correspondiente.
+  `interactivo` / `validacion` / `hardening` / `app`), con flag
+  `--html <path>` en cualquier modo para generar también el HTML
+  correspondiente.
 - `tests/test_scoring.py` (10) + `tests/test_report.py` (4) +
-  `tests/test_validation.py` (4) + `tests/test_hardening.py` (3) —
-  **21/21 pasando**.
+  `tests/test_validation.py` (4) + `tests/test_hardening.py` (3) +
+  `tests/test_interactive_app.py` (3) — **24/24 pasando**.
 
 **No existe todavía:** documentación final/manual de uso, FastAPI,
-Supabase, frontend.
+Supabase, frontend, GitHub remote.
 
 ## ⚠️ Ritmo de publicación — NO confundir "hecho en el código" con "mostrado en clase"
 
@@ -103,8 +115,10 @@ real del código — es `BITACORA-INTERNA.md` y Notion los que se pausan.
 1. **Documentación final + manual de uso**, sin artefactos de generación de
    IA sin limpiar (nada de texto tipo `fileciteturn0file0` — ya pasó una
    vez en el documento técnico, revisar siempre antes de enviar nada).
-   Due Notion: 2026-11-04.
-2. Recién después del 13/dic: API FastAPI sobre el motor ya validado,
+   Due Notion: 2026-11-04. Mencionar la app interactiva también acá.
+2. Push del repo a GitHub (hoy local-only) — preguntarle a Juanma
+   público/privado antes de crearlo.
+3. Recién después del 13/dic: API FastAPI sobre el motor ya validado,
    Supabase con RLS real (políticas por operación, `auth.uid()`, nunca
    `user_metadata`), frontend Next.js.
 
@@ -136,7 +150,8 @@ avisarle a Juanma para que lo actualice él).
 cd backend
 pip install pytest --break-system-packages
 
-python -m pytest tests/ -v                          # 21 tests
+python -m pytest tests/ -v                          # 24 tests
+python -m app.cli app --html cyberpyme_app.html     # LA APP: cuestionario + resultado en el navegador
 python -m app.cli demo                              # demo con caso simulado
 python -m app.cli interactivo                       # demo pregunta por pregunta
 python -m app.cli validacion                        # corre los 3 casos débil/medio/maduro

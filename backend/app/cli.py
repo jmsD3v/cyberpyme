@@ -7,10 +7,12 @@ Uso:
     python -m app.cli interactivo   -> te pregunta dominio por dominio
     python -m app.cli validacion    -> corre los 3 casos (débil/medio/maduro)
     python -m app.cli hardening     -> genera la guía de hardening completa (requiere --html)
+    python -m app.cli app           -> genera la app interactiva (cuestionario + scoring en el navegador, requiere --html)
     (agregar --html <archivo> a cualquier modo genera además el informe HTML)
 """
 import sys
 
+from app.services.interactive_app import render_interactive_app_html
 from app.services.report import render_comparative_html, render_hardening_guide_html, render_html_report
 from app.services.scoring import calculate_assessment, load_questions, load_recommendations
 from app.services.validation import CASE_ORDER, load_validation_cases, run_validation
@@ -78,6 +80,18 @@ def run_hardening(html_path: str | None = None):
     print(f"Generada en: {html_path}")
 
 
+def run_app(html_path: str | None = None):
+    questions, domain_labels = load_questions()
+    recommendations = load_recommendations()
+    if not html_path:
+        html_path = "cyberpyme_app.html"
+    report = render_interactive_app_html(questions, domain_labels, recommendations)
+    with open(html_path, "w", encoding="utf-8") as f:
+        f.write(report)
+    print(f"=== CyberPyME — App interactiva ({len(questions)} preguntas) ===")
+    print(f"Generada en: {html_path}")
+
+
 def run_interactivo(html_path: str | None = None):
     questions, _ = load_questions()
     answers = {}
@@ -107,5 +121,7 @@ if __name__ == "__main__":
         run_validacion(html_path)
     elif modo == "hardening":
         run_hardening(html_path)
+    elif modo == "app":
+        run_app(html_path)
     else:
         run_demo(html_path)
