@@ -67,8 +67,8 @@ export default function TerminosPage() {
           <h2 className="font-semibold text-ink mb-2">Contacto</h2>
           <p>
             Para consultas sobre estos términos, escribinos a{" "}
-            <a href="mailto:juanmanuelsilva06@gmail.com" className="text-accent hover:underline">
-              juanmanuelsilva06@gmail.com
+            <a href="mailto:contacto@jmsilva.dev" className="text-accent hover:underline">
+              contacto@jmsilva.dev
             </a>
             .
           </p>
