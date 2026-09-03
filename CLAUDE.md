@@ -160,6 +160,17 @@ abajo. Arquitectura, deliberada:
   llamando de nuevo a `POST /evaluar` con las `respuestas` guardadas,
   aprovechando que el motor es determinista (mismo principio que el resto
   del proyecto: config sobre código, sin estado redundante).
+- **Pulido, mismo día:** se puede borrar una evaluación guardada
+  (botón en `/evaluaciones/[id]`, con confirmación). Hizo falta agregar
+  una política RLS de `DELETE` en `evaluaciones` — no existía ninguna
+  (migración `agregar_politica_delete_evaluaciones`, mismo criterio que
+  el resto: `empresa_id = empresa_actual()`). **Bug real encontrado y
+  corregido en la propia implementación**: faltaba `revalidatePath("/")`
+  después del delete — el dashboard seguía mostrando la evaluación
+  borrada porque Next.js no invalidaba el caché de esa ruta (el delete sí
+  pasaba en la base, solo no se reflejaba en pantalla). Verificado con
+  fila real de prueba: borrada en la base y desaparece del dashboard tras
+  el fix.
 - **Pendiente:** manejo de errores más robusto en casos borde adicionales
   (los principales — login, signup, alta de empresa — ya están cubiertos).
 

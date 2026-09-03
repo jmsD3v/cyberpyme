@@ -1,8 +1,10 @@
 import { redirect } from "next/navigation";
 import AppShell from "@/components/AppShell";
 import EvaluacionDetalle from "@/components/EvaluacionDetalle";
+import DeleteEvaluacionButton from "@/components/DeleteEvaluacionButton";
 import { createClient } from "@/lib/supabase/server";
 import type { AnswerValue } from "@/lib/types";
+import { deleteEvaluacion } from "./actions";
 
 export default async function EvaluacionDetallePage({
   params,
@@ -49,6 +51,9 @@ export default async function EvaluacionDetallePage({
         empresa={empresaNombre}
         fecha={fecha}
       />
+      <div className="mt-8 flex justify-end">
+        <DeleteEvaluacionButton action={deleteEvaluacion.bind(null, id)} />
+      </div>
     </AppShell>
   );
 }
