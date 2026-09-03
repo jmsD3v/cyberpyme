@@ -163,6 +163,26 @@ abajo. Arquitectura, deliberada:
 - **Pendiente:** manejo de errores más robusto en casos borde adicionales
   (los principales — login, signup, alta de empresa — ya están cubiertos).
 
+## Despliegue
+
+**Frontend en producción**: [cyberpyme.vercel.app](https://cyberpyme.vercel.app)
+(equipo Vercel `jmsd3v-projects`, proyecto `cyberpyme`, repo de GitHub
+conectado — cada push a `master` redespliega solo). Desplegado vía CLI
+(`npx vercel link --yes --project cyberpyme` + `vercel env add` × 3 +
+`vercel --prod --yes`) después de que el conector MCP de Vercel de esta
+sesión no lograra autenticar la cuenta correcta tras varios reintentos y
+un reinicio — no vale la pena reintentarlo, la CLI manual funciona bien.
+
+**Backend todavía no desplegado**: `NEXT_PUBLIC_API_URL` en producción
+sigue apuntando a `http://localhost:8000` — el login/dashboard andan en
+producción, pero el cuestionario y la guía de hardening (que dependen de
+la API) van a fallar hasta que el backend tenga un host real (Render,
+Railway, Fly — sin conector MCP disponible para ninguno en esta sesión,
+hace falta que Juanma cree la cuenta). Una vez elegido: desplegar,
+después `vercel env rm NEXT_PUBLIC_API_URL production` +
+`vercel env add NEXT_PUBLIC_API_URL production` con la URL real, y
+redesplegar el frontend.
+
 ## ⚠️ Ritmo de publicación — NO confundir "hecho en el código" con "mostrado en clase"
 
 El desarrollo real va más rápido que el cronograma de clases. Eso está bien

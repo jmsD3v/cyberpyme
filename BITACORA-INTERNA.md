@@ -183,6 +183,20 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
   **[github.com/jmsD3v/cyberpyme](https://github.com/jmsD3v/cyberpyme)**
   como **privado** (elección explícita de Juanma) vía `gh repo create`.
 
+- **03/09/2026 (noche) — frontend desplegado en producción**: después de
+  que el conector de Vercel de la sesión no lograra autenticar la cuenta
+  correcta (probamos varias veces, incluso con un reinicio completo),
+  desplegamos a mano vía la CLI de Vercel desde la terminal de Juanma
+  (`vercel login` → `vercel link --yes --project cyberpyme` →
+  `vercel env add` × 3 → `vercel --prod --yes`). Resultado:
+  **[cyberpyme.vercel.app](https://cyberpyme.vercel.app)**, con el repo
+  de GitHub conectado (cada push a `master` redespliega solo).
+  Verificado en el navegador: `/login` y `/signup` cargan bien en
+  producción, cero errores de consola. El backend (FastAPI) todavía no
+  tiene host — `NEXT_PUBLIC_API_URL` sigue apuntando a
+  `http://localhost:8000`, así que el cuestionario y la guía de hardening
+  no van a andar en el sitio público hasta que se resuelva eso.
+
 - **03/09/2026 — pivot de ritmo, fase producto arrancada ya (no después del
   13/dic):** Juanma pidió explícitamente terminar el proyecto completo lo
   antes posible, sin esperar la fecha académica: *"no puedo estar sin
