@@ -22,7 +22,7 @@ jobs:
       - run: python -m pytest tests/ -v
 
   frontend:
-    name: Frontend (typecheck + build)
+    name: Frontend (build, incl. typecheck)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -38,7 +38,10 @@ jobs:
           cache: pnpm
           cache-dependency-path: frontend/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec tsc --noEmit
+      # `next build` runs its own TypeScript pass and needs the ambient
+      # PageProps/LayoutProps types it generates into .next/types/ first --
+      # a standalone `tsc --noEmit` before this fails on a fresh checkout
+      # because those types don't exist yet.
       - run: pnpm run build
         env:
           NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
