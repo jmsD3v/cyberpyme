@@ -171,6 +171,27 @@ abajo. Arquitectura, deliberada:
   pasaba en la base, solo no se reflejaba en pantalla). Verificado con
   fila real de prueba: borrada en la base y desaparece del dashboard tras
   el fix.
+- **Pulido, mismo día — ronda "vamos con todo eso"** (página de cuenta,
+  gráfico de evolución, exportar PDF, términos/privacidad):
+  - `/cuenta`: cambiar el nombre de la empresa (reusa la política RLS de
+    UPDATE que ya existía en `empresas`, solo el owner puede) + link a
+    `/forgot-password` para cambiar la contraseña (no se duplicó ese
+    flujo).
+  - `EvolucionChart.tsx`: gráfico de línea SVG a mano (mismo enfoque que
+    `Gauge.tsx`, sin librería nueva) en el dashboard, con puntos
+    coloreados por nivel de riesgo — solo aparece con 2+ evaluaciones.
+  - "Descargar PDF" en `Resultado.tsx` vía `window.print()` + CSS
+    `@media print` en `globals.css` que pisa las variables de color del
+    tema (fondo blanco, texto oscuro) y una clase `.no-print` para
+    ocultar nav/botones. `ActionCard` ahora renderiza el contenido
+    expandido siempre en el DOM (antes solo si `open`), controlado por
+    `hidden print:block` en vez de render condicional, para que
+    `print:block` lo pueda forzar visible al exportar sin depender del
+    estado de React en ese momento.
+  - `/terminos` + `/privacidad`: páginas públicas, español llano,
+    linkeadas desde el signup (aceptación al crear cuenta) y desde un
+    footer nuevo en `AppShell`. La política de privacidad referencia la
+    Ley 25.326 argentina.
 - **Pendiente:** manejo de errores más robusto en casos borde adicionales
   (los principales — login, signup, alta de empresa — ya están cubiertos).
 
