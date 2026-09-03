@@ -31,6 +31,16 @@ export default function AppShell({
         </div>
       </header>
       <main className="flex-1 max-w-4xl w-full mx-auto px-6 py-8">{children}</main>
+      <footer className="no-print border-t border-border py-4">
+        <div className="max-w-4xl mx-auto px-6 flex gap-4 text-xs text-ink-muted">
+          <Link href="/terminos" className="hover:text-ink transition">
+            Términos de servicio
+          </Link>
+          <Link href="/privacidad" className="hover:text-ink transition">
+            Política de privacidad
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }

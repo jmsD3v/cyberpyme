@@ -65,7 +65,19 @@ export default async function SignupPage({
           </button>
         </form>
 
-        <p className="text-sm text-ink-muted mt-6 text-center">
+        <p className="text-xs text-ink-muted mt-4 text-center">
+          Al crear tu cuenta aceptás nuestros{" "}
+          <Link href="/terminos" className="text-accent hover:underline">
+            Términos de servicio
+          </Link>{" "}
+          y nuestra{" "}
+          <Link href="/privacidad" className="text-accent hover:underline">
+            Política de privacidad
+          </Link>
+          .
+        </p>
+
+        <p className="text-sm text-ink-muted mt-4 text-center">
           ¿Ya tenés cuenta?{" "}
           <Link href="/login" className="text-accent hover:underline">
             Iniciá sesión
