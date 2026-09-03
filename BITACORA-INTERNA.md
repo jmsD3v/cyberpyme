@@ -192,10 +192,24 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
   **[cyberpyme.vercel.app](https://cyberpyme.vercel.app)**, con el repo
   de GitHub conectado (cada push a `master` redespliega solo).
   Verificado en el navegador: `/login` y `/signup` cargan bien en
-  producción, cero errores de consola. El backend (FastAPI) todavía no
-  tiene host — `NEXT_PUBLIC_API_URL` sigue apuntando a
-  `http://localhost:8000`, así que el cuestionario y la guía de hardening
-  no van a andar en el sitio público hasta que se resuelva eso.
+  producción, cero errores de consola.
+
+- **03/09/2026 (noche) — backend desplegado, stack completo en
+  producción**: Juanma instaló el conector MCP de Render en la sesión, lo
+  que permitió crear el servicio directamente (`create_web_service`) sin
+  pasar por el dashboard a mano. Primer intento falló porque el repo es
+  privado y Render no tenía acceso — Juanma autorizó la GitHub App de
+  Render para `jmsD3v/cyberpyme` en github.com/settings/installations, y
+  el segundo intento anduvo. Resultado:
+  **[cyberpyme-api.onrender.com](https://cyberpyme-api.onrender.com)**
+  (free tier, se duerme tras inactividad). Actualizado
+  `NEXT_PUBLIC_API_URL` en Vercel con la URL real y redesplegado el
+  frontend. **Probado de punta a punta en el sitio público real**: alta
+  de cuenta → confirmación → login → alta de empresa → cuestionario
+  (trayendo las preguntas del backend en Render en vivo) — cero errores
+  de consola en ningún paso. El proyecto completo (frontend + backend +
+  base de datos) ya es accesible desde cualquier lado, no solo desde la
+  compu de Juanma.
 
 - **03/09/2026 — pivot de ritmo, fase producto arrancada ya (no después del
   13/dic):** Juanma pidió explícitamente terminar el proyecto completo lo

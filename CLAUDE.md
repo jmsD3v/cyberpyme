@@ -173,15 +173,25 @@ conectado — cada push a `master` redespliega solo). Desplegado vía CLI
 sesión no lograra autenticar la cuenta correcta tras varios reintentos y
 un reinicio — no vale la pena reintentarlo, la CLI manual funciona bien.
 
-**Backend todavía no desplegado**: `NEXT_PUBLIC_API_URL` en producción
-sigue apuntando a `http://localhost:8000` — el login/dashboard andan en
-producción, pero el cuestionario y la guía de hardening (que dependen de
-la API) van a fallar hasta que el backend tenga un host real (Render,
-Railway, Fly — sin conector MCP disponible para ninguno en esta sesión,
-hace falta que Juanma cree la cuenta). Una vez elegido: desplegar,
-después `vercel env rm NEXT_PUBLIC_API_URL production` +
-`vercel env add NEXT_PUBLIC_API_URL production` con la URL real, y
-redesplegar el frontend.
+**Backend en producción**: [cyberpyme-api.onrender.com](https://cyberpyme-api.onrender.com)
+(Render, servicio `cyberpyme-api`, free tier — se "duerme" tras un rato
+sin tráfico, ~30s en despertar en el primer request después de eso).
+Creado con el conector MCP de Render (`create_web_service`), build
+command `cd backend && pip install -r requirements.txt`, start command
+`cd backend && uvicorn api:app --host 0.0.0.0 --port $PORT` (sin
+`rootDirectory` en la API del conector, así que el `cd backend &&` hace
+ese trabajo), variable `ALLOWED_ORIGINS=https://cyberpyme.vercel.app`.
+Repo privado — hubo que autorizar la GitHub App de Render en
+github.com/settings/installations antes de que `create_web_service`
+pudiera clonar el repo (primer intento tiró "repository URL is invalid
+or unfetchable", segundo intento después de autorizar funcionó). Auto-
+deploy activado igual que en Vercel.
+
+**Todo el stack verificado en producción de punta a punta**: login →
+alta de empresa → cuestionario (fetch real a Render) → sin errores de
+consola. `NEXT_PUBLIC_API_URL` del frontend ya apunta a la URL de Render
+(se actualizó con `vercel env rm` + `vercel env add` + `vercel --prod`
+después de crear el backend).
 
 ## ⚠️ Ritmo de publicación — NO confundir "hecho en el código" con "mostrado en clase"
 
