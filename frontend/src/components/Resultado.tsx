@@ -12,10 +12,12 @@ export default function Resultado({
   result,
   catalogo,
   empresa,
+  fecha,
 }: {
   result: AssessmentResult;
   catalogo: PreguntasResponse;
   empresa: string;
+  fecha?: string;
 }) {
   const questionById = Object.fromEntries(catalogo.questions.map((q) => [q.id, q]));
 
@@ -27,6 +29,7 @@ export default function Resultado({
           <h1 className="text-xl font-bold">Informe de autodiagnóstico — {empresa}</h1>
           <p className="text-ink-muted text-sm mt-1">
             Metodología NIST CSF 2.0 + CIS Controls v8.1 IG1
+            {fecha && ` · ${fecha}`}
           </p>
         </div>
       </div>

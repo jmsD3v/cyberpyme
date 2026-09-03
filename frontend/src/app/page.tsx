@@ -92,7 +92,11 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
       ) : (
         <div className="bg-surface border border-border rounded-2xl divide-y divide-border">
           {(evaluaciones as Evaluacion[]).map((ev) => (
-            <div key={ev.id} className="flex items-center justify-between px-5 py-4">
+            <Link
+              key={ev.id}
+              href={`/evaluaciones/${ev.id}`}
+              className="flex items-center justify-between px-5 py-4 hover:bg-card transition"
+            >
               <div>
                 <p className="text-sm text-ink-2">
                   {new Date(ev.created_at).toLocaleDateString("es-AR", {
@@ -109,7 +113,7 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
               >
                 Riesgo {RISK_LABEL[ev.risk_level]}
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       )}

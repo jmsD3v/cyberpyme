@@ -14,6 +14,19 @@ tope de la Bitácora de Notion, y cambiar el Estado de la tarea asociada a
 Finalizada. Ver `feedback-cyberpyme-notion-pacing` en la memoria de Claude
 para el porqué.
 
+**Esta regla no es solo de Notion.** El 03/09/2026 el profesor Gabriel
+preguntó por mail qué sigue después del documento técnico, y el primer
+borrador de respuesta describía la app interactiva y la plataforma
+multiempresa en tiempo presente ("ya está funcionando") y ofrecía una
+demo — revelando avance muy por delante de la jornada real (la app
+interactiva está agendada para el 21/09, no antes). Juanma lo corrigió:
+*"acá tenemos que estar a la altura de lo que vamos registrando en
+notion... le contamos lo que va a ser, eso todo bien, pero no aclaramos
+lo avanzado que estamos."* Se reescribió todo en tiempo futuro/de plan
+("la idea es", "más adelante") y se sacó la demo. **Cualquier
+comunicación externa sobre este proyecto — mail, mensaje, demo — sigue
+la misma regla de ritmo que Notion.**
+
 ---
 
 ## Pendientes de publicar (ya construido, esperando la fecha real)
@@ -243,6 +256,14 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
     ciberataque") y 3 bullets con ícono explicando qué hace la app en
     términos simples, sin jerga — mismo panel reusado en `/login` y
     `/signup`. Verificado en desktop y mobile en el navegador.
+  - **Ver detalle de una evaluación pasada** (`/evaluaciones/[id]`, filas
+    del dashboard ahora clickeables): en vez de guardar `top_actions` en
+    la tabla `evaluaciones` (duplicando datos derivables), la página
+    llama de nuevo a `POST /evaluar` con las `respuestas` guardadas y
+    recalcula todo al vuelo — el motor es determinista, así que da
+    exactamente el mismo resultado que en su momento. Verificado con un
+    caso sembrado a mano (score 36/100, CRÍTICO) que coincide pixel a
+    pixel con lo insertado.
   - **Bug investigado y descartado**: Juanma reportó un error de Next.js
     ("An unexpected response was received from the server") al apretar
     "Salir". Diagnosticado: los logs del servidor mostraban `logout()`

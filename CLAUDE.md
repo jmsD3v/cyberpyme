@@ -153,6 +153,13 @@ abajo. Arquitectura, deliberada:
   bullets) porque la versión anterior era demasiado minimalista para un
   usuario que no sabe de IT — pedido explícito de Juanma, ver
   `BITACORA-INTERNA.md`.
+- **Pulido, mismo día:** las evaluaciones del dashboard ahora son
+  clickeables (`/evaluaciones/[id]`) y muestran el detalle completo
+  (gauge, barras, acciones) de una evaluación guardada. No se duplica
+  `top_actions` en la tabla `evaluaciones` — se recalcula en el momento
+  llamando de nuevo a `POST /evaluar` con las `respuestas` guardadas,
+  aprovechando que el motor es determinista (mismo principio que el resto
+  del proyecto: config sobre código, sin estado redundante).
 - **Pendiente:** manejo de errores más robusto en casos borde adicionales
   (los principales — login, signup, alta de empresa — ya están cubiertos).
 
