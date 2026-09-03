@@ -83,6 +83,12 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
         </Link>
       </div>
 
+      {error && (
+        <p className="mb-6 text-sm text-status-critico bg-status-critico/10 border border-status-critico/30 rounded-lg px-3 py-2">
+          {error}
+        </p>
+      )}
+
       {evaluaciones && evaluaciones.length >= 2 && (
         <div className="bg-surface border border-border rounded-2xl p-6 mb-6">
           <h2 className="font-semibold mb-3">Evolución del score</h2>

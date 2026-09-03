@@ -9,7 +9,10 @@ import { createClient } from "@/lib/supabase/server";
  * afecta ninguna fila, sin necesidad de chequearlo acá primero. */
 export async function deleteEvaluacion(id: string) {
   const supabase = await createClient();
-  await supabase.from("evaluaciones").delete().eq("id", id);
+  const { error } = await supabase.from("evaluaciones").delete().eq("id", id);
+  if (error) {
+    redirect(`/?error=${encodeURIComponent("No se pudo borrar la evaluación. Probá de nuevo.")}`);
+  }
   revalidatePath("/");
   redirect("/");
 }
