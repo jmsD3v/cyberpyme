@@ -10,6 +10,12 @@ from api import app
 client = TestClient(app)
 
 
+def test_raiz():
+    res = client.get("/")
+    assert res.status_code == 200
+    assert "servicio" in res.json()
+
+
 def test_salud():
     res = client.get("/salud")
     assert res.status_code == 200

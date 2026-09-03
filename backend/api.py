@@ -56,6 +56,13 @@ def _question_to_dict(q) -> dict:
     }
 
 
+@app.get("/")
+def raiz():
+    """Respuesta minima para quien pegue directo a la URL base (monitores
+    de uptime, curiosidad) -- sin esto tiraba 404 y ensuciaba los logs."""
+    return {"servicio": "CyberPyME API", "docs": "/docs", "salud": "/salud"}
+
+
 @app.get("/salud")
 def salud():
     return {"status": "ok"}
