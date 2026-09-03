@@ -51,7 +51,7 @@ export default async function EvaluacionDetallePage({
         empresa={empresaNombre}
         fecha={fecha}
       />
-      <div className="mt-8 flex justify-end">
+      <div className="mt-8 flex justify-end no-print">
         <DeleteEvaluacionButton action={deleteEvaluacion.bind(null, id)} />
       </div>
     </AppShell>

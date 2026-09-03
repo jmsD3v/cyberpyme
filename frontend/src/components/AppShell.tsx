@@ -15,7 +15,7 @@ export default function AppShell({
           <Link href="/" className="font-bold text-lg">
             CyberPyME{empresa ? <span className="text-ink-muted font-normal"> — {empresa}</span> : null}
           </Link>
-          <div className="flex items-center gap-5 shrink-0">
+          <div className="flex items-center gap-5 shrink-0 no-print">
             <Link href="/guia-hardening" className="text-sm text-ink-muted hover:text-ink transition">
               Guía de hardening
             </Link>

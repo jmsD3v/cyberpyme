@@ -33,3 +33,25 @@ body {
     transform: translateY(0);
   }
 }
+
+/* Al imprimir/exportar a PDF: paleta clara en vez del tema oscuro (ahorra
+   tinta y se lee bien en papel), y se ocultan los controles interactivos
+   que no tienen sentido en una impresión (nav, botones, chevrons). Como
+   todo el tema ya se apoya en estas variables, alcanza con pisarlas acá
+   -- no hace falta tocar cada componente. */
+@media print {
+  :root {
+    --color-page: #ffffff;
+    --color-surface: #ffffff;
+    --color-card: #f2f2f2;
+    --color-ink: #111111;
+    --color-ink-2: #333333;
+    --color-ink-muted: #555555;
+    --color-track: #e2e2e2;
+    --color-border: #cccccc;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

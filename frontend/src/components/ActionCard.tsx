@@ -38,24 +38,25 @@ export default function ActionCard({
           <span className="bg-track px-2 py-0.5 rounded-full">Esfuerzo: {action.effort}</span>
           <span className="bg-track px-2 py-0.5 rounded-full">Tiempo: {action.time}</span>
         </span>
-        <span className={`text-ink-muted transition-transform ${open ? "rotate-180" : ""}`}>▾</span>
+        <span className={`text-ink-muted transition-transform no-print ${open ? "rotate-180" : ""}`}>▾</span>
       </button>
-      {open && (
-        <div className="px-5 pb-5 border-t border-border pt-4">
-          <p className="italic text-ink-2 mb-3">{action.why}</p>
-          <ol className="list-decimal pl-5 space-y-1.5">
-            {action.steps.map((s, i) => (
-              <li key={i}>{s}</li>
-            ))}
-          </ol>
-          {question && (
-            <p className="text-xs text-ink-muted mt-3">
-              Basado en la pregunta: &ldquo;{question.question}&rdquo; — NIST CSF:{" "}
-              {question.nist.join(", ")} · CIS IG1: {question.cis.join(", ")}
-            </p>
-          )}
-        </div>
-      )}
+      {/* Siempre en el DOM (no solo si open) para que print:block pueda
+       * forzarlo visible al exportar a PDF, sin depender del estado de
+       * React en ese momento. */}
+      <div className={`px-5 pb-5 border-t border-border pt-4 ${open ? "" : "hidden print:block"}`}>
+        <p className="italic text-ink-2 mb-3">{action.why}</p>
+        <ol className="list-decimal pl-5 space-y-1.5">
+          {action.steps.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ol>
+        {question && (
+          <p className="text-xs text-ink-muted mt-3">
+            Basado en la pregunta: &ldquo;{question.question}&rdquo; — NIST CSF:{" "}
+            {question.nist.join(", ")} · CIS IG1: {question.cis.join(", ")}
+          </p>
+        )}
+      </div>
     </article>
   );
 }

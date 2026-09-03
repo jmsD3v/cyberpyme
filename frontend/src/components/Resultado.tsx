@@ -25,13 +25,20 @@ export default function Resultado({
     <div className="space-y-8">
       <div className="bg-surface border border-border rounded-2xl p-8 flex flex-wrap items-center gap-8">
         <Gauge score={result.global_score} riskLevel={result.risk_level} />
-        <div>
+        <div className="flex-1">
           <h1 className="text-xl font-bold">Informe de autodiagnóstico — {empresa}</h1>
           <p className="text-ink-muted text-sm mt-1">
             Metodología NIST CSF 2.0 + CIS Controls v8.1 IG1
             {fecha && ` · ${fecha}`}
           </p>
         </div>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="no-print rounded-full bg-track px-4 py-2 text-sm font-semibold hover:brightness-110 active:scale-[.98] transition"
+        >
+          Descargar PDF
+        </button>
       </div>
 
       <section>
