@@ -261,6 +261,20 @@ documentación oficial de Supabase antes de implementar. Verificado que
 Supabase (probado con un usuario real: login con la contraseña vieja
 falló después, login con la nueva funcionó).
 
+## CI
+
+`.github/workflows/ci.yml` corre en cada push a `master` (y en PRs):
+job `backend` (pytest, 32 tests, con `backend/requirements-dev.txt` —
+`pytest` + `httpx2`, que `starlette.testclient` exige aparte de
+`httpx`) y job `frontend` (`pnpm run build` — **no** un `tsc --noEmit`
+suelto: `PageProps`/`LayoutProps` son tipos ambiente que Next.js genera
+en `.next/types/` recién durante el build, así que un `tsc` corrido
+antes falla en un checkout limpio; `next build` ya typechequea todo
+internamente, es lo mismo que hace Vercel en producción). Verificado en
+verde después de 3 iteraciones (los primeros 2 intentos fallaron por
+exactamente estos dos motivos — quedan documentados en el historial de
+commits, no hace falta repetir el error).
+
 ## ⚠️ Ritmo de publicación — NO confundir "hecho en el código" con "mostrado en clase"
 
 El desarrollo real va más rápido que el cronograma de clases. Eso está bien
