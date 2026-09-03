@@ -39,9 +39,10 @@ APP_CSS = '''
 .intro-card h1 { margin: 0 0 12px; font-size: 28px; position: relative; }
 .intro-card p { color: var(--ink-2); max-width: 520px; margin: 0 auto 10px; position: relative; }
 .intro-card .disclaimer { font-size: 13px; color: var(--ink-muted); margin-top: 18px; position: relative; }
-.domain-teaser { display: flex; justify-content: center; gap: 18px; margin: 22px 0 6px; flex-wrap: wrap; position: relative; }
-.domain-teaser .d-icon-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.domain-teaser span.d-label { font-size: 11px; color: var(--ink-muted); }
+.domain-teaser { display: flex; justify-content: center; gap: 6px; margin: 22px 0 6px; position: relative; }
+.domain-teaser .d-icon-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px;
+  width: 80px; flex-shrink: 0; }
+.domain-teaser span.d-label { font-size: 11px; color: var(--ink-muted); text-align: center; line-height: 1.3; }
 .name-field { margin: 22px auto 6px; max-width: 360px; text-align: left; position: relative; }
 .name-field label { display: block; font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
 .name-field input { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);
