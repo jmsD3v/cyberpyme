@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AppShell from "@/components/AppShell";
+import EvolucionChart from "@/components/EvolucionChart";
 import { createClient } from "@/lib/supabase/server";
 import { completarRegistro } from "./onboarding-actions";
 import { RISK_COLOR, RISK_LABEL, type RiskLevel } from "@/lib/types";
@@ -81,6 +82,17 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
           + Nueva evaluación
         </Link>
       </div>
+
+      {evaluaciones && evaluaciones.length >= 2 && (
+        <div className="bg-surface border border-border rounded-2xl p-6 mb-6">
+          <h2 className="font-semibold mb-3">Evolución del score</h2>
+          <EvolucionChart
+            puntos={[...(evaluaciones as Evaluacion[])]
+              .reverse()
+              .map((ev) => ({ fecha: ev.created_at, score: ev.global_score, risk_level: ev.risk_level }))}
+          />
+        </div>
+      )}
 
       {!evaluaciones || evaluaciones.length === 0 ? (
         <div className="bg-surface border border-border rounded-2xl p-8 text-center">
