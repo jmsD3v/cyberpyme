@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { translateAuthError } from "@/lib/auth-errors";
 import AuthShowcase from "@/components/AuthShowcase";
 
+const LINK_TIMEOUT_MS = 8000;
+
 export default function ResetPasswordPage() {
   const router = useRouter();
   const [ready, setReady] = useState(false);
+  const [expired, setExpired] = useState(false);
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -16,16 +20,20 @@ export default function ResetPasswordPage() {
 
   useEffect(() => {
     const supabase = createClient();
+    // Se habilita SOLO con el evento PASSWORD_RECOVERY -- una sesion
+    // cualquiera (ej. un usuario ya logueado navegando acá a mano) no
+    // alcanza, para que no se pueda cambiar la contraseña sin pasar por
+    // el link de email ni repetir la contraseña actual.
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event) => {
       if (event === "PASSWORD_RECOVERY") setReady(true);
     });
-    // Si la sesion de recuperacion ya estaba activa al montar (ej. recarga de pagina), tambien la aceptamos.
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) setReady(true);
-    });
-    return () => subscription.unsubscribe();
+    const timeout = setTimeout(() => setExpired(true), LINK_TIMEOUT_MS);
+    return () => {
+      subscription.unsubscribe();
+      clearTimeout(timeout);
+    };
   }, []);
 
   async function handleSubmit(e: FormEvent) {
@@ -47,6 +55,20 @@ export default function ResetPasswordPage() {
   }
 
   if (!ready) {
+    if (expired) {
+      return (
+        <div className="flex-1 flex items-center justify-center p-6 text-center">
+          <div className="max-w-sm">
+            <p className="text-ink-2 mb-3">
+              Este link de recuperación no es válido o ya venció. Pedí uno nuevo.
+            </p>
+            <Link href="/forgot-password" className="text-accent hover:underline text-sm">
+              Recuperar contraseña de nuevo
+            </Link>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="flex-1 flex items-center justify-center p-6 text-center">
         <p className="text-ink-muted text-sm">Verificando el link…</p>

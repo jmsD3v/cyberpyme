@@ -220,6 +220,35 @@ acá en más, el único método de deploy es push a `master` (auto-deploy) o
 `vercel redeploy <url>` sobre un deploy anterior, nunca más
 `vercel --prod` desde la CLI local.
 
+**Auditoría de seguridad completa (2026-09-03, noche)** — a pedido de
+Juanma, revisión de todo el código (backend + frontend) con un agente
+dedicado más verificación manual contra la base real (políticas RLS,
+funciones `crear_empresa`/`empresa_actual`, y un ataque de prueba real
+entre dos empresas). Resultado: **un solo hallazgo real**, ya corregido:
+
+- **`/reset-password` aceptaba cualquier sesión activa, no solo una de
+  recuperación** — un usuario ya logueado que entraba directo a esa URL
+  podía cambiar su contraseña sin repetir la actual. Corregido: ahora se
+  habilita **estrictamente** con el evento `PASSWORD_RECOVERY` de
+  Supabase (se sacó el fallback `getSession()` que aceptaba cualquier
+  sesión). Se agregó un timeout de 8s con mensaje + link para pedir un
+  link nuevo, para no dejar la pantalla de "Verificando el link…"
+  colgada para siempre en el caso legítimo de un link vencido/inválido.
+  Verificado el cierre real: usuario logueado normal → `/reset-password`
+  directo → ya NO ve el formulario, ve el mensaje de link inválido.
+
+Dos candidatos descartados por el agente, **verificados contra la
+política SQL real y con un ataque de prueba en vivo** (no solo lectura
+de código): inserción de `evaluaciones` con `empresa_id` ajeno (la
+política `WITH CHECK` exige `empresa_id = empresa_actual()`, calculado
+server-side) y lectura de evaluación de otra empresa por ID adivinado
+(mismo caso con la política `SELECT` — probado creando dos empresas de
+prueba y confirmando que una no puede ver la evaluación de la otra ni
+con el ID real en la URL). Condición de carrera teórica en
+`crear_empresa` también descartada: `perfiles.id` tiene `PRIMARY KEY`,
+así que aunque el chequeo "¿ya tiene empresa?" no sea atómico, Postgres
+rechaza igual el segundo insert por clave duplicada.
+
 **"Olvidé mi contraseña"** (`/forgot-password` + `/reset-password`, link
 agregado en `/login`): flujo estándar de Supabase Auth con
 `resetPasswordForEmail` + el evento `PASSWORD_RECOVERY` de
