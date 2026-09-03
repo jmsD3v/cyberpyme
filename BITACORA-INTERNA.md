@@ -202,9 +202,59 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
     preguntas) → llamada a FastAPI → inserción en Supabase respetando RLS →
     resultado renderizado correctamente (score 100/100, Riesgo Bajo). Cero
     errores de consola bloqueantes. Datos de prueba borrados después.
-  - **Pendiente:** documentación pulida de la fase producto, tipos
-    generados de Supabase en vez de casteos manuales, página de guía de
-    hardening en el frontend. Ninguna tarea de Notion se tocó todavía por
-    este avance — evaluar con Juanma si corresponde reflejarlo ahí o si,
-    al no estar atado a una jornada Lunes/Miércoles, no aplica la regla de
-    ritmo de `feedback-cyberpyme-notion-pacing`.
+  - **Pendiente:** documentación pulida de la fase producto. Ninguna tarea
+    de Notion se tocó todavía por este avance — evaluar con Juanma si
+    corresponde reflejarlo ahí o si, al no estar atado a una jornada
+    Lunes/Miércoles, no aplica la regla de ritmo de
+    `feedback-cyberpyme-notion-pacing`.
+
+- **03/09/2026 (más tarde) — pulido de la fase producto, a pedido de
+  Juanma tras probar la app** ("segui con todo eso, muy bien hasta
+  ahora!"):
+  - **Tipos generados de Supabase**: `frontend/src/lib/supabase/database.types.ts`
+    generado con el MCP de Supabase (`generate_typescript_types`), cableado
+    en `client.ts`/`server.ts`. Los casteos manuales `as unknown as {...}`
+    que había en los joins de `page.tsx`/`cuestionario/page.tsx`
+    desaparecieron — Supabase infiere correctamente el embed como objeto
+    único (no array) a partir de la FK. Verificado con `tsc --noEmit`
+    limpio.
+  - **Página de guía de hardening** (`/guia-hardening`, con link en el
+    header): nuevo endpoint `GET /guia-hardening` en `backend/api.py`
+    reusando `prioritize_actions()` sobre todas las preguntas (no solo
+    brechas de una evaluación) — mismo cálculo que la guía HTML de la
+    parte académica, sin duplicar el orden de prioridad en el frontend.
+    `ActionCard` se extrajo de `Resultado.tsx` a un componente compartido
+    para reusarlo ahí. Test nuevo en `test_api.py` (32/32 en verde).
+  - **Manejo de errores más robusto**: los mensajes de Supabase Auth
+    (en inglés, técnicos — ej. "Invalid login credentials", "email rate
+    limit exceeded", que efectivamente apareció crudo en pantalla durante
+    las pruebas de esta sesión) ahora se traducen a español llano
+    (`frontend/src/lib/auth-errors.ts`). `completarRegistro` (alta de
+    empresa post-confirmación de email) ya no tira una excepción cruda que
+    rompía a la pantalla de error genérica de Next.js — ahora redirige con
+    un mensaje amigable, mismo patrón que `login`/`signup`.
+  - **Rediseño de login/signup** — pedido explícito de Juanma mientras
+    probaba la app: *"en el loguin... falta descripcion, no se sabe de que
+    va la pagina... no que sea tan minimalista porque sino no se entiende
+    de que es, acordate que el usuario va a ser una persona que no sabe
+    nada de IT"*. Se agregó `AuthShowcase.tsx`, un panel de marca a la
+    izquierda (layout split en desktop, apilado en mobile) con logo,
+    propuesta de valor ("Sabé qué tan expuesta está tu empresa a un
+    ciberataque") y 3 bullets con ícono explicando qué hace la app en
+    términos simples, sin jerga — mismo panel reusado en `/login` y
+    `/signup`. Verificado en desktop y mobile en el navegador.
+  - **Bug investigado y descartado**: Juanma reportó un error de Next.js
+    ("An unexpected response was received from the server") al apretar
+    "Salir". Diagnosticado: los logs del servidor mostraban `logout()`
+    corriendo sin errores y el redirect a `/login` completándose siempre
+    — el error era cosmético, del overlay de dev de Turbopack, causado por
+    reiniciar el servidor de Next.js manualmente mientras una pestaña
+    vieja del navegador seguía con la conexión de HMR muerta apuntando al
+    proceso anterior. Confirmado 100% funcional en una pestaña nueva y
+    limpia (logout probado 3 veces más, cero errores). **Lección para
+    diagnosticar bugs de frontend en esta sesión**: si el navegador
+    reporta un error pero los logs del servidor están limpios y la acción
+    de todos modos completa correctamente (redirect exitoso, sesión
+    realmente borrada), sospechar de estado de pestaña/HMR obsoleto antes
+    que de un bug real — abrir una pestaña nueva y repetir la prueba antes
+    de tocar código.

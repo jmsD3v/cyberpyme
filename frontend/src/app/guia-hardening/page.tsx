@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import AppShell from "@/components/AppShell";
-import Cuestionario from "@/components/Cuestionario";
+import GuiaHardening from "@/components/GuiaHardening";
 import { createClient } from "@/lib/supabase/server";
 
-export default async function CuestionarioPage() {
+export default async function GuiaHardeningPage() {
   const supabase = await createClient();
   const {
     data: { user },
@@ -22,7 +22,7 @@ export default async function CuestionarioPage() {
 
   return (
     <AppShell empresa={empresaNombre}>
-      <Cuestionario empresa={empresaNombre} />
+      <GuiaHardening />
     </AppShell>
   );
 }

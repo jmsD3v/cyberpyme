@@ -3,15 +3,16 @@ import AppShell from "@/components/AppShell";
 import { createClient } from "@/lib/supabase/server";
 import { completarRegistro } from "./onboarding-actions";
 import { RISK_COLOR, RISK_LABEL, type RiskLevel } from "@/lib/types";
+import type { Tables } from "@/lib/supabase/database.types";
 
-interface Evaluacion {
-  id: string;
-  global_score: number;
+type Evaluacion = Pick<Tables<"evaluaciones">, "id" | "global_score" | "created_at"> & {
   risk_level: RiskLevel;
-  created_at: string;
-}
+};
 
-export default async function DashboardPage() {
+export default async function DashboardPage({ searchParams }: PageProps<"/">) {
+  const params = await searchParams;
+  const error = typeof params.error === "string" ? params.error : null;
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -37,6 +38,11 @@ export default async function DashboardPage() {
             Confirmaste tu email — ahora contanos el nombre de tu empresa para
             terminar de crear tu cuenta.
           </p>
+          {error && (
+            <p className="mb-4 text-sm text-status-critico bg-status-critico/10 border border-status-critico/30 rounded-lg px-3 py-2">
+              {error}
+            </p>
+          )}
           <form action={completarRegistro} className="space-y-4">
             <input
               name="empresa"
@@ -57,7 +63,7 @@ export default async function DashboardPage() {
     );
   }
 
-  const empresaNombre = (perfil.empresas as unknown as { nombre: string } | null)?.nombre;
+  const empresaNombre = perfil.empresas?.nombre;
 
   const { data: evaluaciones } = await supabase
     .from("evaluaciones")

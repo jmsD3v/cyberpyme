@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { signup } from "./actions";
+import AuthShowcase from "@/components/AuthShowcase";
 
 export default async function SignupPage({
   searchParams,
@@ -8,7 +9,9 @@ export default async function SignupPage({
   const error = typeof params.error === "string" ? params.error : null;
 
   return (
-    <div className="flex-1 flex items-center justify-center p-6">
+    <div className="flex-1 flex flex-col lg:flex-row">
+      <AuthShowcase />
+      <div className="flex-1 flex items-center justify-center p-6 lg:border-l lg:border-border">
       <div className="w-full max-w-sm bg-surface border border-border rounded-2xl p-8">
         <h1 className="text-2xl font-bold mb-1">Creá tu empresa</h1>
         <p className="text-ink-muted text-sm mb-6">
@@ -68,6 +71,7 @@ export default async function SignupPage({
             Iniciá sesión
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );

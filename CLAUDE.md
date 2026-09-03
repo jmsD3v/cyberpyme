@@ -135,10 +135,26 @@ abajo. Arquitectura, deliberada:
   (Supabase, cliente browser, respetando RLS) → resultado renderizado
   (gauge animado, barras por dominio, acordeón de acciones). Cero errores
   de consola bloqueantes.
-- **Pendiente:** tipos TypeScript generados de Supabase (hoy hay un par de
-  casteos manuales en los joins de `page.tsx`/`cuestionario/page.tsx`),
-  página de guía de hardening en el frontend, manejo de errores más
-  robusto.
+- **Pulido, mismo día:** tipos TypeScript generados de Supabase
+  (`frontend/src/lib/supabase/database.types.ts`, vía
+  `generate_typescript_types` del MCP de Supabase — los casteos manuales
+  `as unknown as {...}` en los joins de `page.tsx`/`cuestionario/page.tsx`
+  ya no existen); página `/guia-hardening` (nuevo endpoint
+  `GET /guia-hardening` en `backend/api.py`, reusa `prioritize_actions()`
+  sobre todas las preguntas — no duplica la lógica de priorización en el
+  frontend, mismo principio que `render_hardening_guide_html` en la parte
+  académica); `ActionCard` extraído a componente compartido
+  (`frontend/src/components/ActionCard.tsx`) para no duplicarlo entre
+  `Resultado.tsx` y `GuiaHardening.tsx`; mensajes de error de Supabase Auth
+  traducidos a español llano (`frontend/src/lib/auth-errors.ts` — antes se
+  mostraba texto crudo en inglés tipo "email rate limit exceeded"
+  directamente al usuario); `login`/`signup` rediseñados con un panel de
+  marca a la izquierda (`AuthShowcase.tsx`: logo, propuesta de valor, 3
+  bullets) porque la versión anterior era demasiado minimalista para un
+  usuario que no sabe de IT — pedido explícito de Juanma, ver
+  `BITACORA-INTERNA.md`.
+- **Pendiente:** manejo de errores más robusto en casos borde adicionales
+  (los principales — login, signup, alta de empresa — ya están cubiertos).
 
 ## ⚠️ Ritmo de publicación — NO confundir "hecho en el código" con "mostrado en clase"
 

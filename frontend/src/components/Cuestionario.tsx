@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Resultado from "./Resultado";
 import type { AnswerValue, AssessmentResult, PreguntasResponse } from "@/lib/types";
+import type { Json } from "@/lib/supabase/database.types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 const OPCIONES: { value: AnswerValue; label: string }[] = [
@@ -77,7 +78,7 @@ export default function Cuestionario({ empresa }: { empresa: string }) {
         respuestas: answers,
         global_score: data.global_score,
         risk_level: data.risk_level,
-        domains: data.domains,
+        domains: data.domains as unknown as Json,
       });
 
       setResult(data);

@@ -15,11 +15,16 @@ export default function AppShell({
           <Link href="/" className="font-bold text-lg">
             CyberPyME{empresa ? <span className="text-ink-muted font-normal"> — {empresa}</span> : null}
           </Link>
-          <form action={logout}>
-            <button type="submit" className="text-sm text-ink-muted hover:text-ink transition">
-              Salir
-            </button>
-          </form>
+          <div className="flex items-center gap-5">
+            <Link href="/guia-hardening" className="text-sm text-ink-muted hover:text-ink transition">
+              Guía de hardening
+            </Link>
+            <form action={logout}>
+              <button type="submit" className="text-sm text-ink-muted hover:text-ink transition">
+                Salir
+              </button>
+            </form>
+          </div>
         </div>
       </header>
       <main className="flex-1 max-w-4xl w-full mx-auto px-6 py-8">{children}</main>

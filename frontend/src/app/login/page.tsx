@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { login } from "./actions";
+import AuthShowcase from "@/components/AuthShowcase";
 
 export default async function LoginPage({
   searchParams,
@@ -8,10 +9,12 @@ export default async function LoginPage({
   const error = typeof params.error === "string" ? params.error : null;
 
   return (
-    <div className="flex-1 flex items-center justify-center p-6">
+    <div className="flex-1 flex flex-col lg:flex-row">
+      <AuthShowcase />
+      <div className="flex-1 flex items-center justify-center p-6 lg:border-l lg:border-border">
       <div className="w-full max-w-sm bg-surface border border-border rounded-2xl p-8">
-        <h1 className="text-2xl font-bold mb-1">CyberPyME</h1>
-        <p className="text-ink-muted text-sm mb-6">Iniciá sesión para ver tus evaluaciones</p>
+        <h1 className="text-2xl font-bold mb-1">Iniciá sesión</h1>
+        <p className="text-ink-muted text-sm mb-6">Entrá para ver el estado de tu empresa</p>
 
         {error && (
           <p className="mb-4 text-sm text-status-critico bg-status-critico/10 border border-status-critico/30 rounded-lg px-3 py-2">
@@ -54,6 +57,7 @@ export default async function LoginPage({
             Creá tu empresa
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { translateAuthError } from "@/lib/auth-errors";
 
 export async function signup(formData: FormData) {
   const empresa = String(formData.get("empresa") ?? "").trim();
@@ -16,7 +17,7 @@ export async function signup(formData: FormData) {
 
   const { data, error: signUpError } = await supabase.auth.signUp({ email, password });
   if (signUpError) {
-    redirect(`/signup?error=${encodeURIComponent(signUpError.message)}`);
+    redirect(`/signup?error=${encodeURIComponent(translateAuthError(signUpError.message))}`);
   }
 
   // Si el proyecto tiene confirmacion de email activada, signUp NO deja
@@ -33,7 +34,7 @@ export async function signup(formData: FormData) {
   // migracion "esquema_inicial_multiempresa").
   const { error: rpcError } = await supabase.rpc("crear_empresa", { p_nombre: empresa });
   if (rpcError) {
-    redirect(`/signup?error=${encodeURIComponent(rpcError.message)}`);
+    redirect(`/signup?error=${encodeURIComponent("No se pudo crear tu empresa. Probá de nuevo en unos minutos.")}`);
   }
 
   redirect("/");

@@ -17,7 +17,12 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from app.services.scoring import calculate_assessment, load_questions, load_recommendations
+from app.services.scoring import (
+    calculate_assessment,
+    load_questions,
+    load_recommendations,
+    prioritize_actions,
+)
 
 VALID_ANSWER_VALUES = {"yes", "partial", "no", "unknown"}
 
@@ -63,6 +68,18 @@ def preguntas():
 def recomendaciones():
     """Catálogo completo de recomendaciones (why + steps). Público, sin auth."""
     return load_recommendations()
+
+
+@app.get("/guia-hardening")
+def guia_hardening():
+    """Catálogo completo de acciones de hardening, ordenadas por prioridad —
+    trata todas las preguntas como brecha (no depende de ningún
+    autodiagnóstico puntual). Mismo cálculo que la guía HTML de la parte
+    académica (`report.py::render_hardening_guide_html`), reusando
+    `prioritize_actions` en vez de duplicar el orden en el frontend."""
+    questions, _ = load_questions()
+    recommendations = load_recommendations()
+    return prioritize_actions(questions, recommendations)
 
 
 @app.post("/evaluar")

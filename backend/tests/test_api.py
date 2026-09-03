@@ -57,5 +57,16 @@ def test_evaluar_rechaza_respuesta_invalida():
     assert res.status_code == 422
 
 
+def test_guia_hardening_devuelve_las_24_ordenadas_por_prioridad():
+    res = client.get("/guia-hardening")
+    assert res.status_code == 200
+    body = res.json()
+    assert len(body) == 24
+    priority_order = {"P1": 0, "P2": 1, "P3": 2}
+    priorities = [priority_order[a["priority"]] for a in body]
+    assert priorities == sorted(priorities)
+    assert {a["question_id"] for a in body} == set(_all_question_ids())
+
+
 def _all_question_ids():
     return [q["id"] for q in client.get("/preguntas").json()["questions"]]
