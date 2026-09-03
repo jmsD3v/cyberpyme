@@ -1,0 +1,212 @@
+{
+  "methodology_version": "1.0.0",
+  "domains": {
+    "accesos": {"label": "Accesos", "domain_weight": 25},
+    "wifi": {"label": "WiFi", "domain_weight": 15},
+    "backups": {"label": "Backups", "domain_weight": 25},
+    "actualizaciones": {"label": "Actualizaciones", "domain_weight": 15},
+    "continuidad": {"label": "Continuidad Operativa", "domain_weight": 20}
+  },
+  "questions": [
+    {
+      "id": "ACC-01",
+      "domain": "accesos",
+      "question": "¿Cada persona utiliza una cuenta propia para acceder a los sistemas de la empresa?",
+      "weight": 3,
+      "risk": "shared_accounts",
+      "nist": ["PR.AA"],
+      "cis": ["5", "6"],
+      "recommendation_id": "REC-ACC-01"
+    },
+    {
+      "id": "ACC-02",
+      "domain": "accesos",
+      "question": "¿Las cuentas críticas (correo, banca, administración) tienen MFA activado?",
+      "weight": 5,
+      "risk": "credential_compromise",
+      "nist": ["PR.AA", "GV.RR"],
+      "cis": ["6", "14"],
+      "recommendation_id": "REC-ACC-02"
+    },
+    {
+      "id": "ACC-03",
+      "domain": "accesos",
+      "question": "¿Las contraseñas se gestionan con un gestor o una política consistente?",
+      "weight": 3,
+      "risk": "password_reuse",
+      "nist": ["PR.AA"],
+      "cis": ["5"],
+      "recommendation_id": "REC-ACC-03"
+    },
+    {
+      "id": "ACC-04",
+      "domain": "accesos",
+      "question": "¿Se retiran las cuentas cuando una persona deja la empresa?",
+      "weight": 3,
+      "risk": "orphaned_access",
+      "nist": ["PR.AA"],
+      "cis": ["5", "6"],
+      "recommendation_id": "REC-ACC-04"
+    },
+    {
+      "id": "ACC-05",
+      "domain": "accesos",
+      "question": "¿Los usuarios comunes trabajan sin privilegios de administrador?",
+      "weight": 4,
+      "risk": "privilege_escalation",
+      "nist": ["PR.AA"],
+      "cis": ["5"],
+      "recommendation_id": "REC-ACC-05"
+    },
+    {
+      "id": "WIF-01",
+      "domain": "wifi",
+      "question": "¿La red utiliza WPA2-AES o WPA3 (no un cifrado obsoleto)?",
+      "weight": 4,
+      "risk": "wifi_attack",
+      "nist": ["PR.PS"],
+      "cis": ["4", "12"],
+      "recommendation_id": "REC-WIF-01"
+    },
+    {
+      "id": "WIF-02",
+      "domain": "wifi",
+      "question": "¿La contraseña del WiFi corporativo es única y robusta (no la de fábrica)?",
+      "weight": 3,
+      "risk": "unauthorized_access",
+      "nist": ["PR.PS"],
+      "cis": ["4"],
+      "recommendation_id": "REC-WIF-02"
+    },
+    {
+      "id": "WIF-03",
+      "domain": "wifi",
+      "question": "¿La administración del router está protegida y no expuesta a internet?",
+      "weight": 4,
+      "risk": "router_takeover",
+      "nist": ["PR.PS"],
+      "cis": ["4", "12"],
+      "recommendation_id": "REC-WIF-03"
+    },
+    {
+      "id": "WIF-04",
+      "domain": "wifi",
+      "question": "¿Existe una red separada para invitados?",
+      "weight": 2,
+      "risk": "lateral_movement",
+      "nist": ["PR.PS"],
+      "cis": ["12", "13"],
+      "recommendation_id": "REC-WIF-04"
+    },
+    {
+      "id": "BKP-01",
+      "domain": "backups",
+      "question": "¿Se realizan copias automáticas de la información crítica?",
+      "weight": 5,
+      "risk": "data_loss",
+      "nist": ["PR.DS"],
+      "cis": ["11"],
+      "recommendation_id": "REC-BKP-01"
+    },
+    {
+      "id": "BKP-02",
+      "domain": "backups",
+      "question": "¿Existe una copia separada/offline o protegida frente a ransomware?",
+      "weight": 5,
+      "risk": "ransomware_wipe",
+      "nist": ["PR.DS"],
+      "cis": ["11"],
+      "recommendation_id": "REC-BKP-02"
+    },
+    {
+      "id": "BKP-03",
+      "domain": "backups",
+      "question": "¿Se mantiene una estrategia 3-2-1 o equivalente?",
+      "weight": 4,
+      "risk": "single_point_of_failure",
+      "nist": ["PR.DS"],
+      "cis": ["11"],
+      "recommendation_id": "REC-BKP-03"
+    },
+    {
+      "id": "BKP-04",
+      "domain": "backups",
+      "question": "¿Se prueba periódicamente la restauración del backup?",
+      "weight": 5,
+      "risk": "unusable_backup",
+      "nist": ["PR.DS", "RC.RP"],
+      "cis": ["11"],
+      "recommendation_id": "REC-BKP-04"
+    },
+    {
+      "id": "UPD-01",
+      "domain": "actualizaciones",
+      "question": "¿Los sistemas operativos reciben actualizaciones automáticas o programadas?",
+      "weight": 4,
+      "risk": "known_vulnerability",
+      "nist": ["ID.RA", "PR.PS"],
+      "cis": ["7"],
+      "recommendation_id": "REC-UPD-01"
+    },
+    {
+      "id": "UPD-02",
+      "domain": "actualizaciones",
+      "question": "¿Se actualizan navegadores y aplicaciones críticas?",
+      "weight": 3,
+      "risk": "exploitation",
+      "nist": ["PR.PS"],
+      "cis": ["7"],
+      "recommendation_id": "REC-UPD-02"
+    },
+    {
+      "id": "UPD-03",
+      "domain": "actualizaciones",
+      "question": "¿Se conoce qué equipos y software existen en la empresa (inventario)?",
+      "weight": 3,
+      "risk": "invisible_assets",
+      "nist": ["ID.AM"],
+      "cis": ["1", "2"],
+      "recommendation_id": "REC-UPD-03"
+    },
+    {
+      "id": "CON-01",
+      "domain": "continuidad",
+      "question": "¿Existe una lista de servicios indispensables para operar?",
+      "weight": 3,
+      "risk": "poor_prioritization",
+      "nist": ["ID.AM", "GV.RM"],
+      "cis": ["1"],
+      "recommendation_id": "REC-CON-01"
+    },
+    {
+      "id": "CON-02",
+      "domain": "continuidad",
+      "question": "¿Está definido qué hacer ante un ransomware o pérdida de acceso?",
+      "weight": 5,
+      "risk": "improvised_response",
+      "nist": ["RS.MA"],
+      "cis": ["17"],
+      "recommendation_id": "REC-CON-02"
+    },
+    {
+      "id": "CON-03",
+      "domain": "continuidad",
+      "question": "¿Se sabe cómo recuperar la facturación/ventas si falla el sistema principal?",
+      "weight": 4,
+      "risk": "operational_stoppage",
+      "nist": ["RC.RP"],
+      "cis": ["11"],
+      "recommendation_id": "REC-CON-03"
+    },
+    {
+      "id": "CON-04",
+      "domain": "continuidad",
+      "question": "¿Se realiza al menos una prueba anual de recuperación?",
+      "weight": 3,
+      "risk": "untested_plan",
+      "nist": ["RC.RP"],
+      "cis": ["11", "17"],
+      "recommendation_id": "REC-CON-04"
+    }
+  ]
+}

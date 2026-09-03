@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Reportes HTML generados (artefactos, no código fuente)
+*.html
+!docs/**/*.html
+
+# Word lock files
+~$*.docx
+
+# Entornos
+.venv/
+venv/

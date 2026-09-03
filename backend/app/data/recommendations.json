@@ -1,0 +1,218 @@
+{
+  "REC-ACC-01": {
+    "title": "Crear una cuenta individual por persona",
+    "domain": "accesos", "priority": "P2", "impact": "ALTO", "effort": "BAJO", "time": "1-3 días",
+    "why": "Si varias personas comparten un usuario, no hay forma de saber quién hizo qué, y cuando alguien se va nadie cambia la clave a tiempo.",
+    "steps": [
+      "Hacer una lista de todos los sistemas donde hoy se comparte una cuenta (correo, sistema de ventas, redes sociales, etc.).",
+      "Crear un usuario individual por cada persona en cada sistema que lo permita.",
+      "Cambiar la contraseña de la cuenta compartida una vez que todos tengan su propio usuario.",
+      "Documentar quién tiene acceso a qué sistema, aunque sea en una planilla simple."
+    ]
+  },
+  "REC-ACC-02": {
+    "title": "Activar MFA en correo, banca y servicios críticos",
+    "domain": "accesos", "priority": "P1", "impact": "MUY_ALTO", "effort": "BAJO", "time": "1-3 días",
+    "why": "Una contraseña filtrada o adivinada ya no alcanza para entrar si además hace falta un segundo paso — es la medida individual con mejor relación impacto/esfuerzo que existe.",
+    "steps": [
+      "Entrar a la configuración de seguridad del correo (Gmail/Outlook) y activar la verificación en dos pasos.",
+      "Hacer lo mismo en el homebanking o ebanking de la empresa.",
+      "Usar una app autenticadora (Google Authenticator, Microsoft Authenticator) en vez de SMS cuando sea posible.",
+      "Repetir en cualquier otro servicio crítico: redes sociales de la empresa, sistema de facturación, etc."
+    ]
+  },
+  "REC-ACC-03": {
+    "title": "Adoptar un gestor de contraseñas para todo el equipo",
+    "domain": "accesos", "priority": "P2", "impact": "ALTO", "effort": "BAJO", "time": "3-7 días",
+    "why": "Sin un gestor, la gente reutiliza la misma clave en todos lados — y si esa clave se filtra en un sitio, queda expuesta en todos los demás.",
+    "steps": [
+      "Elegir un gestor de contraseñas (Bitwarden es gratuito y tiene plan de equipos).",
+      "Crear una cuenta organizacional y sumar a cada empleado.",
+      "Migrar las contraseñas más importantes (correo, banca, sistemas críticos) al gestor.",
+      "Generar contraseñas únicas y robustas para cada servicio en vez de reutilizar la misma de siempre."
+    ]
+  },
+  "REC-ACC-04": {
+    "title": "Definir un procedimiento de baja de accesos al desvincular personal",
+    "domain": "accesos", "priority": "P2", "impact": "ALTO", "effort": "BAJO", "time": "1-3 días",
+    "why": "Un ex-empleado con accesos activos es una de las causas más comunes de incidentes en PyMEs — y casi siempre es un olvido, no mala intención de nadie.",
+    "steps": [
+      "Armar un checklist de qué desactivar cuando alguien se va: correo, sistemas, WiFi, accesos remotos.",
+      "Asignar quién es responsable de ejecutar ese checklist el mismo día de la desvinculación.",
+      "Cambiar las contraseñas compartidas que esa persona conocía.",
+      "Revisar también accesos físicos (llaves, tarjetas), no solo los digitales."
+    ]
+  },
+  "REC-ACC-05": {
+    "title": "Quitar privilegios de administrador a usuarios comunes",
+    "domain": "accesos", "priority": "P2", "impact": "ALTO", "effort": "MEDIO", "time": "3-7 días",
+    "why": "Si el usuario del día a día tiene permisos de administrador, un solo clic en un archivo malicioso puede infectar todo el equipo sin pedir permiso.",
+    "steps": [
+      "Identificar qué usuarios tienen permisos de administrador en las computadoras de la empresa.",
+      "Crear una cuenta de administrador separada, solo para tareas técnicas.",
+      "Bajar a los usuarios del día a día a cuentas estándar, sin privilegios de instalación/administración.",
+      "Guardar la contraseña de administrador en el gestor de contraseñas, no en la cabeza de una sola persona."
+    ]
+  },
+  "REC-WIF-01": {
+    "title": "Migrar la red a WPA2-AES o WPA3",
+    "domain": "wifi", "priority": "P2", "impact": "ALTO", "effort": "BAJO", "time": "1 día",
+    "why": "WEP y WPA-TKIP se pueden romper en minutos con herramientas gratuitas — cualquiera cerca del local podría entrar a la red interna.",
+    "steps": [
+      "Entrar a la configuración del router (usualmente en 192.168.0.1 o 192.168.1.1).",
+      "Buscar la sección de seguridad WiFi y ver qué protocolo está activo hoy.",
+      "Cambiar a WPA2-AES o WPA3 si el router lo soporta (evitar WEP o WPA-TKIP, están obsoletos).",
+      "Guardar los cambios y reconectar los dispositivos con la nueva configuración."
+    ]
+  },
+  "REC-WIF-02": {
+    "title": "Cambiar la clave WiFi por una robusta y única",
+    "domain": "wifi", "priority": "P2", "impact": "MEDIO", "effort": "BAJO", "time": "1 día",
+    "why": "Una clave corta o con datos del negocio (nombre, dirección, teléfono) es de las primeras que se prueban en un ataque de fuerza bruta.",
+    "steps": [
+      "Generar una contraseña de al menos 16 caracteres, con mayúsculas, minúsculas y números.",
+      "Cambiarla desde el panel de administración del router.",
+      "Evitar datos obvios: nombre de la empresa, dirección, teléfono.",
+      "Guardar la nueva clave en el gestor de contraseñas del equipo."
+    ]
+  },
+  "REC-WIF-03": {
+    "title": "Restringir la administración del router a la red interna",
+    "domain": "wifi", "priority": "P2", "impact": "ALTO", "effort": "BAJO", "time": "1 día",
+    "why": "Con la administración remota activada, alguien desde internet podría llegar a reconfigurar el router sin estar físicamente en el local.",
+    "steps": [
+      "Entrar a la configuración del router y buscar 'administración remota' o 'acceso remoto'.",
+      "Desactivar esa opción si está habilitada.",
+      "Verificar que solo se pueda acceder al panel del router desde dispositivos conectados a la red local.",
+      "Cambiar la contraseña de administrador del router (distinta a la clave del WiFi)."
+    ]
+  },
+  "REC-WIF-04": {
+    "title": "Crear una red separada para invitados/IoT",
+    "domain": "wifi", "priority": "P3", "impact": "MEDIO", "effort": "BAJO", "time": "1 día",
+    "why": "Una cámara IP o un celular de visita comprometido no debería poder ver las computadoras de facturación y contabilidad de la empresa.",
+    "steps": [
+      "Activar la función 'red de invitados' en el router (la mayoría de los routers modernos la tienen).",
+      "Conectar ahí a las visitas, y también cámaras, impresoras y dispositivos IoT.",
+      "Verificar que la red de invitados no tenga acceso a la red principal ni a los equipos de trabajo.",
+      "Ponerle una clave distinta a la de la red principal."
+    ]
+  },
+  "REC-BKP-01": {
+    "title": "Configurar backups automáticos de la información crítica",
+    "domain": "backups", "priority": "P1", "impact": "MUY_ALTO", "effort": "MEDIO", "time": "3-7 días",
+    "why": "Un backup que depende de que alguien se acuerde de hacerlo, tarde o temprano no se hace — y el día que hace falta, no está.",
+    "steps": [
+      "Identificar qué información es crítica para operar: facturación, clientes, contabilidad.",
+      "Elegir una herramienta de backup automático (OneDrive/Google Drive para archivos, o el backup propio del sistema de gestión).",
+      "Configurar que el backup corra solo, sin depender de que alguien lo dispare a mano.",
+      "Verificar cada semana que el backup se esté generando de verdad (revisar la fecha del último)."
+    ]
+  },
+  "REC-BKP-02": {
+    "title": "Sumar una copia offline/aislada del backup principal",
+    "domain": "backups", "priority": "P1", "impact": "MUY_ALTO", "effort": "MEDIO", "time": "3-7 días",
+    "why": "Un ransomware que cifra la computadora también cifra cualquier backup conectado en ese momento — la copia offline es la que sobrevive.",
+    "steps": [
+      "Elegir un disco externo o servicio de backup separado del sistema principal.",
+      "Copiar ahí el backup al menos una vez por semana.",
+      "Desconectar el disco después de cada copia, para que un ransomware no lo alcance también.",
+      "Guardar el disco en un lugar físico distinto al de las computadoras principales."
+    ]
+  },
+  "REC-BKP-03": {
+    "title": "Implementar estrategia 3-2-1 de backups",
+    "domain": "backups", "priority": "P1", "impact": "ALTO", "effort": "MEDIO", "time": "7-15 días",
+    "why": "Es el estándar de la industria porque cubre a la vez la falla de hardware, el error humano y el ataque dirigido con un solo esquema simple de recordar.",
+    "steps": [
+      "Mantener 3 copias de la información: 1 original + 2 backups.",
+      "Guardar esas copias en 2 tipos de soporte distintos (por ejemplo disco externo + nube).",
+      "Tener al menos 1 copia fuera del lugar físico de la empresa (la nube, o un disco en otra ubicación).",
+      "Documentar dónde está cada copia y cómo se actualiza."
+    ]
+  },
+  "REC-BKP-04": {
+    "title": "Probar la restauración del backup al menos una vez",
+    "domain": "backups", "priority": "P1", "impact": "MUY_ALTO", "effort": "BAJO", "time": "1 día",
+    "why": "Un backup que nunca se restauró es una suposición, no una garantía — muchas empresas descubren que su backup estaba roto justo cuando más lo necesitaban.",
+    "steps": [
+      "Elegir un archivo o carpeta no crítica para hacer la prueba.",
+      "Restaurar esa información desde el backup a un lugar distinto del original.",
+      "Verificar que el archivo restaurado abre y tiene la información correcta.",
+      "Anotar la fecha de la prueba y repetirla cada 6 meses."
+    ]
+  },
+  "REC-UPD-01": {
+    "title": "Activar actualizaciones automáticas del sistema operativo",
+    "domain": "actualizaciones", "priority": "P2", "impact": "ALTO", "effort": "BAJO", "time": "1 día",
+    "why": "La mayoría de los ataques que explotan vulnerabilidades conocidas funcionan porque el sistema hacía meses que no se actualizaba, no porque el ataque sea sofisticado.",
+    "steps": [
+      "Entrar a la configuración de Windows/Mac en cada equipo.",
+      "Activar las actualizaciones automáticas del sistema operativo.",
+      "Programar que se instalen fuera del horario de trabajo si es posible.",
+      "Revisar una vez al mes que ningún equipo haya quedado pausado sin actualizar."
+    ]
+  },
+  "REC-UPD-02": {
+    "title": "Actualizar navegadores y aplicaciones críticas",
+    "domain": "actualizaciones", "priority": "P2", "impact": "MEDIO", "effort": "BAJO", "time": "1 día",
+    "why": "El navegador es la puerta de entrada más usada para infecciones vía web — mantenerlo actualizado cierra la mayoría de esos caminos.",
+    "steps": [
+      "Verificar que las actualizaciones automáticas del navegador estén activas (Chrome/Edge/Firefox lo hacen por defecto).",
+      "Revisar las aplicaciones que usa el negocio a diario (facturación, contable, etc.) y actualizarlas a la última versión.",
+      "Desinstalar programas que ya no se usan — menos superficie de ataque."
+    ]
+  },
+  "REC-UPD-03": {
+    "title": "Armar un inventario básico de equipos y software",
+    "domain": "actualizaciones", "priority": "P3", "impact": "MEDIO", "effort": "MEDIO", "time": "3-7 días",
+    "why": "No se puede proteger ni actualizar lo que no se sabe que existe — el inventario es la base de todo lo demás en este dominio.",
+    "steps": [
+      "Listar todas las computadoras, celulares de trabajo y servidores de la empresa.",
+      "Anotar qué sistema operativo y versión tiene cada uno.",
+      "Listar el software crítico instalado en cada equipo.",
+      "Actualizar esta lista cada vez que se suma o se da de baja un equipo."
+    ]
+  },
+  "REC-CON-01": {
+    "title": "Listar los servicios indispensables para operar",
+    "domain": "continuidad", "priority": "P3", "impact": "MEDIO", "effort": "BAJO", "time": "1 día",
+    "why": "En una emergencia no hay tiempo para pensar qué es crítico — esa lista tiene que existir de antemano.",
+    "steps": [
+      "Preguntarse: si esto se cae, ¿la empresa no puede facturar, vender o atender?",
+      "Listar esos servicios: sistema de ventas, WhatsApp Business, banca, correo.",
+      "Para cada uno, anotar quién es el responsable y cómo se contacta al proveedor si falla."
+    ]
+  },
+  "REC-CON-02": {
+    "title": "Redactar un procedimiento básico ante ransomware/pérdida de acceso",
+    "domain": "continuidad", "priority": "P1", "impact": "MUY_ALTO", "effort": "MEDIO", "time": "7-15 días",
+    "why": "Los primeros minutos de un incidente definen el daño final — improvisar en ese momento suele empeorar las cosas (por ejemplo, pagando el rescate sin asesorarse).",
+    "steps": [
+      "Definir los primeros 3 pasos si una computadora se infecta: desconectarla de la red, avisar al responsable, no pagar sin asesorarse.",
+      "Anotar los teléfonos y contactos de emergencia: soporte técnico, banco si hay fraude, seguro si aplica.",
+      "Guardar este procedimiento impreso o en un lugar accesible que no dependa de la computadora infectada.",
+      "Repasarlo con el equipo al menos una vez al año."
+    ]
+  },
+  "REC-CON-03": {
+    "title": "Documentar cómo recuperar la facturación si falla el sistema principal",
+    "domain": "continuidad", "priority": "P2", "impact": "ALTO", "effort": "MEDIO", "time": "7-15 días",
+    "why": "Si el sistema de facturación cae y no hay plan B, la empresa directamente deja de poder vender hasta que se resuelva.",
+    "steps": [
+      "Definir un método manual de respaldo para facturar: talonario físico, planilla, sistema alternativo.",
+      "Anotar los datos mínimos necesarios para facturar sin el sistema: CUIT, datos fiscales, numeración.",
+      "Guardar esta documentación en un lugar accesible incluso si el sistema principal está caído."
+    ]
+  },
+  "REC-CON-04": {
+    "title": "Planificar una prueba anual de recuperación",
+    "domain": "continuidad", "priority": "P3", "impact": "ALTO", "effort": "MEDIO", "time": "planificar",
+    "why": "Un plan de continuidad que nunca se ensayó tiene los mismos riesgos que un backup que nunca se restauró: se descubre que falla justo cuando hace falta.",
+    "steps": [
+      "Elegir una fecha fija cada año (por ejemplo, la primera semana de diciembre) para simular una caída.",
+      "Probar restaurar un backup y facturar con el método alternativo ese día.",
+      "Anotar qué funcionó y qué no, y ajustar el plan para el año siguiente."
+    ]
+  }
+}
