@@ -192,8 +192,24 @@ abajo. Arquitectura, deliberada:
     linkeadas desde el signup (aceptación al crear cuenta) y desde un
     footer nuevo en `AppShell`. La política de privacidad referencia la
     Ley 25.326 argentina.
+- **Pulido, mismo día — micro-ronda final** (scrollbar oscuro, email de
+  contacto propio, copyright en footer, 404/error boundary con el
+  tema, manifest PWA, theme-color, endpoint raíz en el backend): todo
+  chico y verificado, ver `BITACORA-INTERNA.md` para el detalle.
+- **2 bugs reales corregidos** (encontrados con un grep sistemático de
+  llamadas a Supabase que descartaban el `error` de vuelta): guardar
+  una evaluación y borrar una evaluación fallaban en silencio si el
+  mutation fallaba — se mostraba éxito igual. Ambos ahora chequean el
+  error y lo muestran.
+- **Tests de frontend**: antes cero, ahora 15 (Vitest + React Testing
+  Library + jsdom). `auth-errors.ts` (7, lógica pura) + `ActionCard` y
+  `EvolucionChart` (8, componentes). Ojo: Tailwind's `hidden` es CSS,
+  jsdom no carga el stylesheet compilado en los tests — `toBeVisible()`
+  no sirve para eso, testear por clase (`toHaveClass`) en su lugar.
+  Config en `vitest.config.mts` (`.mts`, no `.ts`).
 - **Pendiente:** manejo de errores más robusto en casos borde adicionales
-  (los principales — login, signup, alta de empresa — ya están cubiertos).
+  (los principales — login, signup, alta de empresa, guardar/borrar
+  evaluación — ya están cubiertos).
 
 ## Despliegue
 
