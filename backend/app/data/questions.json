@@ -59,6 +59,16 @@
       "recommendation_id": "REC-ACC-05"
     },
     {
+      "id": "ACC-06",
+      "domain": "accesos",
+      "question": "¿El personal recibió alguna capacitación o aviso básico para reconocer correos de phishing?",
+      "weight": 4,
+      "risk": "phishing_susceptibility",
+      "nist": ["PR.AT"],
+      "cis": ["14"],
+      "recommendation_id": "REC-ACC-06"
+    },
+    {
       "id": "WIF-01",
       "domain": "wifi",
       "question": "¿La red utiliza WPA2-AES o WPA3 (no un cifrado obsoleto)?",
@@ -167,6 +177,26 @@
       "nist": ["ID.AM"],
       "cis": ["1", "2"],
       "recommendation_id": "REC-UPD-03"
+    },
+    {
+      "id": "UPD-04",
+      "domain": "actualizaciones",
+      "question": "¿Los equipos tienen antivirus/antimalware activo y actualizado?",
+      "weight": 5,
+      "risk": "malware_infection",
+      "nist": ["PR.PS"],
+      "cis": ["10"],
+      "recommendation_id": "REC-UPD-04"
+    },
+    {
+      "id": "UPD-05",
+      "domain": "actualizaciones",
+      "question": "¿Está desactivada la reproducción automática de USB y el personal sabe que no debe conectar dispositivos desconocidos?",
+      "weight": 3,
+      "risk": "usb_malware_exfiltration",
+      "nist": ["PR.PS"],
+      "cis": ["4", "10"],
+      "recommendation_id": "REC-UPD-05"
     },
     {
       "id": "CON-01",

@@ -3,10 +3,10 @@
     "label": "PyME madura",
     "descripcion": "Empresa con prácticas de seguridad ya instaladas: MFA en cuentas críticas, backups probados y aislados, WiFi segmentada. Perfil objetivo al que debería tender cualquier PyME tras aplicar las recomendaciones P1/P2.",
     "answers": {
-      "ACC-01": "yes", "ACC-02": "yes", "ACC-03": "yes", "ACC-04": "partial", "ACC-05": "yes",
+      "ACC-01": "yes", "ACC-02": "yes", "ACC-03": "yes", "ACC-04": "partial", "ACC-05": "yes", "ACC-06": "yes",
       "WIF-01": "yes", "WIF-02": "yes", "WIF-03": "yes", "WIF-04": "partial",
       "BKP-01": "yes", "BKP-02": "yes", "BKP-03": "yes", "BKP-04": "yes",
-      "UPD-01": "yes", "UPD-02": "yes", "UPD-03": "partial",
+      "UPD-01": "yes", "UPD-02": "yes", "UPD-03": "partial", "UPD-04": "yes", "UPD-05": "yes",
       "CON-01": "yes", "CON-02": "yes", "CON-03": "partial", "CON-04": "no"
     }
   },
@@ -14,10 +14,10 @@
     "label": "PyME media (caso base de la demo)",
     "descripcion": "Perfil intermedio, el mismo caso usado en la demo de consola (python -m app.cli demo): PyME de 12 empleados con brechas típicas repartidas entre dominios.",
     "answers": {
-      "ACC-01": "yes", "ACC-02": "no", "ACC-03": "partial", "ACC-04": "yes", "ACC-05": "no",
+      "ACC-01": "yes", "ACC-02": "no", "ACC-03": "partial", "ACC-04": "yes", "ACC-05": "no", "ACC-06": "no",
       "WIF-01": "yes", "WIF-02": "yes", "WIF-03": "yes", "WIF-04": "no",
       "BKP-01": "yes", "BKP-02": "no", "BKP-03": "no", "BKP-04": "no",
-      "UPD-01": "yes", "UPD-02": "partial", "UPD-03": "no",
+      "UPD-01": "yes", "UPD-02": "partial", "UPD-03": "no", "UPD-04": "partial", "UPD-05": "no",
       "CON-01": "partial", "CON-02": "no", "CON-03": "partial", "CON-04": "no"
     }
   },
@@ -25,10 +25,10 @@
     "label": "PyME débil",
     "descripcion": "Empresa sin prácticas básicas de ciberseguridad instaladas: sin MFA, sin backups verificados, WiFi con configuración por defecto, sin plan de continuidad. Perfil de alta exposición.",
     "answers": {
-      "ACC-01": "no", "ACC-02": "no", "ACC-03": "unknown", "ACC-04": "no", "ACC-05": "no",
+      "ACC-01": "no", "ACC-02": "no", "ACC-03": "unknown", "ACC-04": "no", "ACC-05": "no", "ACC-06": "no",
       "WIF-01": "no", "WIF-02": "no", "WIF-03": "unknown", "WIF-04": "no",
       "BKP-01": "no", "BKP-02": "no", "BKP-03": "no", "BKP-04": "no",
-      "UPD-01": "partial", "UPD-02": "no", "UPD-03": "no",
+      "UPD-01": "partial", "UPD-02": "no", "UPD-03": "no", "UPD-04": "no", "UPD-05": "no",
       "CON-01": "no", "CON-02": "no", "CON-03": "no", "CON-04": "unknown"
     }
   }

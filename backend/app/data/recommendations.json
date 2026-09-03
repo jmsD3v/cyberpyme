@@ -54,6 +54,17 @@
       "Guardar la contraseña de administrador en el gestor de contraseñas, no en la cabeza de una sola persona."
     ]
   },
+  "REC-ACC-06": {
+    "title": "Capacitar al personal para reconocer phishing",
+    "domain": "accesos", "priority": "P1", "impact": "MUY_ALTO", "effort": "BAJO", "time": "1-3 días",
+    "why": "Un correo de phishing bien armado engaña incluso a gente atenta — es la puerta de entrada más común a credenciales robadas y ransomware, y una charla de 30 minutos reduce muchísimo el riesgo.",
+    "steps": [
+      "Juntar al equipo (aunque sea 30 minutos) y mostrar 2-3 ejemplos reales de correos de phishing (bancos, WhatsApp Business, proveedores falsos).",
+      "Enseñar las señales típicas: urgencia injustificada, links que no coinciden con el dominio real, pedidos de datos o pagos fuera de lo habitual.",
+      "Establecer una regla simple: ante la duda, confirmar por otro canal (llamado, WhatsApp) antes de hacer clic o transferir.",
+      "Repetir el recordatorio cada 6 meses, no es una charla de una sola vez."
+    ]
+  },
   "REC-WIF-01": {
     "title": "Migrar la red a WPA2-AES o WPA3",
     "domain": "wifi", "priority": "P2", "impact": "ALTO", "effort": "BAJO", "time": "1 día",
@@ -172,6 +183,28 @@
       "Anotar qué sistema operativo y versión tiene cada uno.",
       "Listar el software crítico instalado en cada equipo.",
       "Actualizar esta lista cada vez que se suma o se da de baja un equipo."
+    ]
+  },
+  "REC-UPD-04": {
+    "title": "Instalar antivirus/antimalware en todos los equipos",
+    "domain": "actualizaciones", "priority": "P1", "impact": "MUY_ALTO", "effort": "BAJO", "time": "1-3 días",
+    "why": "Sin antivirus, un archivo malicioso descargado por error o un USB infectado puede correr libremente en el equipo sin ninguna barrera.",
+    "steps": [
+      "Instalar una solución antivirus en todas las computadoras (Microsoft Defender ya viene incluido y activo en Windows moderno, verificar que no esté desactivado).",
+      "Activar las actualizaciones automáticas de firmas del antivirus.",
+      "Programar un análisis completo semanal, fuera del horario de trabajo si es posible.",
+      "Revisar una vez al mes que el antivirus siga activo en todos los equipos, no solo en el que se instaló primero."
+    ]
+  },
+  "REC-UPD-05": {
+    "title": "Desactivar la reproducción automática de USB y controlar dispositivos desconocidos",
+    "domain": "actualizaciones", "priority": "P2", "impact": "ALTO", "effort": "BAJO", "time": "1 día",
+    "why": "Un pendrive infectado (perdido a propósito en la puerta del local, o de un cliente) es una de las formas más simples de meter malware sin pasar por el correo ni por internet.",
+    "steps": [
+      "Desactivar la reproducción automática (autorun/autoplay) de USB en todas las computadoras de la empresa (Windows: Configuración > Dispositivos > Reproducción automática).",
+      "Establecer una regla simple: no conectar pendrives ni discos externos de origen desconocido a las computadoras del trabajo.",
+      "Si alguien encuentra un USB 'perdido', avisarlo en vez de conectarlo para ver qué es.",
+      "Para transferir archivos de forma segura, preferir la nube (Drive, OneDrive) antes que USB."
     ]
   },
   "REC-CON-01": {

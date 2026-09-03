@@ -24,15 +24,15 @@ para el porqué.
 **Enfoque:** informe automático interactivo — de "diagnóstico" a "diagnóstico + cómo resolverlo".
 **Qué se construyó:**
 - `app/services/report.py`: genera un único `.html` autocontenido (sin backend, sin CDN) a partir de `AssessmentResult` — gauge de score global + barras por dominio (SVG, coloreadas por nivel de riesgo) + acordeón de acciones priorizadas.
-- `recommendations.json` enriquecido: las 20 recomendaciones ahora tienen `why` (por qué importa) y `steps` (guía de resolución paso a paso, en criollo, sin jerga técnica) — esto es lo que convierte el informe en algo que ayuda a *resolver*, no solo a *diagnosticar*.
+- `recommendations.json` enriquecido: las recomendaciones ahora tienen `why` (por qué importa) y `steps` (guía de resolución paso a paso, en criollo, sin jerga técnica) — esto es lo que convierte el informe en algo que ayuda a *resolver*, no solo a *diagnosticar*.
 - Tema oscuro (gris, no negro) por defecto.
 - 4 tests nuevos (`tests/test_report.py`), incluyendo uno de que el nombre de la empresa se escapa correctamente (XSS) pensando en la fase producto. Total: **14/14 tests en verde**.
 - Uso: `python -m app.cli demo --html informe.html`.
 **Por qué así:** configuración sobre código (preguntas, pesos y ahora también los pasos de resolución viven en JSON), scoring desacoplado de la interfaz, determinismo total. El informe interactivo responde a la necesidad de que la PyME no solo se autodiagnostique sino que sepa cómo resolver cada brecha — sin salir de la restricción de "corre sola, sin infraestructura" de la entrega académica.
 **Para mostrar en clase:**
-- Correr `python -m app.cli demo` en vivo — score global 42.61/100, RIESGO ALTO, top 5 acciones priorizadas.
+- Correr `python -m app.cli demo` en vivo — muestra el score global del caso "medio" y el top 5 de acciones priorizadas (número exacto sujeto al cuestionario vigente al momento de publicar).
 - Abrir el `.html` generado en el navegador — mostrar el gauge, las barras por dominio y desplegar el acordeón de una acción P1 para ver la guía paso a paso.
-- Correr `python -m pytest tests/ -v` — 14 passed.
+- Correr `python -m pytest tests/ -v` — todos en verde.
 **Próximo objetivo (a publicar cuando corresponda):** validación con 3 casos simulados de PyME (perfil maduro, medio, débil).
 
 ---
@@ -46,9 +46,10 @@ para el porqué.
 - `app/services/validation.py`: corre los 3 casos sobre el mismo motor (`calculate_assessment`) y verifica el orden monótono de scores (`is_monotonic`).
 - `app/services/report.py` → `render_comparative_html()`: informe HTML comparativo con tabla de resultados, gráfico de barras agrupadas por dominio (3 series, paleta categórica de la skill `dataviz`) y conclusión automática.
 - CLI: `python -m app.cli validacion [--html archivo.html]`.
-- 4 tests nuevos (`tests/test_validation.py`): cubren los 3 casos con las 20 preguntas, orden monótono débil<medio<maduro, más brechas en débil que en maduro, y que el HTML comparativo renderiza los 3 casos. Total: **18/18 tests en verde**.
-- Resultado real obtenido: débil 3.00/100 (CRÍTICO) → medio 42.61/100 (ALTO) → maduro 87.85/100 (BAJO). Orden monótono: OK.
+- 4 tests nuevos (`tests/test_validation.py`): cubren los 3 casos contra el cuestionario completo, orden monótono débil<medio<maduro, más brechas en débil que en maduro, y que el HTML comparativo renderiza los 3 casos.
+- Resultado real (correr `python -m app.cli validacion` para el número exacto vigente): orden monótono débil < medio < maduro confirmado — débil roza el 0, medio cae en ALTO/CRÍTICO según cobertura del cuestionario, maduro por encima de 85.
 - (03/09) Corregidos 2 bugs visuales del gráfico comparativo: la etiqueta "100" se cortaba arriba (falta de margen superior) y las etiquetas largas de dominio ("Continuidad Operativa") se pisaban con la del dominio vecino — ahora las etiquetas de dos palabras parten en dos líneas.
+- (03/09) Sumadas 3 preguntas nuevas al cuestionario (ACC-06 phishing, UPD-04 antivirus, UPD-05 USB — ver hito más abajo); `validation_cases.json` actualizado con respuestas para las 3 en los 3 perfiles, orden monótono se mantiene.
 **Por qué así:** reutiliza el mismo motor determinista sin duplicar lógica de scoring; los 3 perfiles viven en JSON (config sobre código), igual que preguntas y recomendaciones. La validación demuestra empíricamente — no solo por argumento — que mejor postura declarada = mejor score = menor riesgo, en los 5 dominios y en el global.
 **Para mostrar en clase:**
 - Correr `python -m app.cli validacion` en vivo — muestra los 3 scores y confirma el orden monótono.
@@ -63,12 +64,12 @@ para el porqué.
 
 **Enfoque:** documentar la guía de hardening completa, generada del catálogo en vez de escrita a mano.
 **Qué se construyó:**
-- `app/services/report.py` → `render_hardening_guide_html()`: reutiliza `prioritize_actions()` pasándole **todas** las preguntas (no solo brechas de una evaluación puntual) para generar el catálogo completo de las 20 acciones, agrupadas por dominio y ordenadas por prioridad — mismo componente visual (acordeón con `why`+`steps`) que el informe de autodiagnóstico.
+- `app/services/report.py` → `render_hardening_guide_html()`: reutiliza `prioritize_actions()` pasándole **todas** las preguntas (no solo brechas de una evaluación puntual) para generar el catálogo completo de acciones, agrupadas por dominio y ordenadas por prioridad — mismo componente visual (acordeón con `why`+`steps`) que el informe de autodiagnóstico.
 - CLI: `python -m app.cli hardening --html guia.html`.
-- 3 tests nuevos (`tests/test_hardening.py`): las 20 recomendaciones aparecen, los 5 dominios aparecen, y la guía no depende de ningún `AssessmentResult`. Total: **21/21 tests en verde**.
+- 3 tests nuevos (`tests/test_hardening.py`): todas las recomendaciones del catálogo aparecen, los 5 dominios aparecen, y la guía no depende de ningún `AssessmentResult`.
 **Por qué así:** la guía de hardening y el informe de autodiagnóstico son la misma pregunta ("¿cómo resuelvo esto?") aplicada a dos universos distintos (todas las acciones vs. solo las brechas detectadas) — reusar `prioritize_actions()` y `_action_card()` evita duplicar la lógica de priorización y el diseño de las tarjetas.
 **Para mostrar en clase:**
-- Correr `python -m app.cli hardening` en vivo — genera el HTML con las 20 acciones.
+- Correr `python -m app.cli hardening` en vivo — genera el HTML con el catálogo completo.
 - Abrir el HTML — mostrar las 5 secciones por dominio y desplegar alguna tarjeta.
 - Correr `python -m pytest tests/ -v` — 21 passed.
 **Próximo objetivo (a publicar cuando corresponda):** documentación final + manual de uso (due 04/11).
@@ -107,3 +108,29 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
   y se agregó un recuadro aclarando qué está construido hoy vs. qué es fase
   producto (redactado sin fechar el avance, para no adelantar tampoco ahí).
   **Enviado por mail a Gabriel (vpp.teclab.gg@gmail.com) el 02/09/2026.**
+
+- **03/09/2026**: auditoría del cuestionario contra el catálogo completo de
+  CIS Controls v8.1 IG1 (a pedido de Juanma: "¿no nos estaremos olvidando
+  de USB?"). Encontrados 3 huecos reales: malware defenses/antivirus (CIS
+  Control 10), USB/removable media (Safeguard 10.3, específicamente IG1) y
+  concientización de phishing (Control 14) — este último más grave, porque
+  "Phishing" ya estaba marcado como riesgo "Crítica" en la matriz de la
+  sección 5 del documento técnico pero no tenía pregunta asociada.
+  Agregadas `ACC-06`, `UPD-04`, `UPD-05` (cuestionario pasa de 20 a 23
+  preguntas) — se optó por sumarlas a los dominios existentes (Accesos,
+  Actualizaciones) en vez de crear un 6to dominio, para no tener que
+  rebalancear `domain_weight` ni reestructurar el documento técnico otra
+  vez. `validation_cases.json` actualizado con las 3 respuestas nuevas en
+  los 3 perfiles — el caso "medio" (referencia de la demo) bajó de
+  ALTO a CRÍTICO al sumar estas preguntas, lo cual es correcto: el
+  cuestionario anterior subestimaba el riesgo real al no medir estos 3
+  controles. **`Herramienta_Autodiagnostico_Ciberseguridad_PyMEs.docx` no
+  se actualizó todavía con este cambio** — el documento ya enviado a
+  Gabriel el 02/09 sigue describiendo el cuestionario de 20 preguntas;
+  decidir si conviene mandar una versión actualizada o dejarlo para la
+  próxima entrega.
+- **03/09/2026**: inicializado el repositorio git (nunca se había hecho) —
+  commit inicial con todo lo construido hasta la fecha. Configurado con
+  `user.name`/`user.email` de Juanma (ya estaban en la config global de la
+  máquina). Sigue pendiente: crear el repo en GitHub y pushear (no hecho
+  todavía, requiere decisión de Juanma sobre público/privado).
