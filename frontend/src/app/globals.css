@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/* Paleta CyberPyME (gris oscuro, no negro) — misma identidad que report.py
+   e interactive_app.py, ahora como theme tokens de Tailwind v4. */
+@theme {
+  --color-page: #1e1e1e;
+  --color-surface: #262626;
+  --color-card: #2a2a2a;
+  --color-ink: #ffffff;
+  --color-ink-2: #c9c9c9;
+  --color-ink-muted: #9a9a9a;
+  --color-track: #3a3a3a;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-accent: #2a78d6;
+  --color-status-bajo: #0ca30c;
+  --color-status-medio: #fab219;
+  --color-status-alto: #ec835a;
+  --color-status-critico: #d03b3b;
+}
+
+body {
+  background: var(--color-page);
+  color: var(--color-ink);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

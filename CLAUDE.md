@@ -16,7 +16,9 @@ después en producto real, potencialmente monetizable.
 2. **Fase producto (sin fecha límite académica)** — FastAPI + Supabase +
    Next.js sobre el mismo motor, para el objetivo de app monetizable.
 
-Si no se aclara lo contrario, priorizar siempre la entrega académica primero.
+La separación de **alcance** entre las dos entregas sigue en pie tal cual —
+no hay que mezclar qué va en cada una. Lo que cambió es el **momento**: ver
+"⚠️ Pivot de ritmo" más abajo, ambas se están construyendo ya, en paralelo.
 
 ## Estado actual (al 03/09/2026 — código real, ver nota de ritmo abajo)
 
@@ -99,17 +101,49 @@ Ya construido y funcionando (`backend/`):
   `tests/test_validation.py` (4) + `tests/test_hardening.py` (3) +
   `tests/test_interactive_app.py` (4) — **25/25 pasando**.
 
-**No existe todavía:** documentación final/manual de uso, FastAPI,
-Supabase, frontend.
+**No existe todavía:** documentación final/manual de uso.
 
 **Repositorio:** [github.com/jmsD3v/cyberpyme](https://github.com/jmsD3v/cyberpyme)
 (privado, creado 2026-09-03).
 
+## Fase producto — construida y verificada 2026-09-03 (`backend/api.py` + `frontend/`)
+
+Ya no está pausada hasta después del 13/dic — ver el pivot de ritmo más
+abajo. Arquitectura, deliberada:
+
+- **Supabase** (multi-tenant, RLS real): `empresas` / `perfiles` /
+  `evaluaciones`, todas con RLS. Alta atómica de empresa vía RPC
+  `crear_empresa(p_nombre)` (`SECURITY DEFINER`) — evita una condición de
+  carrera de secuestro de tenant que existiría con inserts separados. Sin
+  políticas de INSERT directo en `empresas`/`perfiles`, solo vía la RPC.
+- **FastAPI** (`backend/api.py`) — microservicio de **cómputo puro** sobre
+  el mismo `calculate_assessment()` de `app/services/scoring.py` (una sola
+  fuente de verdad para el motor). No sabe nada de auth ni persistencia:
+  eso lo maneja Next.js hablando directo con Supabase, protegido por RLS.
+  Correr: `cd backend && uvicorn api:app --reload --port 8000`.
+- **Next.js 16 + TypeScript + Tailwind v4** (`frontend/`) — App Router,
+  `@supabase/ssr`. Ojo con `frontend/AGENTS.md`: Next 16 tiene breaking
+  changes reales respecto a versiones anteriores (`middleware.ts` se
+  renombró a `proxy.ts`, función `proxy` en vez de `middleware`, `cookies()`
+  async, etc.) — leer `node_modules/next/dist/docs/` antes de tocar código
+  nuevo ahí, no confiar en el entrenamiento previo.
+  Correr: `cd frontend && pnpm dev` (puerto 3000, necesita `backend/api.py`
+  corriendo en el 8000 y `.env.local` con las credenciales de Supabase).
+- **Verificado de punta a punta en el navegador** (no solo tests):
+  registro → confirmación de email → login → alta de empresa → cuestionario
+  de 24 preguntas → `/evaluar` (FastAPI) → insert en `evaluaciones`
+  (Supabase, cliente browser, respetando RLS) → resultado renderizado
+  (gauge animado, barras por dominio, acordeón de acciones). Cero errores
+  de consola bloqueantes.
+- **Pendiente:** tipos TypeScript generados de Supabase (hoy hay un par de
+  casteos manuales en los joins de `page.tsx`/`cuestionario/page.tsx`),
+  página de guía de hardening en el frontend, manejo de errores más
+  robusto.
+
 ## ⚠️ Ritmo de publicación — NO confundir "hecho en el código" con "mostrado en clase"
 
-El desarrollo real va más rápido que el cronograma de clases (Juanma estima
-terminar el grueso en un par de días, contra un plazo que llega al 13/dic).
-Eso está bien para el código, pero:
+El desarrollo real va más rápido que el cronograma de clases. Eso está bien
+para el código, pero:
 
 - **`BITACORA-INTERNA.md`** (raíz del proyecto) es el registro real de
   avance, con una entrada pre-escrita por cada jornada futura, lista para
@@ -126,6 +160,19 @@ Eso está bien para el código, pero:
 Este documento (`CLAUDE.md`) sí se mantiene siempre al día con el estado
 real del código — es `BITACORA-INTERNA.md` y Notion los que se pausan.
 
+## ⚠️ Pivot de ritmo (2026-09-03) — leer antes de asumir "recién después del 13/dic"
+
+Juanma pidió explícitamente terminar **todo el proyecto**, no solo la
+entrega académica, lo antes posible — no esperar al 13/dic para arrancar la
+fase producto. Cita textual: *"no puedo estar sin desarrollar ni esperando
+a las fechas para eso"* / *"cuando hablo de terminar ya, me refiero a todo
+el proyecto, lo antes posible"*. Esto reemplaza cualquier plan anterior que
+dijera "fase producto recién después de la entrega académica" — la
+separación de *alcance* entre ambas entregas sigue firme, pero el
+*calendario de desarrollo* ya no las secuencia. Lo único que sigue atado al
+cronograma de clases es qué se **muestra en Notion**, no qué se construye
+(ver sección de ritmo de publicación arriba).
+
 ## Próximos pasos, en este orden
 
 1. **Documentación final + manual de uso**, sin artefactos de generación de
@@ -134,9 +181,9 @@ real del código — es `BITACORA-INTERNA.md` y Notion los que se pausan.
    Due Notion: 2026-11-04. Mencionar la app interactiva también acá.
    Deliberadamente no arrancada todavía — falta más de 2 meses y el
    proyecto va a seguir cambiando mucho más que hasta ahora.
-2. Recién después del 13/dic: API FastAPI sobre el motor ya validado,
-   Supabase con RLS real (políticas por operación, `auth.uid()`, nunca
-   `user_metadata`), frontend Next.js.
+2. Fase producto: núcleo ya construido y verificado (ver sección arriba) —
+   lo que queda es pulido (tipos generados, página de hardening, manejo de
+   errores), no las piezas grandes.
 
 ## Principios de diseño a respetar
 

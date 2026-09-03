@@ -169,3 +169,42 @@ Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
   máquina). Más tarde el mismo día, creado y pusheado a
   **[github.com/jmsD3v/cyberpyme](https://github.com/jmsD3v/cyberpyme)**
   como **privado** (elección explícita de Juanma) vía `gh repo create`.
+
+- **03/09/2026 — pivot de ritmo, fase producto arrancada ya (no después del
+  13/dic):** Juanma pidió explícitamente terminar el proyecto completo lo
+  antes posible, sin esperar la fecha académica: *"no puedo estar sin
+  desarrollar ni esperando a las fechas para eso"* / *"cuando hablo de
+  terminar ya, me refiero a todo el proyecto, lo antes posible"*. Esto NO
+  cambia qué va en cada entrega (ver `CLAUDE.md`), solo el momento en que se
+  construye. Mismo día, se construyó y verificó de punta a punta la fase
+  producto completa:
+  - **Supabase** (multi-tenant, RLS real): tablas `empresas`/`perfiles`/`evaluaciones`,
+    signup atómico vía RPC `crear_empresa` (`SECURITY DEFINER`, evita
+    condición de carrera de secuestro de tenant). Encontrado y corregido un
+    bug de privilegios: Postgres otorga EXECUTE a `PUBLIC` por defecto al
+    crear una función, y revocar solo de `anon` no alcanza si nunca se
+    revocó de `PUBLIC` — pasaba con `empresa_actual()`. Corregido y
+    verificado con `get_advisors` (0 lints de seguridad relevantes).
+  - **FastAPI** (`backend/api.py`): microservicio de cómputo puro sobre el
+    mismo motor de scoring (`/salud`, `/preguntas`, `/recomendaciones`,
+    `/evaluar`), sin conocer auth ni persistencia — eso lo maneja Next.js
+    directo contra Supabase. 6 tests nuevos, suite completa 31/31 en verde.
+  - **Next.js 16 + TypeScript + Tailwind v4** (`frontend/`): login, signup,
+    onboarding, dashboard, cuestionario de 24 preguntas y resultado
+    (gauge animado, acordeón de acciones) — mismo diseño visual que el
+    informe HTML académico. Encontrado y adaptado el breaking change de
+    Next 16 (`middleware.ts`→`proxy.ts`) leyendo la documentación
+    empaquetada antes de escribir código, tal como advierte el propio
+    `AGENTS.md` del proyecto.
+  - **Verificado en el navegador de punta a punta** (no solo tests):
+    registro → confirmación de email (simulada vía SQL para no depender de
+    un inbox real) → login → alta de empresa → cuestionario completo (24
+    preguntas) → llamada a FastAPI → inserción en Supabase respetando RLS →
+    resultado renderizado correctamente (score 100/100, Riesgo Bajo). Cero
+    errores de consola bloqueantes. Datos de prueba borrados después.
+  - **Pendiente:** documentación pulida de la fase producto, tipos
+    generados de Supabase en vez de casteos manuales, página de guía de
+    hardening en el frontend. Ninguna tarea de Notion se tocó todavía por
+    este avance — evaluar con Juanma si corresponde reflejarlo ahí o si,
+    al no estar atado a una jornada Lunes/Miércoles, no aplica la regla de
+    ritmo de `feedback-cyberpyme-notion-pacing`.
