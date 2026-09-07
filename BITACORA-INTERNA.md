@@ -31,6 +31,28 @@ la misma regla de ritmo que Notion.**
 
 ## Pendientes de publicar (ya construido, esperando la fecha real)
 
+### Jornada 7 — 07/09/2026 (lunes) — publicada ese día
+
+**Sin tarea propia en Notion** — cae dentro de la ventana de "Informe automático"
+(vence 09/09, ya en curso). Checkpoint intermedio, sin cerrar la tarea todavía.
+
+**Enfoque:** avance parcial del informe automático, mostrado en curso (no
+Finalizado — eso corresponde al miércoles).
+**Qué se mostró:**
+- El motor de scoring ya alimenta un generador de informe HTML autocontenido
+  (`app/services/report.py`): gauge circular animado con el score global +
+  barras de score por dominio, coloreadas por nivel de riesgo.
+- Corrida en vivo sobre el caso simulado (PyME de 12 empleados): 38/100,
+  Riesgo Crítico.
+**Deliberadamente no mostrado hoy** (ya construido, pero se reserva para el
+cierre del miércoles): el acordeón de acciones priorizadas P1/P2/P3 con la
+guía de resolución paso a paso — es la pieza que falta "activar" en la
+demo del miércoles para no adelantar la Jornada 8 completa.
+**Para mostrar en clase:** el HTML de avance (gauge + barras), aclarando que
+el cierre completo del informe (con la guía de resolución) es el miércoles.
+
+---
+
 ### Jornada 8 — 09/09/2026 (miércoles) — publicar ese día
 **Tarea Notion asociada:** "Informe automático (Markdown/PDF con resumen ejecutivo)" → cambiar Estado a Finalizada ese día.
 
