@@ -148,7 +148,7 @@ Operativa) y con eso termina el diseño completo del cuestionario.
 
 ---
 
-### J8 — 09/09/2026 (miércoles)
+### J8 — 09/09/2026 (miércoles) — En curso (arrancado entre clases)
 
 **Enfoque:** diseño del dominio Continuidad Operativa (5to y último
 dominio) — cierra el diseño completo del cuestionario de 5 dominios.
