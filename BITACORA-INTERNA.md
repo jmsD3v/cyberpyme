@@ -1,345 +1,179 @@
 # Bitácora interna (staging) — CyberPyME
 
-**Esto NO es lo que está publicado en Notion.** Es el registro real de avance,
-fecha por fecha, que se usa como borrador para saber **qué corresponde
-publicar en la Bitácora de Notion y qué tarea marcar Finalizada cuando
-llegue la fecha real de esa jornada** — aunque el trabajo ya esté terminado
-hoy.
+**Esto NO es lo que está publicado en Notion.** Es el borrador de trabajo para
+saber qué corresponde publicar en la Bitácora de Notion y en la base Tareas
+en cada jornada Lunes/Miércoles — aunque el código real ya esté mucho más
+avanzado.
 
-**Regla:** avanzamos el código a la velocidad que dé. Pero en Notion (Bitácora
-+ Tareas) solo se muestra, en cada jornada Lunes/Miércoles, lo que
-correspondería a ese día según el cronograma — nunca antes. Cuando llega la
-fecha real: copiar la entrada de "Pendientes de publicar" de más abajo al
-tope de la Bitácora de Notion, y cambiar el Estado de la tarea asociada a
-Finalizada. Ver `feedback-cyberpyme-notion-pacing` en la memoria de Claude
-para el porqué.
+## El principio: dos líneas de tiempo distintas (reescrito 07/09/2026)
 
-**Esta regla no es solo de Notion.** El 03/09/2026 el profesor Gabriel
-preguntó por mail qué sigue después del documento técnico, y el primer
-borrador de respuesta describía la app interactiva y la plataforma
-multiempresa en tiempo presente ("ya está funcionando") y ofrecía una
-demo — revelando avance muy por delante de la jornada real (la app
-interactiva está agendada para el 21/09, no antes). Juanma lo corrigió:
-*"acá tenemos que estar a la altura de lo que vamos registrando en
-notion... le contamos lo que va a ser, eso todo bien, pero no aclaramos
-lo avanzado que estamos."* Se reescribió todo en tiempo futuro/de plan
-("la idea es", "más adelante") y se sacó la demo. **Cualquier
-comunicación externa sobre este proyecto — mail, mensaje, demo — sigue
-la misma regla de ritmo que Notion.**
+Hay **dos proyectos** que conviven y que no hay que mezclar nunca:
 
----
+1. **El proyecto real** (este repo, `git log`, `CLAUDE.md`): avanza a la
+   velocidad que dé, sin esperar fechas. Ya está prácticamente terminado —
+   motor académico completo + fase producto completa (Supabase, FastAPI,
+   Next.js, deploy, auditoría de seguridad, tests) — mucho antes del
+   13/dic/2026 (fecha límite real del plan aprobado por TECLAB).
+2. **El proyecto que "vive" en Notion** (Bitácora + Tareas, lo único que
+   Gabriel puede llegar a ver): tiene que avanzar a **paso de tortuga**,
+   jornada por jornada, mostrando en cada clase de 1-1.5 hora algo chico,
+   concreto y visual — como si el desarrollo recién estuviera pasando esa
+   semana. Este calendario llega hasta el 13/dic, ni un día antes.
 
-## Pendientes de publicar (ya construido, esperando la fecha real)
+**Importante, aclarado por Juanma el 07/09/2026:** hasta hoy **nunca se
+presentó nada oficialmente en clase**. Las clases son por Meet, duran una
+hora, hay muchos alumnos, y lo único que se dice es informal ("hoy hice tal
+cosa") sin que el profesor lo recuerde después. Lo único físico y real que
+Gabriel tiene es el **plan de trabajo inicial** (Word/PDF, enviado por mail
+y confirmado por él) — nunca vio el detalle de Notion. Esto significa que
+**las Jornadas 1 a 6 (18/08 al 02/09), aunque tienen fecha pasada, nunca
+quedaron comprometidas verbalmente en detalle** — se pueden reescribir sin
+generar ninguna contradicción. Se reescribieron acá con un ritmo mucho más
+lento (retomando el boceto original de 15 jornadas que había hecho Juanma en
+Copilot al planificar, que ya encajaba perfecto con las fechas reales).
 
-### Jornada 7 — 07/09/2026 (lunes) — publicada ese día
-
-**Sin tarea propia en Notion** — cae dentro de la ventana de "Informe automático"
-(vence 09/09, ya en curso). Checkpoint intermedio, sin cerrar la tarea todavía.
-
-**Enfoque:** avance parcial del informe automático, mostrado en curso (no
-Finalizado — eso corresponde al miércoles).
-**Qué se mostró:**
-- El motor de scoring ya alimenta un generador de informe HTML autocontenido
-  (`app/services/report.py`): gauge circular animado con el score global +
-  barras de score por dominio, coloreadas por nivel de riesgo.
-- Corrida en vivo sobre el caso simulado (PyME de 12 empleados): 38/100,
-  Riesgo Crítico.
-**Deliberadamente no mostrado hoy** (ya construido, pero se reserva para el
-cierre del miércoles): el acordeón de acciones priorizadas P1/P2/P3 con la
-guía de resolución paso a paso — es la pieza que falta "activar" en la
-demo del miércoles para no adelantar la Jornada 8 completa.
-**Para mostrar en clase:** el HTML de avance (gauge + barras), aclarando que
-el cierre completo del informe (con la guía de resolución) es el miércoles.
+**Regla de oro para cada jornada:**
+- Una jornada = lo que entra cómodo en 1 a 1.5 horas de clase. Nunca un
+  salto grande.
+- Siempre mostrar **algo visual** (ficha de diseño, diagrama, tabla,
+  wireframe, captura de código, y recién sobre el final del calendario,
+  capturas reales de la app) — nunca solo texto.
+- En la Bitácora de Notion, **dejar siempre 2-3 jornadas futuras enunciadas**
+  ("Próximo objetivo") pero sin detalle completo — así el plan nunca se
+  siente "ya terminado", siempre queda algo por venir.
+- Nunca revelar en una jornada algo que en el calendario real de abajo
+  corresponde a una jornada posterior, aunque el código ya lo tenga
+  terminado hace semanas.
+- Antes de cada clase: copiar la entrada de esa jornada de este archivo a la
+  Bitácora de Notion, y recién ahí cambiar el Estado de la tarea asociada en
+  la base Tareas.
 
 ---
 
-### Jornada 8 — 09/09/2026 (miércoles) — publicar ese día
-**Tarea Notion asociada:** "Informe automático (Markdown/PDF con resumen ejecutivo)" → cambiar Estado a Finalizada ese día.
+## Calendario maestro (18/08/2026 → 13/12/2026, 34 jornadas)
 
-**Enfoque:** informe automático interactivo — de "diagnóstico" a "diagnóstico + cómo resolverlo".
-**Qué se construyó:**
-- `app/services/report.py`: genera un único `.html` autocontenido (sin backend, sin CDN) a partir de `AssessmentResult` — gauge de score global + barras por dominio (SVG, coloreadas por nivel de riesgo) + acordeón de acciones priorizadas.
-- `recommendations.json` enriquecido: las recomendaciones ahora tienen `why` (por qué importa) y `steps` (guía de resolución paso a paso, en criollo, sin jerga técnica) — esto es lo que convierte el informe en algo que ayuda a *resolver*, no solo a *diagnosticar*.
-- Tema oscuro (gris, no negro) por defecto.
-- 4 tests nuevos (`tests/test_report.py`), incluyendo uno de que el nombre de la empresa se escapa correctamente (XSS) pensando en la fase producto. Total: **14/14 tests en verde**.
-- Uso: `python -m app.cli demo --html informe.html`.
-**Por qué así:** configuración sobre código (preguntas, pesos y ahora también los pasos de resolución viven en JSON), scoring desacoplado de la interfaz, determinismo total. El informe interactivo responde a la necesidad de que la PyME no solo se autodiagnostique sino que sepa cómo resolver cada brecha — sin salir de la restricción de "corre sola, sin infraestructura" de la entrega académica.
-**Para mostrar en clase:**
-- Correr `python -m app.cli demo` en vivo — muestra el score global del caso "medio" y el top 5 de acciones priorizadas (número exacto sujeto al cuestionario vigente al momento de publicar).
-- Abrir el `.html` generado en el navegador — mostrar el gauge, las barras por dominio y desplegar el acordeón de una acción P1 para ver la guía paso a paso.
-- Correr `python -m pytest tests/ -v` — todos en verde.
-**Próximo objetivo (a publicar cuando corresponda):** validación con 3 casos simulados de PyME (perfil maduro, medio, débil).
+| # | Fecha | Día | Bloque | Foco |
+|---|-------|-----|--------|------|
+| J1 | 18/08 | martes* | A — Encuadre | Kickoff: plan aprobado por TECLAB + encuadre del dominio Accesos |
+| J2 | 20/08 | miércoles | A | Relevamiento de riesgos en PyMEs sin área de IT (matriz, Ley 25.326) |
+| J3 | 24/08 | lunes | A | Metodología: mapeo NIST CSF 2.0 + CIS Controls v8.1 IG1 |
+| J4 | 26/08 | miércoles | A | Diseño del dominio Accesos (preguntas ACC, pesos, señales) |
+| J5 | 31/08 | lunes | A | Diseño del dominio WiFi (preguntas WIF) |
+| J6 | 02/09 | miércoles | A | Diseño del dominio Backups (preguntas BKP) |
+| **J7** | **07/09** | **lunes (HOY)** | B | **Diseño del dominio Actualizaciones (preguntas UPD)** |
+| J8 | 09/09 | miércoles | B | Diseño del dominio Continuidad Operativa (preguntas CON) — cierra los 5 dominios |
+| J9 | 14/09 | lunes | B | Arquitectura del sistema (metodología en JSON vs. datos operativos) |
+| J10 | 16/09 | miércoles | B | Modelo de datos: Question / Answer / AssessmentResult |
+| J11 | 21/09 | lunes | B | Motor de preguntas: carga del catálogo + validación de respuestas |
+| J12 | 23/09 | miércoles | B | Motor de scoring: score ponderado por dominio |
+| J13 | 28/09 | lunes | B | Motor de scoring: score global + niveles de riesgo (umbrales) |
+| J14 | 30/09 | miércoles | B | Motor de recomendaciones: brechas + prioridades P1/P2/P3 |
+| J15 | 05/10 | lunes | C — Cierre académico | Demo de consola end-to-end + primeros tests unitarios |
+| J16 | 07/10 | miércoles | C | Informe automático: gauge + score por dominio (HTML) |
+| J17 | 12/10 | lunes | C | Informe automático: guía de resolución paso a paso |
+| J18 | 14/10 | miércoles | C | Validación con 3 casos simulados (débil / medio / maduro) |
+| J19 | 19/10 | lunes | C | Guía de hardening por dominio (documento) |
+| J20 | 21/10 | miércoles | C | Cierre de la entrega académica: suite de tests + repaso general |
+| J21 | 26/10 | lunes | D — Fase producto | Por qué ir más allá del mínimo: arquitectura (Next.js + FastAPI + Supabase) |
+| J22 | 28/10 | miércoles | D | Modelo multiempresa en Supabase (empresas/perfiles/evaluaciones + RLS) |
+| J23 | 02/11 | lunes | D | API: exponer el motor de scoring vía FastAPI |
+| J24 | 04/11 | miércoles | D | Next.js: pantallas de login / registro |
+| J25 | 09/11 | lunes | D | Cuestionario interactivo en el navegador |
+| J26 | 11/11 | miércoles | D | Pantalla de resultado conectada al backend |
+| J27 | 16/11 | lunes | D | Dashboard: historial de evaluaciones + evolución del score |
+| J28 | 18/11 | miércoles | D | Funciones extra: cuenta de usuario, exportar a PDF, términos/privacidad |
+| J29 | 23/11 | lunes | D | Revisión mobile + accesibilidad |
+| J30 | 25/11 | miércoles | D | Despliegue en producción |
+| J31 | 30/11 | lunes | D | Auditoría de seguridad |
+| J32 | 02/12 | miércoles | D | Tests automatizados + integración continua |
+| J33 | 07/12 | lunes | E — Entrega | Documentación final: memoria técnica + manual de uso |
+| J34 | 09/12 | miércoles | E | Demo completa end-to-end + conclusiones + entrega |
 
----
+*(J1 es martes porque el 17/08 fue feriado — primera clase real.)*
 
-### Jornada 9 — 14/09/2026 (lunes) — publicar ese día
-**Tarea Notion asociada:** "Validación con 3 casos simulados de PyME" → cambiar Estado a Finalizada ese día.
-
-**Enfoque:** validar que el motor de scoring responde de forma coherente y monótona ante perfiles de postura de seguridad claramente distintos.
-**Qué se construyó:**
-- `app/data/validation_cases.json`: 3 perfiles simulados — *débil* (sin prácticas básicas), *medio* (el mismo caso de la demo, PyME de 12 empleados), *maduro* (buenas prácticas ya instaladas).
-- `app/services/validation.py`: corre los 3 casos sobre el mismo motor (`calculate_assessment`) y verifica el orden monótono de scores (`is_monotonic`).
-- `app/services/report.py` → `render_comparative_html()`: informe HTML comparativo con tabla de resultados, gráfico de barras agrupadas por dominio (3 series, paleta categórica de la skill `dataviz`) y conclusión automática.
-- CLI: `python -m app.cli validacion [--html archivo.html]`.
-- 4 tests nuevos (`tests/test_validation.py`): cubren los 3 casos contra el cuestionario completo, orden monótono débil<medio<maduro, más brechas en débil que en maduro, y que el HTML comparativo renderiza los 3 casos.
-- Resultado real (correr `python -m app.cli validacion` para el número exacto vigente): orden monótono débil < medio < maduro confirmado — débil roza el 0, medio cae en ALTO/CRÍTICO según cobertura del cuestionario, maduro por encima de 85.
-- (03/09) Corregidos 2 bugs visuales del gráfico comparativo: la etiqueta "100" se cortaba arriba (falta de margen superior) y las etiquetas largas de dominio ("Continuidad Operativa") se pisaban con la del dominio vecino — ahora las etiquetas de dos palabras parten en dos líneas.
-- (03/09) Sumadas 3 preguntas nuevas al cuestionario (ACC-06 phishing, UPD-04 antivirus, UPD-05 USB — ver hito más abajo); `validation_cases.json` actualizado con respuestas para las 3 en los 3 perfiles, orden monótono se mantiene.
-**Por qué así:** reutiliza el mismo motor determinista sin duplicar lógica de scoring; los 3 perfiles viven en JSON (config sobre código), igual que preguntas y recomendaciones. La validación demuestra empíricamente — no solo por argumento — que mejor postura declarada = mejor score = menor riesgo, en los 5 dominios y en el global.
-**Para mostrar en clase:**
-- Correr `python -m app.cli validacion` en vivo — muestra los 3 scores y confirma el orden monótono.
-- Abrir el HTML comparativo — tabla + gráfico de barras agrupadas por dominio.
-- Correr `python -m pytest tests/ -v` — 18 passed.
-**Próximo objetivo (a publicar cuando corresponda):** guía de hardening por dominio como documento (due 16/09).
-
----
-
-### Jornada 10 — 16/09/2026 (miércoles) — publicar ese día
-**Tarea Notion asociada:** "Guía de hardening por dominio (documento)" → cambiar Estado a Finalizada ese día.
-
-**Enfoque:** documentar la guía de hardening completa, generada del catálogo en vez de escrita a mano.
-**Qué se construyó:**
-- `app/services/report.py` → `render_hardening_guide_html()`: reutiliza `prioritize_actions()` pasándole **todas** las preguntas (no solo brechas de una evaluación puntual) para generar el catálogo completo de acciones, agrupadas por dominio y ordenadas por prioridad — mismo componente visual (acordeón con `why`+`steps`) que el informe de autodiagnóstico.
-- CLI: `python -m app.cli hardening --html guia.html`.
-- 3 tests nuevos (`tests/test_hardening.py`): todas las recomendaciones del catálogo aparecen, los 5 dominios aparecen, y la guía no depende de ningún `AssessmentResult`.
-**Por qué así:** la guía de hardening y el informe de autodiagnóstico son la misma pregunta ("¿cómo resuelvo esto?") aplicada a dos universos distintos (todas las acciones vs. solo las brechas detectadas) — reusar `prioritize_actions()` y `_action_card()` evita duplicar la lógica de priorización y el diseño de las tarjetas.
-**Para mostrar en clase:**
-- Correr `python -m app.cli hardening` en vivo — genera el HTML con el catálogo completo.
-- Abrir el HTML — mostrar las 5 secciones por dominio y desplegar alguna tarjeta.
-- Correr `python -m pytest tests/ -v` — 21 passed.
-**Próximo objetivo (a publicar cuando corresponda):** documentación final + manual de uso (due 04/11).
+Después de J34 (09/12) quedan 4 días de margen hasta el 13/12 (fecha límite
+del plan aprobado) para pulir la entrega final sin necesidad de una jornada
+de clase más.
 
 ---
 
-### Jornada 11 — 21/09/2026 (lunes) — publicar ese día
-**Tarea Notion asociada:** ninguna todavía — esta app no estaba en el plan de trabajo original, la agregamos porque Juanma notó (03/09) que todo lo construido hasta ahora era "mucho HTML lindo" generado desde la consola, no algo que una PyME pudiera realmente sentarse a usar. Crear una tarea nueva en la base Tareas cuando se publique, con fecha retroactiva a esta jornada.
+## Ya publicado en Notion (histórico — reescrito hoy, reemplaza la versión anterior)
 
-**Enfoque:** la primera pieza que es de verdad "una app" — el cuestionario se responde en el navegador, no en la terminal.
-**Qué se construyó:**
-- `app/services/interactive_app.py` → `render_interactive_app_html()`: un único `.html` donde el motor de scoring está portado a JavaScript puro (espejo de `scoring.py`, mismo algoritmo) y corre 100% en el navegador — preguntas y recomendaciones embebidas como datos, sin backend, sin build step.
-- Flujo de 5 pantallas (una por dominio) con barra de progreso, botones Sí/Parcial/No/No sé, y validación que no deja avanzar sin responder todo el dominio.
-- Pantalla de resultado idéntica en diseño al informe de `report.py` (gauge, barras por dominio, acordeón con guía de resolución) pero calculada en vivo a partir de las respuestas, no precomputada en Python.
-- CLI: `python -m app.cli app --html cyberpyme_app.html`.
-- 3 tests nuevos (`tests/test_interactive_app.py`): todas las preguntas/recomendaciones están embebidas, no hay `fetch`/XHR ni URLs (cero llamadas de red), y los datos embebidos coinciden con el motor Python (mismos ids/pesos/domain_weight).
-- **Probado de punta a punta en el navegador** (no solo con pytest): completé las 24 preguntas reales, click por click, y verifiqué que el resultado final (score, riesgo, barras, acordeón desplegable) calculado en JS coincide con lo esperado — cero errores de consola.
-- Encontrado y corregido en la propia verificación: el botón "Comenzar" no respondía al primer click porque el listener se enganchaba antes de que el HTML del intro existiera en el DOM (el intro vive en un `<template>`, inerte hasta clonarse). Se movió el `addEventListener` a después de inyectar el HTML.
-- **Pulida el mismo día tras feedback directo de Juanma probándola** (dos pedidos concretos): "la pregunta del 3-2-1 no se entiende" → se agregó un campo `help` en `questions.json` (6 preguntas con jerga: MFA, gestor de contraseñas, privilegios de administrador, WPA2/WPA3, 3-2-1, cifrado de disco), mostrado con 💡 bajo la pregunta. "el diseño necesita más vida, imágenes, animaciones" → íconos + color de acento propio por dominio, fila de "domain dots" de progreso, transiciones fade+slide entre pantallas, gauge animado (arco + número contando hacia arriba en vez de aparecer ya lleno), tarjetas en cascada, emoji según riesgo, glow detrás del gauge, micro-interacciones en botones. 4 tests nuevos, total 25/25 en verde. Re-verificado de punta a punta en el navegador con captura del resultado (score 100/100 con todo "Sí", animación completa, cero errores de consola).
-**Por qué así:** portar el motor a JS (en vez de, por ejemplo, correr Python en el navegador con Pyodide) es lo más simple que cumple "sin infraestructura" — es codigo espejo, no compartido, así que si `scoring.py` cambia hay que actualizar esto a mano; documentado como advertencia en el docstring del archivo.
-**Para mostrar en clase:** completar el cuestionario en vivo, proyectado, y mostrar que el resultado aparece al instante sin que nadie toque la terminal.
-**Próximo objetivo (a publicar cuando corresponda):** documentación final + manual de uso (due 04/11) — mencionar esta app ahí también.
+### J1 — 18/08/2026 (martes, primera clase)
+Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB
+(Herramienta de Autodiagnóstico de Ciberseguridad para PyMEs sin Área de IT,
+2A 2026, 18/ago-13/dic). Encuadre inicial del primer dominio a trabajar:
+Accesos.
 
----
+### J2 — 20/08/2026 (miércoles)
+Relevamiento de riesgos frecuentes en PyMEs sin área de IT: credenciales
+comprometidas, ransomware, pérdida de datos, WiFi inseguro, sistemas
+desactualizados, falta de plan de continuidad. Referencia al marco legal
+argentino (Ley 25.326 de Protección de Datos Personales).
 
-## Ya publicado en Notion (histórico, para referencia — no duplicar)
+### J3 — 24/08/2026 (lunes)
+Metodología de diagnóstico: NIST CSF 2.0 (Govern/Identify/Protect/
+Detect/Respond/Recover) + CIS Controls v8.1 Implementation Group 1.
+Primer boceto del mapeo de cada dominio a funciones NIST y controles CIS.
 
-### Jornada 6 — 02/09/2026 (miércoles)
-Primer vertical slice funcional: banco de 20 preguntas (`questions.json`), motor de scoring determinista, motor de recomendaciones, 10 tests, demo de consola. Score global 42.61/100, RIESGO ALTO sobre el caso simulado de 12 empleados.
+### J4 — 26/08/2026 (miércoles)
+Diseño del dominio Accesos: preguntas ACC (MFA, gestor de contraseñas,
+privilegios de administrador, phishing), con peso relativo y trazabilidad
+a NIST/CIS.
 
-### Jornada 5 — 31/08/2026 (lunes)
-Diseño final del cuestionario por dominio (escala Sí/Parcial/No/No sé) + plan de desarrollo con cronograma por sprint + backlog priorizado P0-P3 + Definition of Done del MVP.
+### J5 — 31/08/2026 (lunes)
+Diseño del dominio WiFi: preguntas WIF (WPA2/WPA3, red de invitados,
+cambio de contraseña por defecto), con peso y trazabilidad.
 
-### Jornada 4 — 26/08/2026 (miércoles)
-Arquitectura en capas (metodología en JSON/Git vs. datos operativos en DB) + stack definido (Python puro para la entrega académica; Next.js+TypeScript+Tailwind+FastAPI+Supabase reservado para la fase producto).
-
-### Jornada 3 — 24/08/2026 (lunes)
-Metodología de diagnóstico: NIST CSF 2.0 + CIS Controls v8.1 IG1, mapeo de cada dominio a funciones NIST y controles CIS.
-
-### Jornada 2 — 20/08/2026 (miércoles)
-Relevamiento de riesgos frecuentes en PyMEs sin área de IT + referencia al marco legal argentino (Ley 25.326).
-
-### Jornada 1 — 18/08/2026 (martes, primera clase — el 17 fue feriado)
-Kickoff: presentación del Plan de Trabajo Individual aprobado por TECLAB.
+### J6 — 02/09/2026 (miércoles)
+Diseño del dominio Backups: preguntas BKP (frecuencia, copia offline,
+estrategia 3-2-1, prueba de restauración), con peso y trazabilidad.
 
 ---
 
-## Otros hitos (fuera del ciclo de clase, no van a la Bitácora)
+## Pendientes de publicar
 
-- **02/09/2026**: revisión completa del documento técnico entregable
-  (`Herramienta_Autodiagnostico_Ciberseguridad_PyMEs.docx`) — se sacó un
-  artefacto de IA sin limpiar, se recortaron 5 preguntas que estaban en el
-  documento pero no en el código (25→20), se sincronizaron los números de la
-  simulación con la salida real del motor, se regeneraron las Figuras 1 y 5,
-  y se agregó un recuadro aclarando qué está construido hoy vs. qué es fase
-  producto (redactado sin fechar el avance, para no adelantar tampoco ahí).
-  **Enviado por mail a Gabriel (vpp.teclab.gg@gmail.com) el 02/09/2026.**
+### J7 — 07/09/2026 (lunes) — HOY
 
-- **03/09/2026**: auditoría del cuestionario en dos pasadas — primero un
-  chequeo rápido (a pedido de Juanma: "¿no nos estaremos olvidando de
-  USB?") que encontró 3 huecos, y después una segunda pasada más
-  sistemática (a pedido explícito de Juanma: "analizá bien qué más nos
-  estaría faltando") contra los 6 functions de NIST CSF 2.0 y los 15
-  controles de CIS Controls v8.1 aplicables a IG1, que encontró un 4to
-  hueco. Total 4 preguntas nuevas:
-  - `ACC-06` — concientización de phishing (Control 14). El más grave de
-    los 4: "Phishing" ya estaba marcado como riesgo "Crítica" en la matriz
-    de la sección 5 del documento técnico, sin pregunta asociada.
-  - `UPD-04` — antivirus/antimalware (Control 10).
-  - `UPD-05` — USB/removable media (Safeguard 10.3, específicamente IG1).
-  - `UPD-06` — cifrado de disco en notebooks (Control 3, Protección de
-    Datos) — pedido explícito de Juanma tras la primera auditoría.
+**Enfoque:** diseño del dominio Actualizaciones (4to de 5 dominios).
+**Qué se construyó:** 6 preguntas (UPD-01 a UPD-06) — actualizaciones
+automáticas del sistema operativo, navegadores/apps críticas, inventario de
+equipos y software, antivirus/antimalware, control de USB, cifrado de disco
+en notebooks — con peso relativo y mapeo NIST/CIS.
+**Para mostrar en clase:** ficha de diseño del dominio (tabla con las 6
+preguntas, peso y trazabilidad). Publicada como artefacto:
+https://claude.ai/code/artifact/eb6c167f-a29c-4459-8328-887a454ae017
+**Próximo objetivo:** el miércoles cerramos el último dominio (Continuidad
+Operativa) y con eso termina el diseño completo del cuestionario.
 
-  Cuestionario pasa de 20 a **24** preguntas. Se optó por sumarlas todas a
-  los dominios existentes (Accesos, Actualizaciones) en vez de crear un
-  6to dominio, para no rebalancear `domain_weight` ni reestructurar el
-  documento técnico otra vez. Resto de controles IG1 (logs, monitoreo de
-  red activo, seguridad de aplicaciones, pentesting, gestión formal de
-  proveedores) quedan fuera de alcance **a propósito** — exceden lo
-  sostenible para una PyME sin área de IT, no es un olvido.
+---
 
-  `validation_cases.json` actualizado con las 4 respuestas nuevas en los 3
-  perfiles — el caso "medio" (referencia de la demo) bajó de ALTO a
-  CRÍTICO al sumar estas preguntas (ahora 37.92/100), lo cual es correcto:
-  el cuestionario anterior subestimaba el riesgo real al no medir estos 4
-  controles. **`Herramienta_Autodiagnostico_Ciberseguridad_PyMEs.docx` no
-  se actualizó todavía con este cambio** — el documento ya enviado a
-  Gabriel el 02/09 sigue describiendo el cuestionario de 20 preguntas.
-  **Decisión de Juanma (03/09): no reenviar ahora.** Lo que se mandó es un
-  plan inicial — es lógico y esperable que cambie con el desarrollo. Las
-  actualizaciones se consolidan recién en la entrega final (documentación
-  final + manual de uso, due 04/11), que de todos modos va a cambiar mucho
-  más que esto entre hoy y esa fecha.
-- **03/09/2026**: inicializado el repositorio git (nunca se había hecho) —
-  commit inicial con todo lo construido hasta la fecha. Configurado con
-  `user.name`/`user.email` de Juanma (ya estaban en la config global de la
-  máquina). Más tarde el mismo día, creado y pusheado a
-  **[github.com/jmsD3v/cyberpyme](https://github.com/jmsD3v/cyberpyme)**
-  como **privado** (elección explícita de Juanma) vía `gh repo create`.
+### J8 — 09/09/2026 (miércoles)
 
-- **03/09/2026 (noche) — frontend desplegado en producción**: después de
-  que el conector de Vercel de la sesión no lograra autenticar la cuenta
-  correcta (probamos varias veces, incluso con un reinicio completo),
-  desplegamos a mano vía la CLI de Vercel desde la terminal de Juanma
-  (`vercel login` → `vercel link --yes --project cyberpyme` →
-  `vercel env add` × 3 → `vercel --prod --yes`). Resultado:
-  **[cyberpyme.vercel.app](https://cyberpyme.vercel.app)**, con el repo
-  de GitHub conectado (cada push a `master` redespliega solo).
-  Verificado en el navegador: `/login` y `/signup` cargan bien en
-  producción, cero errores de consola.
+**Enfoque:** diseño del dominio Continuidad Operativa (5to y último
+dominio) — cierra el diseño completo del cuestionario de 5 dominios.
+**Qué mostrar:** preguntas CON (procedimiento ante ransomware/pérdida de
+acceso, recuperación de facturación, servicios indispensables, prueba
+anual de recuperación), con peso y trazabilidad NIST/CIS. Mismo formato de
+ficha que J7.
+**Próximo objetivo:** con los 5 dominios cerrados, la próxima jornada
+arranca la arquitectura del sistema (cómo se organiza el código, no
+todavía el cuestionario funcionando).
 
-- **03/09/2026 (noche) — backend desplegado, stack completo en
-  producción**: Juanma instaló el conector MCP de Render en la sesión, lo
-  que permitió crear el servicio directamente (`create_web_service`) sin
-  pasar por el dashboard a mano. Primer intento falló porque el repo es
-  privado y Render no tenía acceso — Juanma autorizó la GitHub App de
-  Render para `jmsD3v/cyberpyme` en github.com/settings/installations, y
-  el segundo intento anduvo. Resultado:
-  **[cyberpyme-api.onrender.com](https://cyberpyme-api.onrender.com)**
-  (free tier, se duerme tras inactividad). Actualizado
-  `NEXT_PUBLIC_API_URL` en Vercel con la URL real y redesplegado el
-  frontend. **Probado de punta a punta en el sitio público real**: alta
-  de cuenta → confirmación → login → alta de empresa → cuestionario
-  (trayendo las preguntas del backend en Render en vivo) — cero errores
-  de consola en ningún paso. El proyecto completo (frontend + backend +
-  base de datos) ya es accesible desde cualquier lado, no solo desde la
-  compu de Juanma.
+---
 
-- **03/09/2026 (noche) — revisión mobile + "olvidé mi contraseña"**:
-  Juanma pidió revisar cómo se ve en el celular (solo se había probado
-  login/signup hasta ahora) y agregar recuperación de contraseña, que no
-  existía. Encontrados y corregidos 2 bugs reales de mobile: el header
-  (`AppShell.tsx`) no envolvía bien cuando el nombre de la empresa era
-  largo, y el pie del cuestionario apretaba el texto de ayuda entre los
-  botones "Anterior"/"Siguiente" en pantallas angostas. Implementado
-  `/forgot-password` + `/reset-password` con el flujo estándar de
-  Supabase (`resetPasswordForEmail` + evento `PASSWORD_RECOVERY`),
-  verificado con un usuario real que la contraseña efectivamente cambia
-  (login con la vieja falla, con la nueva funciona). Todo probado en
-  local antes de pushear — el push dispara el redeploy automático en
-  Vercel.
+### J9 — 14/09/2026 (lunes)
 
-- **03/09/2026 — pivot de ritmo, fase producto arrancada ya (no después del
-  13/dic):** Juanma pidió explícitamente terminar el proyecto completo lo
-  antes posible, sin esperar la fecha académica: *"no puedo estar sin
-  desarrollar ni esperando a las fechas para eso"* / *"cuando hablo de
-  terminar ya, me refiero a todo el proyecto, lo antes posible"*. Esto NO
-  cambia qué va en cada entrega (ver `CLAUDE.md`), solo el momento en que se
-  construye. Mismo día, se construyó y verificó de punta a punta la fase
-  producto completa:
-  - **Supabase** (multi-tenant, RLS real): tablas `empresas`/`perfiles`/`evaluaciones`,
-    signup atómico vía RPC `crear_empresa` (`SECURITY DEFINER`, evita
-    condición de carrera de secuestro de tenant). Encontrado y corregido un
-    bug de privilegios: Postgres otorga EXECUTE a `PUBLIC` por defecto al
-    crear una función, y revocar solo de `anon` no alcanza si nunca se
-    revocó de `PUBLIC` — pasaba con `empresa_actual()`. Corregido y
-    verificado con `get_advisors` (0 lints de seguridad relevantes).
-  - **FastAPI** (`backend/api.py`): microservicio de cómputo puro sobre el
-    mismo motor de scoring (`/salud`, `/preguntas`, `/recomendaciones`,
-    `/evaluar`), sin conocer auth ni persistencia — eso lo maneja Next.js
-    directo contra Supabase. 6 tests nuevos, suite completa 31/31 en verde.
-  - **Next.js 16 + TypeScript + Tailwind v4** (`frontend/`): login, signup,
-    onboarding, dashboard, cuestionario de 24 preguntas y resultado
-    (gauge animado, acordeón de acciones) — mismo diseño visual que el
-    informe HTML académico. Encontrado y adaptado el breaking change de
-    Next 16 (`middleware.ts`→`proxy.ts`) leyendo la documentación
-    empaquetada antes de escribir código, tal como advierte el propio
-    `AGENTS.md` del proyecto.
-  - **Verificado en el navegador de punta a punta** (no solo tests):
-    registro → confirmación de email (simulada vía SQL para no depender de
-    un inbox real) → login → alta de empresa → cuestionario completo (24
-    preguntas) → llamada a FastAPI → inserción en Supabase respetando RLS →
-    resultado renderizado correctamente (score 100/100, Riesgo Bajo). Cero
-    errores de consola bloqueantes. Datos de prueba borrados después.
-  - **Pendiente:** documentación pulida de la fase producto. Ninguna tarea
-    de Notion se tocó todavía por este avance — evaluar con Juanma si
-    corresponde reflejarlo ahí o si, al no estar atado a una jornada
-    Lunes/Miércoles, no aplica la regla de ritmo de
-    `feedback-cyberpyme-notion-pacing`.
+**Enfoque:** arquitectura del sistema — cómo se separa la metodología
+(preguntas/pesos, versionada en JSON/Git) de los datos operativos
+(evaluaciones futuras, que van a vivir en una base de datos más adelante).
+**Qué mostrar:** diagrama de capas (config JSON → motor → interfaz), y el
+criterio de por qué Python puro para el motor académico.
+**Próximo objetivo:** empezar a construir el modelo de datos (Question /
+Answer / AssessmentResult) la próxima jornada.
 
-- **03/09/2026 (más tarde) — pulido de la fase producto, a pedido de
-  Juanma tras probar la app** ("segui con todo eso, muy bien hasta
-  ahora!"):
-  - **Tipos generados de Supabase**: `frontend/src/lib/supabase/database.types.ts`
-    generado con el MCP de Supabase (`generate_typescript_types`), cableado
-    en `client.ts`/`server.ts`. Los casteos manuales `as unknown as {...}`
-    que había en los joins de `page.tsx`/`cuestionario/page.tsx`
-    desaparecieron — Supabase infiere correctamente el embed como objeto
-    único (no array) a partir de la FK. Verificado con `tsc --noEmit`
-    limpio.
-  - **Página de guía de hardening** (`/guia-hardening`, con link en el
-    header): nuevo endpoint `GET /guia-hardening` en `backend/api.py`
-    reusando `prioritize_actions()` sobre todas las preguntas (no solo
-    brechas de una evaluación) — mismo cálculo que la guía HTML de la
-    parte académica, sin duplicar el orden de prioridad en el frontend.
-    `ActionCard` se extrajo de `Resultado.tsx` a un componente compartido
-    para reusarlo ahí. Test nuevo en `test_api.py` (32/32 en verde).
-  - **Manejo de errores más robusto**: los mensajes de Supabase Auth
-    (en inglés, técnicos — ej. "Invalid login credentials", "email rate
-    limit exceeded", que efectivamente apareció crudo en pantalla durante
-    las pruebas de esta sesión) ahora se traducen a español llano
-    (`frontend/src/lib/auth-errors.ts`). `completarRegistro` (alta de
-    empresa post-confirmación de email) ya no tira una excepción cruda que
-    rompía a la pantalla de error genérica de Next.js — ahora redirige con
-    un mensaje amigable, mismo patrón que `login`/`signup`.
-  - **Rediseño de login/signup** — pedido explícito de Juanma mientras
-    probaba la app: *"en el loguin... falta descripcion, no se sabe de que
-    va la pagina... no que sea tan minimalista porque sino no se entiende
-    de que es, acordate que el usuario va a ser una persona que no sabe
-    nada de IT"*. Se agregó `AuthShowcase.tsx`, un panel de marca a la
-    izquierda (layout split en desktop, apilado en mobile) con logo,
-    propuesta de valor ("Sabé qué tan expuesta está tu empresa a un
-    ciberataque") y 3 bullets con ícono explicando qué hace la app en
-    términos simples, sin jerga — mismo panel reusado en `/login` y
-    `/signup`. Verificado en desktop y mobile en el navegador.
-  - **Ver detalle de una evaluación pasada** (`/evaluaciones/[id]`, filas
-    del dashboard ahora clickeables): en vez de guardar `top_actions` en
-    la tabla `evaluaciones` (duplicando datos derivables), la página
-    llama de nuevo a `POST /evaluar` con las `respuestas` guardadas y
-    recalcula todo al vuelo — el motor es determinista, así que da
-    exactamente el mismo resultado que en su momento. Verificado con un
-    caso sembrado a mano (score 36/100, CRÍTICO) que coincide pixel a
-    pixel con lo insertado.
-  - **Bug investigado y descartado**: Juanma reportó un error de Next.js
-    ("An unexpected response was received from the server") al apretar
-    "Salir". Diagnosticado: los logs del servidor mostraban `logout()`
-    corriendo sin errores y el redirect a `/login` completándose siempre
-    — el error era cosmético, del overlay de dev de Turbopack, causado por
-    reiniciar el servidor de Next.js manualmente mientras una pestaña
-    vieja del navegador seguía con la conexión de HMR muerta apuntando al
-    proceso anterior. Confirmado 100% funcional en una pestaña nueva y
-    limpia (logout probado 3 veces más, cero errores). **Lección para
-    diagnosticar bugs de frontend en esta sesión**: si el navegador
-    reporta un error pero los logs del servidor están limpios y la acción
-    de todos modos completa correctamente (redirect exitoso, sesión
-    realmente borrada), sospechar de estado de pestaña/HMR obsoleto antes
-    que de un bug real — abrir una pestaña nueva y repetir la prueba antes
-    de tocar código.
+---
+
+*(J10 en adelante: ver el calendario maestro arriba — foco definido, detalle
+para completar jornada a jornada a medida que se acerca la fecha real, para
+no adelantar contenido en Notion antes de tiempo.)*

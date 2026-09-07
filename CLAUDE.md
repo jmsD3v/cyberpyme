@@ -323,38 +323,71 @@ verde después de 3 iteraciones (los primeros 2 intentos fallaron por
 exactamente estos dos motivos — quedan documentados en el historial de
 commits, no hace falta repetir el error).
 
-## ⚠️ Ritmo de publicación — NO confundir "hecho en el código" con "mostrado en clase"
+## ⚠️ Dos líneas de tiempo — NUNCA confundir el proyecto real con el proyecto de Notion (reformulado 2026-09-07)
 
-El desarrollo real va más rápido que el cronograma de clases. Eso está bien
-para el código, pero:
+Hay **dos proyectos** que conviven y que no se mezclan nunca:
 
-- **`BITACORA-INTERNA.md`** (raíz del proyecto) es el registro real de
-  avance, con una entrada pre-escrita por cada jornada futura, lista para
-  publicar el día que corresponda.
-- **Notion (Bitácora + Tareas) nunca debe mostrar algo terminado antes de
-  la fecha real de esa jornada Lunes/Miércoles**, aunque el código ya esté
-  100% listo. Cuando la fecha llega: copiar la entrada correspondiente de
-  `BITACORA-INTERNA.md` a la Bitácora de Notion y recién ahí marcar la
-  tarea asociada como Finalizada.
-- Si en una sesión se termina algo "adelantado", anotarlo en
-  `BITACORA-INTERNA.md` bajo la fecha real que le corresponde, no tocar
-  Notion todavía.
+1. **El proyecto real** (este repo): avanza a la velocidad que dé, sin
+   esperar fechas de clase — ver el pivot de ritmo más abajo. Puede estar
+   (y de hecho está) muchísimo más adelantado que lo que corresponde a la
+   fecha del calendario académico.
+2. **El proyecto que "vive" en Notion** (Bitácora + Tareas — lo único que
+   Gabriel, el profesor, puede llegar a ver): avanza a **paso de tortuga**,
+   jornada por jornada, lunes y miércoles, desde el 18/08 hasta el 13/dic.
+   Cada jornada muestra en clase (1 a 1.5 hora, todo por Meet) algo chico y
+   visual — nunca más de lo que le tocaría a un proyecto que recién esa
+   semana llegó a ese punto, aunque el código lo tenga terminado hace
+   semanas.
 
-Este documento (`CLAUDE.md`) sí se mantiene siempre al día con el estado
-real del código — es `BITACORA-INTERNA.md` y Notion los que se pausan.
+**Por qué esto es seguro (aclarado por Juanma el 07/09/2026):** hasta esa
+fecha nunca se había presentado nada oficialmente en clase — son reuniones
+grupales por Meet donde cada alumno dice de palabra "hoy hice tal cosa" sin
+que quede nada registrado ni recordado. Lo único físico que Gabriel tiene es
+el plan de trabajo inicial (Word/PDF, enviado por mail, confirmado por él).
+Notion nunca fue visto por él en detalle. Esto es lo que permite reescribir
+el calendario completo de Notion sin generar contradicciones con nada ya
+dicho en clase.
 
-## ⚠️ Pivot de ritmo (2026-09-03) — leer antes de asumir "recién después del 13/dic"
+- **El calendario completo (34 jornadas, 18/08→09/12) vive en
+  `BITACORA-INTERNA.md`**, con una entrada pre-escrita por cada jornada
+  futura próxima (2-3 siempre desarrolladas de antemano, el resto como
+  título/foco en la tabla maestra), lista para publicar el día que
+  corresponda.
+- **Notion (Bitácora + Tareas de esta app en el workspace de Juanma) nunca
+  debe mostrar algo más avanzado de lo que le toca a esa jornada según el
+  calendario maestro**, aunque el código ya esté 100% listo. Antes de cada
+  clase: copiar la entrada correspondiente de `BITACORA-INTERNA.md` a la
+  Bitácora de Notion, actualizar la tarea asociada en la base Tareas, y
+  siempre dejar 2-3 jornadas futuras enunciadas (sin detalle completo) para
+  que el plan nunca se sienta "terminado".
+- Mostrar siempre algo visual por jornada (ficha de diseño, diagrama,
+  tabla, captura de código) — nunca solo texto. Recién sobre el final del
+  calendario (fase producto, noviembre-diciembre) empezar a mostrar
+  capturas reales de la app funcionando.
+- **Error ya cometido una vez (07/09/2026), no repetir**: en la Jornada 7 se
+  publicó un demo funcional con un score numérico real generado por el
+  motor — visualmente ya parecía una app terminada, muy adelantado para la
+  7ma jornada de un proyecto con entrega en diciembre. Se corrigió
+  reescribiendo el calendario completo desde cero. Antes de publicar
+  cualquier cosa en Notion, chequear contra `BITACORA-INTERNA.md`: si lo
+  que se va a mostrar es un dato/demo funcional en vez de una ficha de
+  diseño o un diagrama, y la jornada todavía está en el Bloque A/B/C
+  (diseño y motores conceptuales), es casi seguro que es demasiado.
+- Si en una sesión se termina algo del proyecto real "adelantado" respecto
+  al calendario de Notion, eso es normal y esperado — anotarlo en
+  `CLAUDE.md` (este archivo, siempre al día con el estado real del código)
+  pero NO tocar Notion hasta que la jornada correspondiente llegue.
 
-Juanma pidió explícitamente terminar **todo el proyecto**, no solo la
+## ⚠️ Pivot de ritmo (2026-09-03) — el proyecto real no espera fechas
+
+Juanma pidió explícitamente terminar **todo el proyecto real**, no solo la
 entrega académica, lo antes posible — no esperar al 13/dic para arrancar la
 fase producto. Cita textual: *"no puedo estar sin desarrollar ni esperando
 a las fechas para eso"* / *"cuando hablo de terminar ya, me refiero a todo
-el proyecto, lo antes posible"*. Esto reemplaza cualquier plan anterior que
-dijera "fase producto recién después de la entrega académica" — la
-separación de *alcance* entre ambas entregas sigue firme, pero el
-*calendario de desarrollo* ya no las secuencia. Lo único que sigue atado al
-cronograma de clases es qué se **muestra en Notion**, no qué se construye
-(ver sección de ritmo de publicación arriba).
+el proyecto, lo antes posible"*. La separación de *alcance* entre ambas
+entregas sigue firme, pero el *calendario de desarrollo real* no las
+secuencia. Lo único que sigue atado al cronograma de clases es qué se
+**muestra en Notion** (ver la sección de arriba) — nunca qué se construye.
 
 ## Próximos pasos, en este orden
 
