@@ -1,0 +1,142 @@
+<!--
+  Plantilla para las "fichas visuales" de cada jornada de la Bitácora de Notion.
+  Usada desde Jornada 7 (07/09/2026) en adelante. NO es parte de la app —
+  es solo el molde que se copia y se completa para el visual de cada
+  jornada (ficha de diseño de dominio, diagrama de arquitectura, tabla de
+  mapeo, etc.), antes de publicarlo como Artifact y/o embeberlo en Notion.
+
+  Cómo usarla:
+  1. Copiar este archivo a un temporal, completar los placeholders {{...}}.
+  2. Adaptar el contenido central (.qlist / lo que corresponda) al tipo de
+     visual que pide esa jornada según BITACORA-INTERNA.md — no siempre es
+     una lista de preguntas: puede ser un diagrama de capas, una tabla de
+     mapeo NIST/CIS, una captura de código, etc. Mantené la misma paleta y
+     tipografía para que las fichas se vean como una sola colección.
+  3. Publicar como Artifact (título corto, favicon 🛡️) y/o generar un PNG
+     (headless Chrome / screenshot) para subir como imagen embebida en la
+     entrada correspondiente de la Bitácora de Notion.
+  4. SIEMPRE respetar el ritmo de "paso de tortuga" de CLAUDE.md ("⚠️ Dos
+     líneas de tiempo"): nunca mostrar un demo funcional con datos/score
+     reales en una jornada de diseño o de motores conceptuales — fichas de
+     diseño, diagramas y tablas, no funcionalidad corriendo, hasta que el
+     calendario maestro llegue a la fase producto (bloque D, oct-dic).
+-->
+<title>{{Título corto de la jornada}}</title>
+<style>
+:root {
+  --page: #f4f4f2; --surface: #ffffff; --ink: #1c1c1a; --ink-2: #4a4a46;
+  --ink-muted: #7a7a74; --border: #dedad2; --accent: #2f6fed; --accent-soft: #eaf0fe;
+  --mono-chip: #f0f0ec;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #1e1e1e; --surface: #262626; --ink: #ffffff; --ink-2: #c9c9c9;
+    --ink-muted: #9a9a9a; --border: rgba(255,255,255,0.12); --accent: #6fa0ff;
+    --accent-soft: rgba(111,160,255,0.14); --mono-chip: #2f2f2f;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #1e1e1e; --surface: #262626; --ink: #ffffff; --ink-2: #c9c9c9;
+  --ink-muted: #9a9a9a; --border: rgba(255,255,255,0.12); --accent: #6fa0ff;
+  --accent-soft: rgba(111,160,255,0.14); --mono-chip: #2f2f2f;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--page); color: var(--ink);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  line-height: 1.55;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 72px; }
+
+.eyebrow {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 22px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted);
+}
+.eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.eyebrow .sep { color: var(--border); }
+
+h1 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 600; font-size: clamp(28px, 4.5vw, 38px);
+  margin: 0 0 8px; text-wrap: balance; letter-spacing: -0.01em;
+}
+.subtitle { color: var(--ink-2); font-size: 15.5px; margin: 0 0 30px; max-width: 62ch; }
+
+.methodology {
+  display: flex; gap: 22px; flex-wrap: wrap; padding: 16px 20px; margin-bottom: 34px;
+  background: var(--accent-soft); border: 1px solid var(--border); border-radius: 10px;
+  font-size: 13px; color: var(--ink-2);
+}
+.methodology strong { color: var(--ink); font-weight: 600; }
+
+h2 {
+  font-family: "Source Serif 4", Georgia, serif; font-weight: 600;
+  font-size: 19px; margin: 0 0 4px;
+}
+.h2-note { font-size: 13px; color: var(--ink-muted); margin: 0 0 18px; }
+
+/* Lista tipo "ficha de preguntas" (dominios) — reusar tal cual cuando aplique */
+.qlist { display: flex; flex-direction: column; gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 36px; }
+.qrow { background: var(--surface); padding: 16px 20px; display: grid;
+  grid-template-columns: 74px 1fr auto; gap: 16px; align-items: start; }
+.qid { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12.5px;
+  color: var(--accent); font-weight: 600; padding-top: 2px; }
+.qtext { font-size: 14.5px; color: var(--ink); }
+.qmeta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.weight { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums;
+  font-size: 12px; color: var(--ink-muted); white-space: nowrap; }
+.weight b { color: var(--ink-2); font-weight: 600; }
+.tags { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+.tag { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10.5px;
+  background: var(--mono-chip); color: var(--ink-2); padding: 2px 7px; border-radius: 5px; }
+
+/* Caja de hito (ej. "se cierran los 5 dominios") — opcional */
+.milestone {
+  display: flex; align-items: center; gap: 10px; padding: 16px 20px; margin-bottom: 20px;
+  background: var(--accent-soft); border: 1px solid var(--border); border-radius: 10px;
+  font-size: 13.5px; color: var(--ink); font-weight: 500;
+}
+.milestone .check { color: var(--accent); font-weight: 700; }
+
+.next {
+  border-top: 1px dashed var(--border); padding-top: 22px; margin-top: 8px;
+  font-size: 13.5px; color: var(--ink-muted);
+}
+.next b { color: var(--ink-2); }
+
+footer { margin-top: 44px; font-size: 12px; color: var(--ink-muted);
+  border-top: 1px solid var(--border); padding-top: 16px; }
+</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+
+<div class="wrap">
+  <div class="eyebrow">
+    <span class="dot"></span>
+    Jornada {{N}} &middot; {{día}} {{DD/MM/AAAA}}
+    <span class="sep">/</span>
+    {{Bloque / tipo de contenido, ej. "Diseño de cuestionario · dominio X de 5"}}
+  </div>
+
+  <h1>{{Título principal}}</h1>
+  <p class="subtitle">{{Bajada de 1-2 líneas, en criollo}}</p>
+
+  <div class="methodology">
+    <span><strong>Metodología:</strong> NIST CSF 2.0</span>
+    <span><strong>Controles:</strong> CIS Controls v8.1 &middot; IG1</span>
+    <span><strong>Escala de respuesta:</strong> Sí / Parcial / No / No sé</span>
+  </div>
+
+  <!-- Reemplazar esta sección por el contenido real de la jornada:
+       lista de preguntas (.qlist/.qrow), diagrama de capas, tabla de
+       mapeo NIST/CIS, snippet de código comentado, etc. -->
+
+  <div class="next">
+    <b>Próximo objetivo ({{próxima fecha}}):</b> {{qué sigue, sin adelantar detalle}}.
+  </div>
+
+  <footer>CyberPyME — Práctica Profesionalizante, Tecnicatura en Seguridad Informática (TECLAB). Herramienta de autodiagnóstico de ciberseguridad para PyMEs sin área de IT.</footer>
+</div>
