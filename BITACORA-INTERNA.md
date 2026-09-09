@@ -148,21 +148,21 @@ Operativa) y con eso termina el diseño completo del cuestionario.
 
 ---
 
-### J8 — 09/09/2026 (miércoles) — En curso (arrancado entre clases)
+### J8 — 09/09/2026 (miércoles) — publicada hoy
 
 **Enfoque:** diseño del dominio Continuidad Operativa (5to y último
 dominio) — cierra el diseño completo del cuestionario de 5 dominios.
-**Qué mostrar:** preguntas CON (procedimiento ante ransomware/pérdida de
-acceso, recuperación de facturación, servicios indispensables, prueba
-anual de recuperación), con peso y trazabilidad NIST/CIS. Mismo formato de
-ficha que J7.
-**Próximo objetivo:** con los 5 dominios cerrados, la próxima jornada
-arranca la arquitectura del sistema (cómo se organiza el código, no
-todavía el cuestionario funcionando).
+**Qué se mostró:** preguntas CON-01 a CON-04 (lista de servicios
+indispensables, protocolo ante ransomware/pérdida de acceso, recuperar la
+facturación si falla el sistema principal, prueba anual de recuperación),
+con peso y trazabilidad NIST/CIS. Ficha de diseño publicada:
+https://claude.ai/code/artifact/e477c6b6-e1e2-4281-8534-4a76e39da722
+**Próximo objetivo:** con los 5 dominios cerrados, arranca la arquitectura
+del sistema (lunes 14/09) — ya marcada "En curso" en Notion.
 
 ---
 
-### J9 — 14/09/2026 (lunes)
+### J9 — 14/09/2026 (lunes) — En curso (arrancado entre clases)
 
 **Enfoque:** arquitectura del sistema — cómo se separa la metodología
 (preguntas/pesos, versionada en JSON/Git) de los datos operativos
