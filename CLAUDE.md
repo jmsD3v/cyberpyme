@@ -377,6 +377,24 @@ dicho en clase.
   al calendario de Notion, eso es normal y esperado — anotarlo en
   `CLAUDE.md` (este archivo, siempre al día con el estado real del código)
   pero NO tocar Notion hasta que la jornada correspondiente llegue.
+- **Regla para las jornadas de código (J10 en adelante, 16/09):** a partir
+  de ahí las fichas visuales empiezan a mostrar código real en vez de solo
+  diseño/diagramas. Mostrar **una sola función o clase aislada por
+  jornada** (la que corresponde a esa fecha según el calendario maestro),
+  nunca el archivo completo ni varias piezas integradas entre sí — eso ya
+  delataría que el motor completo existe. Nunca mostrar output de una
+  corrida real (tests pasando, un score calculado, un resultado numérico)
+  hasta la jornada de cierre académico (J20, 21/10) — recién ahí tiene
+  sentido narrativo mostrar la suite completa corriendo, porque para esa
+  fecha "deberían" estar todas las piezas ya juntas. El código mostrado
+  tiene que ser real (copiado del archivo real), nunca inventado.
+- **Pendiente para más adelante, no resolver todavía:** el plan de entrega
+  final académica incluye "repositorio" como parte del entregable — en
+  algún momento Gabriel podría llegar a ver el repo real, cuyas fechas de
+  commit no coinciden con el calendario de Notion (casi todo se commiteó
+  entre el 02 y 03/09). Juanma es consciente de esto (07/09/2026 y
+  14/09/2026) y decidió no resolverlo todavía — retomar la conversación
+  más cerca de diciembre, antes de la entrega final.
 
 ## ⚠️ Pivot de ritmo (2026-09-03) — el proyecto real no espera fechas
 
