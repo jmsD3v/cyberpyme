@@ -162,15 +162,22 @@ del sistema (lunes 14/09) — ya marcada "En curso" en Notion.
 
 ---
 
-### J9 — 14/09/2026 (lunes) — En curso (arrancado entre clases)
+### J9 — 14/09/2026 (lunes) — HOY
 
 **Enfoque:** arquitectura del sistema — cómo se separa la metodología
-(preguntas/pesos, versionada en JSON/Git) de los datos operativos
-(evaluaciones futuras, que van a vivir en una base de datos más adelante).
-**Qué mostrar:** diagrama de capas (config JSON → motor → interfaz), y el
-criterio de por qué Python puro para el motor académico.
-**Próximo objetivo:** empezar a construir el modelo de datos (Question /
-Answer / AssessmentResult) la próxima jornada.
+(preguntas/pesos, versionada en JSON/Git) del motor de cálculo y de los
+datos operativos (evaluaciones futuras, que van a vivir en una base de
+datos aparte más adelante).
+**Qué se avanzó:** diagrama de tres capas (Configuración JSON → Motor
+Python puro y determinista → Interfaces que lo consumen: CLI, informe
+HTML, app interactiva) más una cuarta caja aparte y punteada para los
+datos operativos, marcada explícitamente como "todavía no existe". Tres
+principios de diseño documentados: config ≠ código, motor puro sin saber
+quién lo llama, y nada se guarda todavía a propósito.
+**Para mostrar en clase:** ficha con el diagrama de arquitectura. Publicada
+como artefacto: https://claude.ai/code/artifact/fd5a8588-0414-4bb4-a557-273f000b1972
+**Próximo objetivo:** el miércoles arranca el modelo de datos (Question /
+Answer / AssessmentResult) que va a sostener ese motor.
 
 ---
 
