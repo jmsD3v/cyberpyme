@@ -181,6 +181,26 @@ Answer / AssessmentResult) que va a sostener ese motor.
 
 ---
 
-*(J10 en adelante: ver el calendario maestro arriba — foco definido, detalle
+### J10 — 16/09/2026 (miércoles) — HOY
+
+**Enfoque:** modelo de datos — el primer código real que se muestra en la
+Bitácora (a partir de esta jornada, ficha con código en vez de solo diseño
+o diagramas, ver regla en CLAUDE.md). Una sola clase aislada, no el motor
+completo.
+**Qué se mostró:** la clase `Question` (`backend/app/models/question.py`),
+un `dataclass` inmutable (`frozen=True`) con los campos de cada pregunta
+del cuestionario, más `from_dict()` para construirla desde el JSON del
+catálogo. Tres anotaciones: por qué inmutable, por qué `from_dict()` en
+vez de pasar el diccionario suelto, y el campo opcional `help` con valor
+por defecto.
+**Para mostrar en clase:** ficha con el código real y anotado. Publicada
+como artefacto: https://claude.ai/artifact/GeAjBmQ8Zr4CczNHLKoCcK
+**Próximo objetivo:** el lunes 21/09 arranca el motor de preguntas — cargar
+el catálogo completo y validar las respuestas antes de que lleguen al
+cálculo del diagnóstico.
+
+---
+
+*(J11 en adelante: ver el calendario maestro arriba — foco definido, detalle
 para completar jornada a jornada a medida que se acerca la fecha real, para
 no adelantar contenido en Notion antes de tiempo.)*
