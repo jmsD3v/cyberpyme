@@ -179,6 +179,15 @@ como artefacto: https://claude.ai/code/artifact/fd5a8588-0414-4bb4-a557-273f000b
 **Próximo objetivo:** el miércoles arranca el modelo de datos (Question /
 Answer / AssessmentResult) que va a sostener ese motor.
 
+**Complemento agregado el 16/09/2026:** el diagrama de capas era conceptual
+(sin nombres de archivo) — faltaba mostrar la estructura de carpetas real
+del repo, aunque sea parcial. Se sumó un segundo visual: árbol de
+`backend/app/` con solo lo construido hasta la Jornada 10 (`data/questions.json`,
+`models/question.py`, `models/assessment.py`), y `services/` + `cli.py`
+marcados como pendientes sin listar archivos internos (para no adelantar
+el motor de scoring ni el CLI). Publicado como artefacto:
+https://claude.ai/artifact/Af1FSe91P6eXdkFsVSa3px
+
 ---
 
 ### J10 — 16/09/2026 (miércoles) — HOY
