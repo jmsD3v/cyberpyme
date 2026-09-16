@@ -101,12 +101,6 @@ h2 {
 }
 .milestone .check { color: var(--accent); font-weight: 700; }
 
-.next {
-  border-top: 1px dashed var(--border); padding-top: 22px; margin-top: 8px;
-  font-size: 13.5px; color: var(--ink-muted);
-}
-.next b { color: var(--ink-2); }
-
 footer { margin-top: 44px; font-size: 12px; color: var(--ink-muted);
   border-top: 1px solid var(--border); padding-top: 16px; }
 </style>
@@ -134,9 +128,13 @@ footer { margin-top: 44px; font-size: 12px; color: var(--ink-muted);
        lista de preguntas (.qlist/.qrow), diagrama de capas, tabla de
        mapeo NIST/CIS, snippet de código comentado, etc. -->
 
-  <div class="next">
-    <b>Próximo objetivo ({{próxima fecha}}):</b> {{qué sigue, sin adelantar detalle}}.
-  </div>
+  <!-- NO agregar acá una caja de "Próximo objetivo": ese texto va solo en
+       el campo de texto de la Bitácora de Notion (ya es un campo fijo de
+       cada entrada). Ponerlo también en la imagen es puro texto sin
+       elemento visual — repetir texto plano entre la captura y Notion es
+       más caro de mantener (dos lugares para editar) sin ganar nada. La
+       imagen se reserva para lo que sí necesita ser imagen: tablas,
+       diagramas, código resaltado. -->
 
   <footer>CyberPyME — Práctica Profesionalizante, Tecnicatura en Seguridad Informática (TECLAB). Herramienta de autodiagnóstico de ciberseguridad para PyMEs sin área de IT.</footer>
 </div>
