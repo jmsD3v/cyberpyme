@@ -210,6 +210,25 @@ cálculo del diagnóstico.
 
 ---
 
-*(J11 en adelante: ver el calendario maestro arriba — foco definido, detalle
+### J11 — 21/09/2026 (lunes) — HOY
+
+**Enfoque:** el motor de preguntas — dos piezas separadas: cargar el
+catálogo desde el JSON como objetos reales, y validar cada respuesta antes
+de que llegue al cálculo del diagnóstico.
+**Qué se mostró:** `load_questions()` (`backend/app/services/scoring.py`),
+que lee `questions.json` y devuelve la lista de `Question` más los pesos
+por dominio; y la clase `Answer` (`backend/app/models/question.py`), con
+`score_value` (valida contra los 4 valores posibles y explota con
+`ValueError` si llega algo raro) e `is_gap` (agrupa "no"/"parcial"/"no sé"
+como la misma señal de riesgo). Ni el motor de scoring ni ningún resultado
+calculado — eso arranca la semana que viene.
+**Para mostrar en clase:** ficha con el código real y anotado. Publicada
+como artefacto: https://claude.ai/artifact/L5DJc2aJu1X6FAJGaTBJYB
+**Próximo objetivo:** el miércoles 23/09 arranca el motor de scoring: el
+score ponderado por dominio.
+
+---
+
+*(J12 en adelante: ver el calendario maestro arriba — foco definido, detalle
 para completar jornada a jornada a medida que se acerca la fecha real, para
 no adelantar contenido en Notion antes de tiempo.)*
