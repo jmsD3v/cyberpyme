@@ -229,6 +229,23 @@ score ponderado por dominio.
 
 ---
 
-*(J12 en adelante: ver el calendario maestro arriba — foco definido, detalle
+### J12 — 23/09/2026 (miércoles) — HOY
+
+**Enfoque:** el motor de scoring — cómo se calcula el score ponderado por
+dominio a partir de las respuestas ya cargadas y validadas.
+**Qué se mostró:** `weighted_score()` (`backend/app/services/scoring.py`),
+la función genérica que recibe pares `(valor_respuesta, peso)` y devuelve un
+score de 0 a 100 sin saber nada de dominios ni preguntas; y
+`score_by_domain()`, que agrupa las respuestas por dominio y le aplica
+`weighted_score()` a cada grupo. Ni el score global ni ningún resultado
+calculado — eso arranca la semana que viene.
+**Para mostrar en clase:** ficha con el código real y anotado. Publicada
+como artefacto: https://claude.ai/artifact/2zjURTT76ABw6LHYk9ww34
+**Próximo objetivo:** el lunes 28/09 sigue el motor de scoring: el score
+global y los umbrales de nivel de riesgo.
+
+---
+
+*(J13 en adelante: ver el calendario maestro arriba — foco definido, detalle
 para completar jornada a jornada a medida que se acerca la fecha real, para
 no adelantar contenido en Notion antes de tiempo.)*
