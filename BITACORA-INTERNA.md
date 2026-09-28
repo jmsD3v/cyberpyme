@@ -246,6 +246,27 @@ global y los umbrales de nivel de riesgo.
 
 ---
 
-*(J13 en adelante: ver el calendario maestro arriba — foco definido, detalle
+### J13 — 28/09/2026 (lunes) — HOY
+
+**Enfoque:** el motor de scoring, segunda parte — combinar los scores por
+dominio (ya calculados la jornada pasada) en un único score global, y
+traducir ese número a un nivel de riesgo en criollo.
+**Qué se mostró:** `score_global()` (`backend/app/services/scoring.py`),
+que vuelve a usar `weighted_score()` pero ponderando por `domain_weight`
+(25/15/25/15/20 según el dominio) en vez de por peso de pregunta; y
+`risk_level_for()` (`backend/app/models/assessment.py`), la única función
+que conoce los umbrales 80/60/40 que separan BAJO/MEDIO/ALTO/CRÍTICO. Sin
+ningún resultado calculado con datos reales — eso recién en el cierre
+académico (J20).
+**Para mostrar en clase:** ficha con el código real y anotado, más los 4
+umbrales de riesgo. Publicada como artefacto:
+https://claude.ai/artifact/3sa8xG3YAA21vbb7vxi8Q7
+**Próximo objetivo:** el miércoles 30/09 arranca el motor de
+recomendaciones: detectar las brechas de una evaluación y priorizarlas en
+P1/P2/P3.
+
+---
+
+*(J14 en adelante: ver el calendario maestro arriba — foco definido, detalle
 para completar jornada a jornada a medida que se acerca la fecha real, para
 no adelantar contenido en Notion antes de tiempo.)*
