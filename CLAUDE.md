@@ -215,7 +215,7 @@ abajo. Arquitectura, deliberada:
 
 **Frontend en producción**: [cyberpyme.vercel.app](https://cyberpyme.vercel.app)
 (equipo Vercel `jmsd3v-projects`, proyecto `cyberpyme`, repo de GitHub
-conectado — cada push a `master` redespliega solo). Desplegado vía CLI
+conectado — cada push a `main` redespliega solo). Desplegado vía CLI
 (`npx vercel link --yes --project cyberpyme` + `vercel env add` × 3 +
 `vercel --prod --yes`) después de que el conector MCP de Vercel de esta
 sesión no lograra autenticar la cuenta correcta tras varios reintentos y
@@ -264,7 +264,7 @@ raíz. Corregido con
 `vercel project update cyberpyme --root-directory frontend --yes`.
 **Ojo**: después de este cambio, `vercel --prod` corrido a mano desde
 adentro de `frontend/` ya NO funciona (busca `frontend/frontend/`) — de
-acá en más, el único método de deploy es push a `master` (auto-deploy) o
+acá en más, el único método de deploy es push a `main` (auto-deploy) o
 `vercel redeploy <url>` sobre un deploy anterior, nunca más
 `vercel --prod` desde la CLI local.
 
@@ -309,9 +309,27 @@ documentación oficial de Supabase antes de implementar. Verificado que
 Supabase (probado con un usuario real: login con la contraseña vieja
 falló después, login con la nueva funcionó).
 
+## Rama principal: `main`, no `master` (2026-09-28)
+
+A pedido explícito de Juanma, se dejó de usar `master`. Se creó `main` a
+partir de `master` y se actualizó `ci.yml` para disparar sobre `main`. De
+acá en más, todo push/commit va a `main` — nunca más a `master`.
+**Pendiente (no lo puede hacer Claude, ninguna herramienta disponible en
+esta sesión expone estos ajustes):** 3 cambios manuales de un clic cada
+uno, en este orden, para que el pipeline de producción no se corte —
+1. GitHub → repo `jmsD3v/cyberpyme` → Settings → Branches → cambiar la
+   rama por defecto a `main`.
+2. Vercel → proyecto `cyberpyme` → Settings → Git → cambiar "Production
+   Branch" de `master` a `main`.
+3. Render → servicio `cyberpyme-api` → Settings → cambiar la rama
+   desplegada de `master` a `main`.
+Recién después de esos 3 pasos se puede borrar `master` del remoto sin
+cortar el auto-deploy. Hasta entonces `master` queda congelada (sin
+recibir más commits) y sigue siendo la que Vercel/Render despliegan.
+
 ## CI
 
-`.github/workflows/ci.yml` corre en cada push a `master` (y en PRs):
+`.github/workflows/ci.yml` corre en cada push a `main` (y en PRs):
 job `backend` (pytest, 32 tests, con `backend/requirements-dev.txt` —
 `pytest` + `httpx2`, que `starlette.testclient` exige aparte de
 `httpx`) y job `frontend` (`pnpm run build` — **no** un `tsc --noEmit`
