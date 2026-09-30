@@ -267,6 +267,26 @@ P1/P2/P3.
 
 ---
 
-*(J14 en adelante: ver el calendario maestro arriba — foco definido, detalle
+### J14 — 30/09/2026 (miércoles) — HOY
+
+**Enfoque:** el motor de recomendaciones — arranca la otra mitad del
+diagnóstico: detectar las brechas (preguntas con respuesta "no"/"parcial"/
+"no sé") y armar con ellas una lista de acciones priorizadas.
+**Qué se mostró:** `find_gaps()` (`backend/app/services/scoring.py`), que
+filtra las preguntas respondidas quedándose con las que representan riesgo
+(reusa `is_gap` de la clase `Answer`, vista en la Jornada 11); y
+`prioritize_actions()`, que busca la recomendación de cada brecha en
+`recommendations.json` y ordena la lista final por prioridad P1/P2/P3 y,
+dentro de la misma prioridad, por peso de la pregunta. Sin ningún resultado
+calculado con datos reales — eso recién en el cierre académico (J20).
+**Para mostrar en clase:** ficha con el código real y anotado, más las 3
+prioridades explicadas. Publicada como artefacto:
+https://claude.ai/artifact/AJPQ1mRsHnJDBjFcBbAoUE
+**Próximo objetivo:** el lunes 05/10 arranca el Bloque C (cierre académico):
+demo de consola end-to-end y primeros tests unitarios.
+
+---
+
+*(J15 en adelante: ver el calendario maestro arriba — foco definido, detalle
 para completar jornada a jornada a medida que se acerca la fecha real, para
 no adelantar contenido en Notion antes de tiempo.)*
