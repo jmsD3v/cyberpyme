@@ -327,6 +327,17 @@ Recién después de esos 3 pasos se puede borrar `master` del remoto sin
 cortar el auto-deploy. Hasta entonces `master` queda congelada (sin
 recibir más commits) y sigue siendo la que Vercel/Render despliegan.
 
+**Desliz del 30/09 (corregido 01/10):** como el paso 1 seguía sin hacerse,
+la rama por defecto en GitHub siguió siendo `master` — y cada sesión nueva
+de Claude Code clona la rama por defecto, así que la sesión de la Jornada
+14 arrancó en `master` y commiteó ahí (`main` quedó sin ese commit). Se
+corrigió llevando ese commit a `main` con `cherry-pick`. **Regla para toda
+sesión nueva:** antes de commitear, correr `git log --oneline -1
+origin/main` y confirmar que la rama de trabajo sale de `origin/main`, no
+de `origin/master`; si salió de `master`, rehacerla con
+`git checkout -B <rama> origin/main` antes de tocar nada. Esto deja de
+hacer falta en cuanto el paso 1 (rama por defecto = `main`) esté hecho.
+
 ## CI
 
 `.github/workflows/ci.yml` corre en cada push a `main` (y en PRs):
@@ -458,6 +469,23 @@ una entrada por jornada de clase (cadencia lunes/miércoles desde el
 18/ago). Si Claude Code hace avances relevantes, conviene reflejarlos ahí
 también (vía el conector de Notion si está disponible en esa sesión, o
 avisarle a Juanma para que lo actualice él).
+
+**Cómo poner la ficha visual de cada jornada en Notion (aprendido 01/10/2026,
+no repetir el error):** las "capturas" de J7–J13 estaban todas rotas — se
+habían subido con `source_url` apuntando al link `claude.ai/artifact/...`
+de la ficha, que sin sesión devuelve la página de login de claude.ai, y eso
+quedó guardado en Notion como un `.png` que en realidad era HTML. Nunca usar
+un link de artifact como `source_url`. Además `api.notion.com` está
+bloqueado por la política de red del entorno cloud, así que tampoco se
+puede subir un PNG binario con `create-file-upload` + POST. Lo que sí
+funciona: bajar el HTML de la ficha (`Artifact` read con `path:
+"index.html"`), limpiarlo (sacar el wrapper del host, forzar
+`data-theme="dark"`), subirlo con `create-attachment` pasando el HTML en
+`content`, y ubicarlo en la Bitácora con `<embed src="file-upload://...">`
+— Notion lo renderiza como la ficha misma. Ojo: `update_content` no puede
+matchear líneas con imágenes/archivos (las URLs firmadas cambian en cada
+lectura); para reemplazar un adjunto hay que reescribir con
+`replace_content`.
 
 ## Cómo correr lo que ya existe
 
