@@ -287,6 +287,26 @@ demo de consola end-to-end y primeros tests unitarios.
 
 ---
 
-*(J15 en adelante: ver el calendario maestro arriba — foco definido, detalle
+### J15 — 05/10/2026 (lunes) — HOY
+
+**Enfoque:** arranca el Bloque C (cierre académico) — el motor de scoring y
+de recomendaciones (piezas sueltas de las jornadas 11 a 14) se juntan en una
+sola función que las orquesta de punta a punta, y arrancan las primeras
+pruebas automáticas.
+**Qué se mostró:** `calculate_assessment()` (`backend/app/services/scoring.py`),
+que llama en orden a `load_questions()`, `score_by_domain()`, `score_global()`,
+`risk_level_for()`, `find_gaps()` y `prioritize_actions()` — pura orquestación,
+sin ninguna regla nueva propia; y 3 pruebas unitarias de `test_scoring.py`
+sobre `weighted_score()` (Jornada 12), con valores de control inventados, no
+con un caso real. Sin ningún resultado de una evaluación completa calculado —
+eso recién en el cierre académico (J20, 21/10).
+**Para mostrar en clase:** ficha con el código real y anotado. Publicada
+como artefacto: https://claude.ai/artifact/2pRsndmhzbBTQVdEoLGP16
+**Próximo objetivo:** el miércoles 07/10 sigue el informe automático: el
+gauge y el score por dominio en HTML.
+
+---
+
+*(J16 en adelante: ver el calendario maestro arriba — foco definido, detalle
 para completar jornada a jornada a medida que se acerca la fecha real, para
 no adelantar contenido en Notion antes de tiempo.)*
