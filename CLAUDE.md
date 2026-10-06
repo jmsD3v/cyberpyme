@@ -441,6 +441,53 @@ una entrada por jornada de clase (cadencia lunes/miércoles desde el
 también (vía el conector de Notion si está disponible en esa sesión, o
 avisarle a Juanma para que lo actualice él).
 
+## ⚠️ Captura de pantalla embebida en Notion — bug real y el fix (05-06/10/2026)
+
+La rutina automática de "preparar jornada de clase" sube una captura del Artifact de
+cada jornada a la Bitácora de Notion. El 05/10/2026 esa imagen quedó rota (no
+renderizaba) y el 06/10 Juanma lo reportó como algo que "como siempre" pasa.
+Investigado y corregido en la sesión del 06/10 — dejarlo documentado acá porque la
+rutina relee este archivo al arrancar, así que no hace falta tocar el prompt de la
+rutina (que además no es editable desde una sesión de agente, solo por Juanma a mano).
+
+**Causa real:** para subir el PNG se usó `notion-create-attachment` con `source_url`
+apuntando a una URL de asset de un Artifact propio (`https://claude.ai/artifact/.../_blob/...`).
+Esa URL no sirve el archivo crudo sin sesión de navegador — el servidor de Notion,
+al pedirla, recibió el HTML de la SPA de claude.ai en vez del PNG, y lo guardó tal
+cual (confirmado bajando esa misma URL con curl: el "PNG" en Notion era en realidad
+`<!doctype html>...`). Intentar subir el binario directo con
+`notion-create-file-upload` + `curl` al `upload_url` tampoco funciona desde una
+sesión en este tipo de entorno — ese POST sale del sandbox y la política de red del
+entorno bloquea `api.notion.com` (confirmado con `curl -I`, rechazo 403 del proxy).
+
+**Fix que sí funciona, probado y confirmado end-to-end el 06/10:**
+1. Capturar con Chrome/Chromium headless o Playwright
+   (`executablePath: '/opt/pw-browsers/chromium'`, ya preinstalado — nunca correr
+   `playwright install`).
+2. Comprimir fuerte con ImageMagick (`convert captura.png -resize 450x -quality 60
+   captura.jpg`, el binario `convert` está disponible en el entorno) hasta que pese
+   ~40-50 KB o menos. Es una miniatura de apoyo para la Bitácora, no hace falta que
+   sea nítida — el link al Artifact real (ese sí con el detalle completo) va al lado.
+3. Empaquetarla como un `.svg` de texto con la imagen embebida en base64
+   (`<svg ...><image href="data:image/jpeg;base64,...."/></svg>`), generado con
+   Python (`base64.b64encode`). Tiene que quedar bien por debajo de 200 KB.
+4. Subirla con `notion-create-attachment` usando el parámetro `content` (texto UTF-8
+   directo, filename `.svg`) — **nunca** `source_url` apuntando a un link de
+   claude.ai, y **nunca** `notion-create-file-upload` + curl manual. La diferencia
+   clave: `notion-create-attachment` corre del lado del conector de Notion, no desde
+   el sandbox de la sesión, así que no choca con la política de red — es la única
+   vía confiable para esto en este entorno.
+5. Embeber el bloque con `<image src="file-upload://ID"></image>` usando el ID que
+   devuelve la tool.
+6. Verificar antes de dar la captura por buena (re-fetch de la página, chequear que
+   el `content_type` devuelto por `notion-create-attachment` sea el esperado). Si algo
+   falla, mejor omitir la imagen y decirlo en el resumen que dejar un bloque roto en
+   la Bitácora — un bloque roto es peor que no tener imagen.
+
+Nota aparte, mismo día: el proyecto de Supabase apareció `INACTIVE` (pausado por
+inactividad real, no solo en riesgo) pese a la consulta trivial semanal —
+`restore_project` antes de `execute_sql` lo reactiva en issue de segundos.
+
 ## Cómo correr lo que ya existe
 
 ```bash
