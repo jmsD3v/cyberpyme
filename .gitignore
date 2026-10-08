@@ -14,3 +14,6 @@ __pycache__/
 # Entornos
 .venv/
 venv/
+
+# Capturas de jornadas para subir a mano a Notion (no son parte del repo)
+docs/capturas-jornadas/
