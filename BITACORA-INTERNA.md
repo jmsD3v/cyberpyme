@@ -307,6 +307,28 @@ gauge y el score por dominio en HTML.
 
 ---
 
-*(J16 en adelante: ver el calendario maestro arriba — foco definido, detalle
+### J16 — 07/10/2026 (miércoles) — HOY
+
+**Enfoque:** sigue el informe automático — las dos piezas de render que
+faltaban: el gauge del score global y las barras por dominio, ambas en SVG
+puro.
+**Qué se mostró:** `_gauge_svg()` (`backend/app/services/report.py`), que
+dibuja el arco circular del score global con el truco clásico de SVG
+(`stroke-dasharray` = circunferencia completa, `stroke-dashoffset` = la
+porción a ocultar); y `_domain_bars_svg()`, que dibuja una barra horizontal
+por dominio con el ancho proporcional al score y el color según
+`STATUS_COLOR` (BAJO/MEDIO/ALTO/CRÍTICO, la misma paleta de `risk_level_for()`,
+Jornada 13). Las dos son funciones privadas y puras — reciben números/dicts,
+devuelven un string SVG, sin leer nada ni saber qué evaluación las originó.
+Sin ningún resultado calculado con datos reales — eso recién en el cierre
+académico (J20, 21/10).
+**Para mostrar en clase:** ficha con el código real y anotado. Publicada
+como artefacto: https://claude.ai/artifact/LbUwhyPH5YFmAyTzyzdnS9
+**Próximo objetivo:** el lunes 12/10 sigue el informe automático: la guía de
+resolución paso a paso de cada acción.
+
+---
+
+*(J17 en adelante: ver el calendario maestro arriba — foco definido, detalle
 para completar jornada a jornada a medida que se acerca la fecha real, para
 no adelantar contenido en Notion antes de tiempo.)*
